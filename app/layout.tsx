@@ -3,6 +3,7 @@ import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import Navigation from "@/app/components/global/navigation";
 import Image from "next/image";
+import Link from "next/link";
 
 const geistSans = Geist({
 	variable: "--font-geist-sans",
@@ -22,12 +23,14 @@ export const metadata: Metadata = {
 const Header = () => {
 	return (
 		<header className="w-full flex justify-between py-2 px-4">
-			<Image
-				src="/spotify-icon-dark-mode.svg"
-				alt="Spotify"
-				width={40}
-				height={40}
-			/>
+			<Link href="/">
+				<Image
+					src="/spotify-icon-dark-mode.svg"
+					alt="Spotify"
+					width={40}
+					height={40}
+				/>
+			</Link>
 
 			<Navigation />
 		</header>
