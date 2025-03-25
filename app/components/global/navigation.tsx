@@ -1,10 +1,7 @@
-import {
-	NavigationMenu,
-	NavigationMenuItem,
-	NavigationMenuLink,
-	NavigationMenuList,
-} from "@/app/components/ui/navigation-menu";
+"use client";
+
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 
 const routeDetails = [
 	{ id: 1, route: "/", name: "Home" },
@@ -14,20 +11,34 @@ const routeDetails = [
 ];
 
 const Navigation = () => {
+	const pathname = usePathname();
+
+	const getLinkClasses = (href: string) =>
+		`px-4 py-2 transition-colors ${
+			pathname === href
+				? "text-blue-400 font-bold hover:bg-transparent active:bg-transparent"
+				: "text-gray-300 hover:text-gray-400 hover:bg-transparent active:bg-transparent"
+		}`;
+
 	return (
-		<NavigationMenu>
-			<NavigationMenuList>
+		<nav>
+			<ul className="flex gap-2">
 				{routeDetails.map(({ id, route, name }) => (
-					<NavigationMenuItem key={id}>
-						<Link href={route} legacyBehavior passHref>
-							<NavigationMenuLink className="bg-black text-white">
-								{name}
-							</NavigationMenuLink>
+					<li key={id}>
+						<Link
+							href={route}
+							className={`px-4 py-2 hover:bg-white hover:text-black text-sm rounded-sm ${
+								pathname === route
+									? "bg-white text-black"
+									: "bg-none text-white"
+							}`}
+						>
+							{name}
 						</Link>
-					</NavigationMenuItem>
+					</li>
 				))}
-			</NavigationMenuList>
-		</NavigationMenu>
+			</ul>
+		</nav>
 	);
 };
 
