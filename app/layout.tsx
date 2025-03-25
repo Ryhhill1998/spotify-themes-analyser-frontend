@@ -22,7 +22,7 @@ export const metadata: Metadata = {
 
 const Header = () => {
 	return (
-		<header className="w-full flex justify-between p-4">
+		<header className="w-full flex justify-between items-center p-4">
 			<Link href="/">
 				<Image
 					src="/spotify-icon-dark-mode.svg"

@@ -30,7 +30,7 @@ const Navigation = () => {
 							className={`px-4 py-2 hover:bg-white hover:text-black text-sm rounded-sm ${
 								pathname === route
 									? "bg-white text-black"
-									: "bg-none text-white"
+									: "bg-nonoe text-white"
 							}`}
 						>
 							{name}
