@@ -3,6 +3,7 @@ import Image from "next/image";
 import { fetchProfile, fetchTopArtists, fetchTopTracks } from "@/app/api/data";
 import { Profile, Track, Artist } from "@/app/api/dataTypes";
 import TopTrackCard from "../top-tracks/components/TopTrackCard";
+import TopArtistCard from "../top-artists/components/TopArtistCard";
 
 const ProfilePage = async () => {
 	const profile: Profile = await fetchProfile();
@@ -36,15 +37,11 @@ const ProfilePage = async () => {
 
 			<div className="flex gap-2">
 				{topArtists.map(({ id, name, images }) => (
-					<div key={id}>
-						<Image
-							src={images[0].url}
-							alt="Artist art"
-							width={50}
-							height={50}
-						/>
-						<p>{name}</p>
-					</div>
+					<TopArtistCard
+						key={id}
+						imageUrl={images[0].url}
+						name={name}
+					/>
 				))}
 			</div>
 		</div>

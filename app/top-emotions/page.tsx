@@ -1,4 +1,4 @@
-const TopEmotions = () => {
+const TopEmotionsPage = () => {
 	return (
 		<div>
 			<h1>Top Emotions</h1>
@@ -6,4 +6,4 @@ const TopEmotions = () => {
 	);
 };
 
-export default TopEmotions;
+export default TopEmotionsPage;

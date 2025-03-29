@@ -2,7 +2,7 @@ import { fetchTopTracks } from "@/app/api/data";
 import { Track } from "@/app/api/dataTypes";
 import TopTrackCard from "@/app/top-tracks/components/TopTrackCard";
 
-const TopTracks = async () => {
+const TopTracksPage = async () => {
 	const topTracks: Track[] = await fetchTopTracks();
 
 	return (
@@ -21,4 +21,4 @@ const TopTracks = async () => {
 	);
 };
 
-export default TopTracks;
+export default TopTracksPage;

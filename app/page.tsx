@@ -1,6 +1,6 @@
 import SpotifySignInButton from "@/app/components/SpotifySignInButton";
 
-const Home = () => {
+const HomePage = () => {
 	return (
 		<div>
 			<h1>Home page</h1>
@@ -10,4 +10,4 @@ const Home = () => {
 	);
 };
 
-export default Home;
+export default HomePage;
