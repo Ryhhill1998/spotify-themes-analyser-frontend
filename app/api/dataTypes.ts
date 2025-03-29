@@ -61,11 +61,28 @@ interface Artist extends ArtistBase {
 	spotifyUrl: string;
 }
 
-// -------------------- TOP TRACKS -------------------- //
+// -------------------- EMOTION -------------------- //
+interface EmotionBase {
+	name: string;
+	percentage: number;
+}
 
-// -------------------- TOP ARTISTS -------------------- //
+interface EmotionAPI extends EmotionBase {
+	track_id: string;
+}
 
-// -------------------- TOP EMOTIONS -------------------- //
+interface Emotion extends EmotionBase {
+	trackId: string;
+}
 
 // -------------------- EXPORTS -------------------- //
-export type { ProfileAPI, Profile, TrackAPI, Track, ArtistAPI, Artist };
+export type {
+	ProfileAPI,
+	Profile,
+	TrackAPI,
+	Track,
+	ArtistAPI,
+	Artist,
+	EmotionAPI,
+	Emotion,
+};

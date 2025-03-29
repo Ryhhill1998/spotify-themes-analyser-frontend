@@ -8,6 +8,8 @@ import {
 	Track,
 	ArtistAPI,
 	Artist,
+	EmotionAPI,
+	Emotion,
 } from "./dataTypes";
 
 const API_BASE_URL = "http://localhost:8080";
@@ -73,6 +75,17 @@ const fetchTopArtists = async () => {
 };
 
 // TODO - get top emotions
+const fetchTopEmotions = async () => {
+	const res = await makeAPIRequest("/data/me/top/emotions");
+	const data: EmotionAPI[] = await res.json();
+	const emotions: Emotion[] = data.map((data) => ({
+		...data,
+		percentage: Math.round(data.percentage * 100),
+		trackId: data.track_id,
+	}));
+	return emotions;
+};
+
 // TODO - get track's lyrics with emotion tags
 
 export {
@@ -81,4 +94,5 @@ export {
 	fetchArtist,
 	fetchTopTracks,
 	fetchTopArtists,
+	fetchTopEmotions,
 };
