@@ -34,12 +34,14 @@ interface TrackBase {
 }
 
 interface TrackAPI extends TrackBase {
+	album_name: string;
 	spotify_url: string;
 	release_date: string;
 	duration_ms: number;
 }
 
 interface Track extends TrackBase {
+	albumName: string;
 	spotifyUrl: string;
 	releaseDate: string;
 	durationMs: number;
@@ -75,6 +77,13 @@ interface Emotion extends EmotionBase {
 	trackId: string;
 }
 
+// -------------------- EMOTION TAGGED LYRICS -------------------- //
+type TaggedLyricsAPI = {
+	track_id: string;
+	emotion: string;
+	lyrics: string;
+};
+
 // -------------------- EXPORTS -------------------- //
 export type {
 	ProfileAPI,
@@ -85,4 +94,5 @@ export type {
 	Artist,
 	EmotionAPI,
 	Emotion,
+	TaggedLyricsAPI,
 };

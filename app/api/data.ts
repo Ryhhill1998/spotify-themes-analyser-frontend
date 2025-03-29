@@ -10,6 +10,7 @@ import {
 	Artist,
 	EmotionAPI,
 	Emotion,
+	TaggedLyricsAPI,
 } from "./dataTypes";
 
 const API_BASE_URL = "http://localhost:8080";
@@ -35,6 +36,7 @@ const fetchTrack = async (trackId: string) => {
 	const data: TrackAPI = await res.json();
 	const track: Track = {
 		...data,
+		albumName: data.album_name,
 		spotifyUrl: data.spotify_url,
 		releaseDate: data.release_date,
 		durationMs: data.duration_ms,
@@ -56,6 +58,7 @@ const fetchTopTracks = async () => {
 	const data: TrackAPI[] = await res.json();
 	const tracks: Track[] = data.map((data) => ({
 		...data,
+		albumName: data.album_name,
 		spotifyUrl: data.spotify_url,
 		releaseDate: data.release_date,
 		durationMs: data.duration_ms,
@@ -87,6 +90,17 @@ const fetchTopEmotions = async () => {
 };
 
 // TODO - get track's lyrics with emotion tags
+const fetchTrackLyricsWithEmotionalTags = async (
+	trackId: string,
+	emotionName: string
+) => {
+	const res = await makeAPIRequest(
+		`/data/tracks/${trackId}/lyrics/emotional-tags/${emotionName}`
+	);
+	const data: TaggedLyricsAPI = await res.json();
+	const taggedLyrics = data.lyrics;
+	return taggedLyrics;
+};
 
 export {
 	fetchProfile,
@@ -95,4 +109,5 @@ export {
 	fetchTopTracks,
 	fetchTopArtists,
 	fetchTopEmotions,
+	fetchTrackLyricsWithEmotionalTags,
 };
