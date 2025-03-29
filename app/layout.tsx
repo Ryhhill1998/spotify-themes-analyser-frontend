@@ -22,7 +22,7 @@ export const metadata: Metadata = {
 
 const Header = () => {
 	return (
-		<header className="w-full flex justify-between items-center p-4">
+		<header className="w-full flex justify-between items-center px-4 py-3">
 			<Link href="/">
 				<Image
 					src="/spotify-icon-dark-mode.svg"
@@ -33,6 +33,14 @@ const Header = () => {
 			</Link>
 
 			<Navigation />
+
+			<Image
+				src="/spotify-icon-dark-mode.svg"
+				alt="Spotify"
+				width={40}
+				height={40}
+				className="invisible"
+			/>
 		</header>
 	);
 };

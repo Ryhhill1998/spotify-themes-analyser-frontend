@@ -4,7 +4,6 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 
 const routeDetails = [
-	{ id: 1, route: "/profile", name: "Profile" },
 	{ id: 2, route: "/top-artists", name: "Top Artists" },
 	{ id: 3, route: "/top-tracks", name: "Top Tracks" },
 	{ id: 4, route: "/top-emotions", name: "Top Emotions" },
