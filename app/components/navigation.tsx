@@ -4,7 +4,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 
 const routeDetails = [
-	{ id: 1, route: "/", name: "Home" },
+	{ id: 1, route: "/profile", name: "Profile" },
 	{ id: 2, route: "/top-artists", name: "Top Artists" },
 	{ id: 3, route: "/top-tracks", name: "Top Tracks" },
 	{ id: 4, route: "/top-emotions", name: "Top Emotions" },
@@ -12,13 +12,6 @@ const routeDetails = [
 
 const Navigation = () => {
 	const pathname = usePathname();
-
-	const getLinkClasses = (href: string) =>
-		`px-4 py-2 transition-colors ${
-			pathname === href
-				? "text-blue-400 font-bold hover:bg-transparent active:bg-transparent"
-				: "text-gray-300 hover:text-gray-400 hover:bg-transparent active:bg-transparent"
-		}`;
 
 	return (
 		<nav>
