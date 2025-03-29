@@ -6,7 +6,7 @@ const handleSpotifyLogin = () => {
 	window.location.href = `${API_BASE_URL}/auth/spotify/login`;
 };
 
-const SpotifySignInBtn = () => {
+const SpotifySignInButton = () => {
 	return (
 		<button className="bg-white" onClick={handleSpotifyLogin}>
 			Sign in with Spotify
@@ -14,4 +14,4 @@ const SpotifySignInBtn = () => {
 	);
 };
 
-export default SpotifySignInBtn;
+export default SpotifySignInButton;
