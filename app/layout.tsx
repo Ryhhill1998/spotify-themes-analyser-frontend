@@ -26,7 +26,7 @@ const Header = async () => {
 	const profile: Profile = await fetchProfile();
 
 	return (
-		<header className="w-full flex justify-between items-center px-4 py-3">
+		<header className="w-full flex justify-between items-center px-4 py-3 sticky top-0 bg-black/75">
 			<Link href="/">
 				<Image
 					src="/spotify-icon-dark-mode.svg"
