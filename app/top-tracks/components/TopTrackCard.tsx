@@ -25,6 +25,7 @@ const TopTrackCard = ({
 					alt="Track album art"
 					width={50}
 					height={50}
+					className="rounded-sm"
 				/>
 
 				<div>

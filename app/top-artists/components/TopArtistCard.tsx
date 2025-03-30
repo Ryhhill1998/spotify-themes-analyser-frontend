@@ -11,8 +11,8 @@ const TopArtistCard = ({ imageUrl, name }: TopArtistCardProps) => {
 			<Image
 				src={imageUrl}
 				alt="Artist art"
-				width={100}
-				height={100}
+				width={200}
+				height={200}
 				className="w-full h-auto aspect-square object-cover rounded-full mb-4"
 			/>
 

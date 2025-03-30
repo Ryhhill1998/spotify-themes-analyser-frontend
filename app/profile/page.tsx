@@ -11,50 +11,62 @@ const ProfilePage = async () => {
 	const topArtists: Artist[] = await fetchTopArtists(10);
 
 	return (
-		<div className="container bg-stone-900 mx-auto p-4 rounded-md flex flex-col gap-10">
-			<div className="flex gap-4">
+		<div className="container bg-stone-900 mx-auto rounded-md">
+			<div className="flex items-center gap-4 p-6 bg-stone-700 rounded-t-md">
 				<Image
 					src={profile.images[0].url}
 					alt="Spotify profile picture"
-					width={100}
-					height={100}
+					width={150}
+					height={150}
+					className="rounded-full"
 				/>
 
 				<div className="flex flex-col gap-2">
-					<p className="text-white">{profile.displayName}</p>
-					<p className="text-white">{profile.email}</p>
-					<p className="text-white">
+					<p className="text-white font-extrabold text-6xl">
+						{profile.displayName}
+					</p>
+
+					<p className="text-stone-300 text-xs">{profile.email}</p>
+					<p className="text-stone-300 text-xs">
 						{profile.followers.total} Followers
 					</p>
 				</div>
 			</div>
 
-			<div className="flex flex-col gap-4">
-				{topTracks.map(
-					(
-						{ id, name, images, artist, durationFormatted },
-						index
-					) => (
-						<TopTrackCard
-							key={id}
-							albumImageUrl={images[0].url}
-							trackName={name}
-							artistName={artist.name}
-							duration={durationFormatted}
-							position={index + 1}
-						/>
-					)
-				)}
+			<div className="p-6">
+				<h3 className="mb-4 text-white font-bold">Your top tracks</h3>
+
+				<div className="flex flex-col gap-4 h-[314px] overflow-y-scroll no-scrollbar">
+					{topTracks.map(
+						(
+							{ id, name, images, artist, durationFormatted },
+							index
+						) => (
+							<TopTrackCard
+								key={id}
+								albumImageUrl={images[0].url}
+								trackName={name}
+								artistName={artist.name}
+								duration={durationFormatted}
+								position={index + 1}
+							/>
+						)
+					)}
+				</div>
 			</div>
 
-			<div className="grid grid-cols-[repeat(auto-fit,_minmax(100px,_1fr))] grid-flow-col gap-4 overflow-scroll">
-				{topArtists.map(({ id, name, images }) => (
-					<TopArtistCard
-						key={id}
-						imageUrl={images[0].url}
-						name={name}
-					/>
-				))}
+			<div className="p-6">
+				<h3 className="mb-4 text-white font-bold">Your top tracks</h3>
+
+				<div className="grid grid-cols-[repeat(auto-fit,_minmax(100px,_1fr))] grid-flow-col gap-4 overflow-y-scroll no-scrollbar">
+					{topArtists.map(({ id, name, images }) => (
+						<TopArtistCard
+							key={id}
+							imageUrl={images[0].url}
+							name={name}
+						/>
+					))}
+				</div>
 			</div>
 		</div>
 	);
