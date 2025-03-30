@@ -51,7 +51,7 @@ const ProfilePage = async () => {
 			<div className="p-6">
 				<h3 className="mb-4 text-white font-bold">Your top tracks</h3>
 
-				<div className="h-[314px] overflow-y-scroll no-scrollbar">
+				<div className="h-[330px] overflow-y-scroll no-scrollbar">
 					{topTracks.map(
 						(
 							{
