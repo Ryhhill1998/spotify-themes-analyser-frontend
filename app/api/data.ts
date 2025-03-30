@@ -34,12 +34,16 @@ const fetchProfile = async () => {
 const fetchTrack = async (trackId: string) => {
 	const res = await makeAPIRequest(`/data/tracks/${trackId}`);
 	const data: TrackAPI = await res.json();
+	const totalSeconds = data.duration_ms / 1000;
+	const seconds = totalSeconds % 60;
+	const minutes = Math.floor(totalSeconds / 60);
 	const track: Track = {
 		...data,
 		albumName: data.album_name,
 		spotifyUrl: data.spotify_url,
 		releaseDate: data.release_date,
 		durationMs: data.duration_ms,
+		durationFormatted: `${minutes}:${seconds}`,
 	};
 	return track;
 };
@@ -56,13 +60,20 @@ const fetchArtist = async (artistId: string) => {
 const fetchTopTracks = async () => {
 	const res = await makeAPIRequest("/data/me/top/tracks");
 	const data: TrackAPI[] = await res.json();
-	const tracks: Track[] = data.map((data) => ({
-		...data,
-		albumName: data.album_name,
-		spotifyUrl: data.spotify_url,
-		releaseDate: data.release_date,
-		durationMs: data.duration_ms,
-	}));
+	const tracks: Track[] = data.map((data) => {
+		const totalSeconds = Math.round(data.duration_ms / 1000);
+		const seconds = String(totalSeconds % 60).padStart(2, "0");
+		const minutes = Math.floor(totalSeconds / 60);
+
+		return {
+			...data,
+			albumName: data.album_name,
+			spotifyUrl: data.spotify_url,
+			releaseDate: data.release_date,
+			durationMs: data.duration_ms,
+			durationFormatted: `${minutes}:${seconds}`,
+		};
+	});
 	return tracks;
 };
 

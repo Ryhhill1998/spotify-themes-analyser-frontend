@@ -45,6 +45,7 @@ interface Track extends TrackBase {
 	spotifyUrl: string;
 	releaseDate: string;
 	durationMs: number;
+	durationFormatted: string;
 }
 
 // -------------------- ARTIST -------------------- //
