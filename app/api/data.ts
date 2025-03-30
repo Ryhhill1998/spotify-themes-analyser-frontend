@@ -57,8 +57,8 @@ const fetchArtist = async (artistId: string) => {
 };
 
 // TODO - get top tracks
-const fetchTopTracks = async () => {
-	const res = await makeAPIRequest("/data/me/top/tracks");
+const fetchTopTracks = async (limit: number = 50) => {
+	const res = await makeAPIRequest(`/data/me/top/tracks/?limit=${limit}`);
 	const data: TrackAPI[] = await res.json();
 	const tracks: Track[] = data.map((data) => {
 		const totalSeconds = Math.round(data.duration_ms / 1000);
@@ -78,8 +78,8 @@ const fetchTopTracks = async () => {
 };
 
 // TODO - get top artists
-const fetchTopArtists = async () => {
-	const res = await makeAPIRequest("/data/me/top/artists");
+const fetchTopArtists = async (limit: number = 50) => {
+	const res = await makeAPIRequest(`/data/me/top/artists/?limit=${limit}`);
 	const data: ArtistAPI[] = await res.json();
 	const artists: Artist[] = data.map((data) => ({
 		...data,
