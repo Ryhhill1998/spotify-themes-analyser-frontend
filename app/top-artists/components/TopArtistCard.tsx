@@ -16,9 +16,11 @@ const TopArtistCard = ({ imageUrl, name }: TopArtistCardProps) => {
 				className="w-full h-auto aspect-square object-cover rounded-full mb-3"
 			/>
 
-			<p className="w-[200px] text-center truncate text-white text-sm font-medium">
-				{name}
-			</p>
+			<div className="w-full overflow-hidden">
+				<p className="text-center truncate text-white text-sm font-medium">
+					{name}
+				</p>
+			</div>
 		</div>
 	);
 };

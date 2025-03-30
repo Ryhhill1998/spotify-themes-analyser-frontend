@@ -36,13 +36,14 @@ const ProfilePage = async () => {
 			<div className="p-6">
 				<h3 className="mb-4 text-white font-bold">Your top artists</h3>
 
-				<div className="flex overflow-y-scroll no-scrollbar">
+				<div className="flex gap-4 overflow-x-auto no-scrollbar">
 					{topArtists.map(({ id, name, images }) => (
-						<TopArtistCard
-							key={id}
-							imageUrl={images[0].url}
-							name={name}
-						/>
+						<div key={id} className="flex-shrink-0 w-[160px]">
+							<TopArtistCard
+								imageUrl={images[0].url}
+								name={name}
+							/>
+						</div>
 					))}
 				</div>
 			</div>

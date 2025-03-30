@@ -11,7 +11,7 @@ const TopArtistsPage = async () => {
 				Your top artists
 			</h3>
 
-			<div className="grid grid-cols-[repeat(auto-fill,_minmax(180px,_1fr))] gap-y-4">
+			<div className="grid grid-cols-[repeat(auto-fill,_minmax(150px,_1fr))] gap-y-4">
 				{topArtists.map(({ id, name, images }) => (
 					<TopArtistCard
 						key={id}
