@@ -36,7 +36,7 @@ const ProfilePage = async () => {
 			<div className="p-6">
 				<h3 className="mb-4 text-white font-bold">Your top artists</h3>
 
-				<div className="flex gap-4 overflow-x-auto no-scrollbar">
+				<div className="flex overflow-x-auto no-scrollbar">
 					{topArtists.map(({ id, name, images }) => (
 						<div key={id} className="flex-shrink-0 w-[160px]">
 							<TopArtistCard
@@ -48,7 +48,7 @@ const ProfilePage = async () => {
 				</div>
 			</div>
 
-			<div className="p-6">
+			<div className="p-6 pt-2">
 				<h3 className="mb-4 text-white font-bold">Your top tracks</h3>
 
 				<div className="h-[330px] overflow-y-scroll no-scrollbar">
