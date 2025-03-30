@@ -1,6 +1,8 @@
 import { fetchTrack, fetchTrackLyricsWithEmotionalTags } from "@/app/api/data";
 import { Track } from "@/app/api/dataTypes";
 import Image from "next/image";
+import { ChevronLeft } from "lucide-react";
+import Link from "next/link";
 
 const EmotionPage = async ({
 	params,
@@ -17,13 +19,18 @@ const EmotionPage = async ({
 
 	return (
 		<div className="container mx-auto bg-stone-900 p-4 rounded-md">
-			<header className="text-white p-4 font-bold text-lg mb-8">
+			<Link
+				href="/top-emotions"
+				className="text-white p-4 font-bold text-lg mb-8 flex gap-2 items-center"
+			>
+				<ChevronLeft />
+
 				<h1>
 					Your Top{" "}
 					{emotionName.charAt(0).toUpperCase() + emotionName.slice(1)}{" "}
 					Track
 				</h1>
-			</header>
+			</Link>
 
 			<div className="flex justify-center gap-20">
 				<div className="flex flex-col gap-2">
