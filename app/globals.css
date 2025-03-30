@@ -151,3 +151,15 @@
 		scrollbar-width: none; /* Firefox */
 	}
 }
+
+@layer components {
+	.spotify-grid {
+		@apply grid gap-4 px-4;
+
+		grid-template-columns:
+			[index] 16px
+			[first] minmax(120px, 4fr)
+			[var1] minmax(120px, 2fr)
+			[last] minmax(120px, 1fr);
+	}
+}

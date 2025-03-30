@@ -6,8 +6,12 @@ const TopArtistsPage = async () => {
 	const topArtists: Artist[] = await fetchTopArtists();
 
 	return (
-		<div className="container bg-stone-900 mx-auto p-4 rounded-md">
-			<div className="grid grid-cols-[repeat(auto-fill,_minmax(100px,_1fr))] gap-5">
+		<div className="container bg-stone-900 mx-auto p-6 rounded-md">
+			<h3 className="mb-6 text-white font-bold text-2xl">
+				Your top artists
+			</h3>
+
+			<div className="grid grid-cols-[repeat(auto-fill,_minmax(180px,_1fr))] gap-y-4">
 				{topArtists.map(({ id, name, images }) => (
 					<TopArtistCard
 						key={id}

@@ -16,8 +16,8 @@ const ProfilePage = async () => {
 				<Image
 					src={profile.images[0].url}
 					alt="Spotify profile picture"
-					width={150}
-					height={150}
+					width={200}
+					height={200}
 					className="rounded-full"
 				/>
 
@@ -34,31 +34,9 @@ const ProfilePage = async () => {
 			</div>
 
 			<div className="p-6">
-				<h3 className="mb-4 text-white font-bold">Your top tracks</h3>
+				<h3 className="mb-4 text-white font-bold">Your top artists</h3>
 
-				<div className="flex flex-col gap-4 h-[314px] overflow-y-scroll no-scrollbar">
-					{topTracks.map(
-						(
-							{ id, name, images, artist, durationFormatted },
-							index
-						) => (
-							<TopTrackCard
-								key={id}
-								albumImageUrl={images[0].url}
-								trackName={name}
-								artistName={artist.name}
-								duration={durationFormatted}
-								position={index + 1}
-							/>
-						)
-					)}
-				</div>
-			</div>
-
-			<div className="p-6">
-				<h3 className="mb-4 text-white font-bold">Your top tracks</h3>
-
-				<div className="grid grid-cols-[repeat(auto-fit,_minmax(100px,_1fr))] grid-flow-col gap-4 overflow-y-scroll no-scrollbar">
+				<div className="flex overflow-y-scroll no-scrollbar">
 					{topArtists.map(({ id, name, images }) => (
 						<TopArtistCard
 							key={id}
@@ -66,6 +44,36 @@ const ProfilePage = async () => {
 							name={name}
 						/>
 					))}
+				</div>
+			</div>
+
+			<div className="p-6">
+				<h3 className="mb-4 text-white font-bold">Your top tracks</h3>
+
+				<div className="h-[314px] overflow-y-scroll no-scrollbar">
+					{topTracks.map(
+						(
+							{
+								id,
+								name,
+								images,
+								artist,
+								durationFormatted,
+								albumName,
+							},
+							index
+						) => (
+							<TopTrackCard
+								key={id}
+								albumImageUrl={images[0].url}
+								albumName={albumName}
+								trackName={name}
+								artistName={artist.name}
+								duration={durationFormatted}
+								position={index + 1}
+							/>
+						)
+					)}
 				</div>
 			</div>
 		</div>

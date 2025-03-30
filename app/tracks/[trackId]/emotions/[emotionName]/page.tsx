@@ -18,10 +18,10 @@ const EmotionPage = async ({
 	);
 
 	return (
-		<div className="container mx-auto bg-stone-900 p-4 rounded-md">
+		<div className="container mx-auto bg-stone-900 p-6 rounded-md">
 			<Link
 				href="/top-emotions"
-				className="text-white p-4 font-bold text-lg mb-8 flex gap-2 items-center"
+				className="text-white font-bold text-2xl mb-6 flex gap-2 items-center"
 			>
 				<ChevronLeft />
 
@@ -32,34 +32,36 @@ const EmotionPage = async ({
 				</h1>
 			</Link>
 
-			<div className="flex justify-center gap-20">
+			<div className="flex justify-center gap-10">
 				<div className="flex flex-col gap-2">
 					<Image
 						src={track.images[0].url}
 						alt={"Album image for track"}
-						width={250}
-						height={250}
+						width={200}
+						height={200}
+						className="rounded-md"
 					/>
 
-					<p className="text-white text-2xl font-bold">
-						{track.name}
-					</p>
+					<p className="text-white text-xl font-bold">{track.name}</p>
 
-					<p className="text-stone-300 text-lg font-bold">
+					<p className="text-stone-300 text-md font-bold">
 						{track.artist.name}
 					</p>
 
-					<div className="flex gap-2 text-stone-400 text-sm font-semibold">
-						<p>{track.albumName}</p>
-						<p>{track.releaseDate}</p>
-					</div>
+					<p className=" text-stone-400 text-sm font-semibold">
+						{track.albumName}
+					</p>
+
+					<p className=" text-stone-400 text-xs">
+						{track.releaseDate.split("-")[0]}
+					</p>
 				</div>
 
 				<div
 					dangerouslySetInnerHTML={{
 						__html: taggedLyrics,
 					}}
-					className="text-stone-300"
+					className="text-stone-400"
 				></div>
 			</div>
 		</div>

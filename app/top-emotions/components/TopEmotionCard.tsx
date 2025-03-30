@@ -1,6 +1,7 @@
 "use client";
 
 import { useRouter } from "next/navigation";
+import { ChevronRight } from "lucide-react";
 
 type TopEmotionCardProps = {
 	name: string;
@@ -17,11 +18,16 @@ const TopEmotionCard = ({ name, percentage, trackId }: TopEmotionCardProps) => {
 
 	return (
 		<div
-			className="flex justify-between p-4 rounded-md text-white hover:bg-gray-800 text-sm"
+			className="flex justify-between items-center p-4 rounded-md text-white hover:bg-stone-700 text-sm cursor-pointer"
 			onClick={handleCardClick}
 		>
-			<p>{name}</p>
-			<p>{percentage} %</p>
+			<p>{name.charAt(0).toUpperCase() + name.slice(1)}</p>
+
+			<div className="flex gap-4 items-center">
+				<p>{percentage} %</p>
+
+				<ChevronRight />
+			</div>
 		</div>
 	);
 };
