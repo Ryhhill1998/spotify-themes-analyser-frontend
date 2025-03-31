@@ -1,6 +1,7 @@
 import TopArtistCard from "@/app/top-artists/components/TopArtistCard";
 import { Artist } from "@/app/api/dataTypes";
 import { fetchTopArtists } from "@/app/api/data";
+import TopArtistCardSkeleton from "./components/TopArtistCardSkeleton";
 
 const TopArtistsPage = async () => {
 	const topArtists: Artist[] = await fetchTopArtists();
