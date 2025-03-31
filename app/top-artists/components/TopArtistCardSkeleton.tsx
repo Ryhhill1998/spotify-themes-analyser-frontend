@@ -6,7 +6,7 @@ const TopArtistCardSkeleton = () => {
 			<Skeleton className="w-full aspect-square object-cover rounded-full mb-3" />
 
 			<div className="w-full overflow-hidden space-y-1">
-				<Skeleton className="h-4 w-full max-w-[80%] mx-auto" />
+				<Skeleton className="h-3 w-full mx-auto" />
 			</div>
 		</div>
 	);
