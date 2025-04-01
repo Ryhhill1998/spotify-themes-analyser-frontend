@@ -1,4 +1,4 @@
-import SpotifySignInButton from "@/app/components/SpotifySignInButton";
+import SpotifySignInButton from "@/app/(routes)/login/components/SpotifySignInButton";
 
 const LoginPage = async () => {
 	return (
