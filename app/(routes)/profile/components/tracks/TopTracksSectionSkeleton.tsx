@@ -1,4 +1,4 @@
-import TopTrackCardSkeleton from "@/app/top-tracks/components/TopTrackCardSkeleton";
+import TopTrackCardSkeleton from "@/app/(routes)/top-tracks/components/TopTrackCardSkeleton";
 
 const TopTracksSectionSkeleton = () => {
 	return (

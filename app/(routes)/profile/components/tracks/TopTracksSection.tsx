@@ -1,17 +1,15 @@
+import TopTrackCard from "@/app/(routes)/top-tracks/components/TopTrackCard";
 import { fetchTopTracks } from "@/app/api/data";
 import { Track } from "@/app/api/dataTypes";
-import TopTrackCard from "@/app/top-tracks/components/TopTrackCard";
 
-const TopTracksPage = async () => {
-	const topTracks: Track[] = await fetchTopTracks();
+const TopTracksSection = async () => {
+	const topTracks: Track[] = await fetchTopTracks(10);
 
 	return (
-		<div className="container bg-stone-900 mx-auto p-6 rounded-md">
-			<h3 className="mb-6 text-white font-bold text-2xl">
-				Your top tracks
-			</h3>
+		<div className="p-6 pt-2">
+			<h3 className="mb-4 text-white font-bold">Your top tracks</h3>
 
-			<div>
+			<div className="h-[330px] overflow-y-scroll no-scrollbar">
 				{topTracks.map(
 					(
 						{
@@ -40,4 +38,4 @@ const TopTracksPage = async () => {
 	);
 };
 
-export default TopTracksPage;
+export default TopTracksSection;

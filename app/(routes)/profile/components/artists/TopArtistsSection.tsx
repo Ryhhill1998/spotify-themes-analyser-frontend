@@ -1,6 +1,6 @@
 import { fetchTopArtists } from "@/app/api/data";
 import { Artist } from "@/app/api/dataTypes";
-import TopArtistCard from "@/app/top-artists/components/TopArtistCard";
+import TopArtistCard from "@/app/(routes)/top-artists/components/TopArtistCard";
 
 const TopArtistsSection = async () => {
 	const topArtists: Artist[] = await fetchTopArtists(10);
