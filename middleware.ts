@@ -1,19 +1,27 @@
 import { NextRequest, NextResponse } from "next/server";
 import { cookies } from "next/headers";
 
-const protectedRoutes = ["/dashboard"];
+const protectedRoutes = [
+	/^\/profile$/,
+	/^\/top-tracks$/,
+	/^\/top-artists$/,
+	/^\/top-emotions$/,
+	/^\/tracks\/.+$/,
+];
 const publicRoutes = ["/", "/login"];
 
-export default async function middleware(req: NextRequest) {
+const middleware = async (req: NextRequest) => {
 	const path = req.nextUrl.pathname;
-	const isProtectedRoute = protectedRoutes.includes(path);
+	const isProtectedRoute = protectedRoutes.some((pattern) =>
+		pattern.test(path)
+	);
 	const isPublicRoute = publicRoutes.includes(path);
 
 	const cookieStore = await cookies();
 
 	// Redirect to /login if the user is not authenticated
 	if (
-		isProtectedRoute &&
+		(isProtectedRoute || req.nextUrl.pathname === "/") &&
 		!(cookieStore.has("access_token") && cookieStore.has("refresh_token"))
 	) {
 		return NextResponse.redirect(new URL("/login", req.nextUrl));
@@ -29,9 +37,13 @@ export default async function middleware(req: NextRequest) {
 	}
 
 	return NextResponse.next();
-}
+};
 
 // Routes Middleware should not run on
-export const config = {
+const config = {
 	matcher: ["/((?!api|_next/static|_next/image|.*\\.png$).*)"],
 };
+
+export default middleware;
+
+export { config };

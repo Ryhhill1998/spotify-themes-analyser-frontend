@@ -1,4 +1,4 @@
-import TopArtistCard from "@/app/(routes)/top-artists/components/TopArtistCard";
+import TopArtistCard from "@/app/(routes)/(auth)/top-artists/components/TopArtistCard";
 import { Artist } from "@/app/api/dataTypes";
 import { fetchTopArtists } from "@/app/api/data";
 import TopArtistCardSkeleton from "./components/TopArtistCardSkeleton";
