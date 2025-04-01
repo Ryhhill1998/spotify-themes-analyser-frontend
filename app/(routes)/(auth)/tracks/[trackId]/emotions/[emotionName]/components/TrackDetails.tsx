@@ -49,8 +49,7 @@ const TrackDetails = async ({ trackId }: TrackDetailsProps) => {
 						width={22}
 						height={22}
 					/>
-
-					{"Play on Spotify"}
+					Play on Spotify
 				</Link>
 			</div>
 		</div>

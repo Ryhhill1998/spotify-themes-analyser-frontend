@@ -32,6 +32,8 @@ const EmotionPage = async ({
 			</Link>
 
 			<div className="flex flex-col gap-8 justify-center items-center">
+				<TrackDetailsSkeleton />
+
 				<Suspense fallback={<TrackDetailsSkeleton />}>
 					<TrackDetails trackId={trackId} />
 				</Suspense>
