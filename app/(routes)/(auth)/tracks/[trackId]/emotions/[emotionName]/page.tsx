@@ -5,6 +5,9 @@ import Link from "next/link";
 import TaggedLyrics from "@/app/(routes)/(auth)/tracks/[trackId]/emotions/[emotionName]/components/TaggedLyrics";
 import TrackDetails from "./components/TrackDetails";
 import { Separator } from "@/components/ui/separator";
+import { Suspense } from "react";
+import TrackDetailsSkeleton from "./components/TrackDetailsSkeleton";
+import TaggedLyricsSkeleton from "./components/TaggedLyricsSkeleton";
 
 const EmotionPage = async ({
 	params,
@@ -29,9 +32,13 @@ const EmotionPage = async ({
 			</Link>
 
 			<div className="flex flex-col gap-8 justify-center items-center">
-				<TrackDetails trackId={trackId} />
+				<Suspense fallback={<TrackDetailsSkeleton />}>
+					<TrackDetails trackId={trackId} />
+				</Suspense>
 
-				<TaggedLyrics trackId={trackId} emotionName={emotionName} />
+				<Suspense fallback={<TaggedLyricsSkeleton />}>
+					<TaggedLyrics trackId={trackId} emotionName={emotionName} />
+				</Suspense>
 			</div>
 		</div>
 	);
