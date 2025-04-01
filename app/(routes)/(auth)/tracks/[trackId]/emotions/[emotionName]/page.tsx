@@ -33,6 +33,7 @@ const EmotionPage = async ({
 
 			<div className="flex flex-col gap-8 justify-center items-center">
 				<TrackDetailsSkeleton />
+				<TaggedLyricsSkeleton />
 
 				<Suspense fallback={<TrackDetailsSkeleton />}>
 					<TrackDetails trackId={trackId} />
