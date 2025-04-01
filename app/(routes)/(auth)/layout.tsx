@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "@/app/globals.css";
-import Navigation from "@/app/(routes)/components/Navigation";
+import Navigation from "@/app/(routes)/(auth)/components/Navigation";
 import Image from "next/image";
 import Link from "next/link";
 import { Profile } from "@/app/api/dataTypes";
