@@ -13,7 +13,7 @@ const TrackPage = async ({
 
 	return (
 		<div className="container mx-auto bg-stone-900 rounded-md">
-			<div className="p-6">
+			<div className="p-6 pb-0">
 				<Link
 					href="/top/tracks"
 					className="text-white font-bold text-lg flex gap-2 items-center"
