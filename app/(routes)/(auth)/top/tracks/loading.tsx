@@ -1,18 +1,17 @@
 import TopTrackCardSkeleton from "@/app/(routes)/(auth)/components/common/TopTrackCardSkeleton";
+import TopTitle from "../components/TopTitle";
 
 const Loading = () => {
 	return (
-		<div className="container bg-stone-900 mx-auto p-6 rounded-md">
-			<h3 className="mb-6 text-white font-bold text-2xl">
-				Your top tracks
-			</h3>
+		<>
+			<TopTitle name="tracks" />
 
 			<div>
 				{[...Array(50).keys()].map((_, index) => (
 					<TopTrackCardSkeleton key={index} position={index + 1} />
 				))}
 			</div>
-		</div>
+		</>
 	);
 };
 
