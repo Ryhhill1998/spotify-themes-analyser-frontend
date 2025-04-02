@@ -15,7 +15,7 @@ const TaggedLyricsSkeleton = () => {
 			{lines.map((verse, verseIndex) => (
 				<div
 					key={`verse-${verseIndex}`}
-					className="w-full flex flex-col items-center gap-2"
+					className="w-full flex flex-col gap-2"
 				>
 					{verse.map((width, lineIndex) => (
 						<Skeleton
