@@ -1,6 +1,6 @@
 "use client";
 
-const API_BASE_URL = "http://localhost:8080";
+const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL;
 
 const handleSpotifyLogin = () => {
 	window.location.href = `${API_BASE_URL}/auth/spotify/login`;
