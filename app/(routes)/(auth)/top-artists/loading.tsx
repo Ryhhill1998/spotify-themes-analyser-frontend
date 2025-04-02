@@ -1,4 +1,4 @@
-import TopArtistCardSkeleton from "./components/TopArtistCardSkeleton";
+import TopArtistCardSkeleton from "../components/common/TopArtistCardSkeleton";
 
 const Loading = () => {
 	return (

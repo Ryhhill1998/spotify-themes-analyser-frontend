@@ -1,6 +1,6 @@
 import { fetchTopTracks } from "@/app/api/data";
 import { Track } from "@/app/api/dataTypes";
-import TopTrackCard from "./components/TopTrackCard";
+import TopTrackCard from "../components/common/TopTrackCard";
 
 const TopTracksPage = async () => {
 	const topTracks: Track[] = await fetchTopTracks();

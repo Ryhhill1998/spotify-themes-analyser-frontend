@@ -1,4 +1,4 @@
-import TopTrackCard from "@/app/(routes)/(auth)/top-tracks/components/TopTrackCard";
+import TopTrackCard from "@/app/(routes)/(auth)/components/common/TopTrackCard";
 import { fetchTopTracks } from "@/app/api/data";
 import { Track } from "@/app/api/dataTypes";
 

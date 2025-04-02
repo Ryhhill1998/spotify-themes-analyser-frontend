@@ -1,4 +1,4 @@
-import TopArtistCardSkeleton from "@/app/(routes)/(auth)/top-artists/components/TopArtistCardSkeleton";
+import TopArtistCardSkeleton from "@/app/(routes)/(auth)/components/common/TopArtistCardSkeleton";
 
 const TopArtistsSectionSkeleton = () => {
 	return (

@@ -1,4 +1,4 @@
-import TopTrackCardSkeleton from "./components/TopTrackCardSkeleton";
+import TopTrackCardSkeleton from "../components/common/TopTrackCardSkeleton";
 
 const Loading = () => {
 	return (

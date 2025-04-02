@@ -1,7 +1,7 @@
-import TopArtistCard from "@/app/(routes)/(auth)/top-artists/components/TopArtistCard";
+import TopArtistCard from "@/app/(routes)/(auth)/components/common/TopArtistCard";
 import { Artist } from "@/app/api/dataTypes";
 import { fetchTopArtists } from "@/app/api/data";
-import TopArtistCardSkeleton from "./components/TopArtistCardSkeleton";
+import TopArtistCardSkeleton from "../components/common/TopArtistCardSkeleton";
 
 const TopArtistsPage = async () => {
 	const topArtists: Artist[] = await fetchTopArtists();
