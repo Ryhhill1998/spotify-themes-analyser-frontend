@@ -14,6 +14,7 @@ const TopArtistsPage = async () => {
 				{topArtists.map(({ id, name, images }) => (
 					<TopArtistCard
 						key={id}
+						artistId={id}
 						imageUrl={images[0].url}
 						name={name}
 					/>

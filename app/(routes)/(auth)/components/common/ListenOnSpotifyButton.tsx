@@ -5,7 +5,7 @@ type PlayOnSpotifyButtonProps = {
 	spotifyUrl: string;
 };
 
-const PlayOnSpotifyButton = ({ spotifyUrl }: PlayOnSpotifyButtonProps) => {
+const ListenOnSpotifyButton = ({ spotifyUrl }: PlayOnSpotifyButtonProps) => {
 	return (
 		<Link
 			href={spotifyUrl}
@@ -17,9 +17,9 @@ const PlayOnSpotifyButton = ({ spotifyUrl }: PlayOnSpotifyButtonProps) => {
 				width={22}
 				height={22}
 			/>
-			Play on Spotify
+			Listen on Spotify
 		</Link>
 	);
 };
 
-export default PlayOnSpotifyButton;
+export default ListenOnSpotifyButton;

@@ -54,6 +54,8 @@ interface ArtistBase {
 	name: string;
 	images: Image[];
 	genres: string[];
+	followers: number;
+	popularity: number;
 }
 
 interface ArtistAPI extends ArtistBase {

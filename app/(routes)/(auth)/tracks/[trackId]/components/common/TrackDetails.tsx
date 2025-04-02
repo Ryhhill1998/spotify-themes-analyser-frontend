@@ -1,4 +1,4 @@
-import PlayOnSpotifyButton from "@/app/(routes)/(auth)/components/common/PlayOnSpotifyButton";
+import ListenOnSpotifyButton from "@/app/(routes)/(auth)/components/common/ListenOnSpotifyButton";
 import { fetchTrack } from "@/app/api/data";
 import { Track } from "@/app/api/dataTypes";
 import Image from "next/image";
@@ -17,7 +17,7 @@ const TrackDetails = async ({ trackId }: TrackDetailsProps) => {
 				alt="Album image for track"
 				width={250}
 				height={250}
-				className="rounded-md"
+				className="aspect-square object-cover rounded-md"
 			/>
 
 			<div className="flex flex-col gap-4 p-4">
@@ -39,7 +39,7 @@ const TrackDetails = async ({ trackId }: TrackDetailsProps) => {
 					</p>
 				</div>
 
-				<PlayOnSpotifyButton spotifyUrl={track.spotifyUrl} />
+				<ListenOnSpotifyButton spotifyUrl={track.spotifyUrl} />
 			</div>
 		</div>
 	);

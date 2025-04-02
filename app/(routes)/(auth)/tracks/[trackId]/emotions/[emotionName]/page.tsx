@@ -3,10 +3,10 @@ import { Track } from "@/app/api/dataTypes";
 import { ChevronLeft } from "lucide-react";
 import Link from "next/link";
 import TaggedLyrics from "@/app/(routes)/(auth)/tracks/[trackId]/emotions/[emotionName]/components/TaggedLyrics";
-import TrackDetails from "./components/TrackDetails";
+import TrackDetails from "../../components/common/TrackDetails";
 import { Separator } from "@/components/ui/separator";
 import { Suspense } from "react";
-import TrackDetailsSkeleton from "./components/TrackDetailsSkeleton";
+import TrackDetailsSkeleton from "../../components/common/TrackDetailsSkeleton";
 import TaggedLyricsSkeleton from "./components/TaggedLyricsSkeleton";
 
 const EmotionPage = async ({

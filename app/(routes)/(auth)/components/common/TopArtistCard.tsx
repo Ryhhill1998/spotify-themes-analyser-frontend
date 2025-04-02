@@ -1,19 +1,24 @@
 import Image from "next/image";
+import Link from "next/link";
 
 type TopArtistCardProps = {
+	artistId: string;
 	imageUrl: string;
 	name: string;
 };
 
-const TopArtistCard = ({ imageUrl, name }: TopArtistCardProps) => {
+const TopArtistCard = ({ artistId, imageUrl, name }: TopArtistCardProps) => {
 	return (
-		<div className="flex flex-col items-center p-3 hover:bg-stone-800 rounded-sm cursor-pointer">
+		<Link
+			href={`/artists/${artistId}`}
+			className="flex flex-col items-center p-3 hover:bg-stone-800 rounded-sm cursor-pointer"
+		>
 			<Image
 				src={imageUrl}
 				alt="Artist art"
 				width={300}
 				height={300}
-				className="w-full h-auto aspect-square object-cover rounded-full mb-3"
+				className="aspect-square object-cover rounded-full mb-3"
 			/>
 
 			<div className="w-full overflow-hidden">
@@ -21,7 +26,7 @@ const TopArtistCard = ({ imageUrl, name }: TopArtistCardProps) => {
 					{name}
 				</p>
 			</div>
-		</div>
+		</Link>
 	);
 };
 

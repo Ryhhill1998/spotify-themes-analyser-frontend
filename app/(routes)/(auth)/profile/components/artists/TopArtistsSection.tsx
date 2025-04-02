@@ -12,7 +12,11 @@ const TopArtistsSection = async () => {
 			<div className="flex overflow-x-auto no-scrollbar">
 				{topArtists.map(({ id, name, images }) => (
 					<div key={id} className="flex-shrink-0 w-[160px]">
-						<TopArtistCard imageUrl={images[0].url} name={name} />
+						<TopArtistCard
+							artistId={id}
+							imageUrl={images[0].url}
+							name={name}
+						/>
 					</div>
 				))}
 			</div>

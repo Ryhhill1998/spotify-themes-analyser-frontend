@@ -1,6 +1,6 @@
 import { Suspense } from "react";
-import TrackDetails from "./emotions/[emotionName]/components/TrackDetails";
-import TrackDetailsSkeleton from "./emotions/[emotionName]/components/TrackDetailsSkeleton";
+import TrackDetails from "./components/common/TrackDetails";
+import TrackDetailsSkeleton from "./components/common/TrackDetailsSkeleton";
 import Link from "next/link";
 import { ChevronLeft } from "lucide-react";
 
