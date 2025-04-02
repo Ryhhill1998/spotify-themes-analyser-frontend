@@ -4,7 +4,7 @@ import TopTrackCard from "@/app/(routes)/(auth)/components/common/TopTrackCard";
 import TopTitle from "../components/TopTitle";
 
 const TopTracksPage = async () => {
-	const topTracks: Track[] = await fetchTopTracks();
+	const topTracks: Track[] = await fetchTopTracks("short_term");
 
 	return (
 		<>

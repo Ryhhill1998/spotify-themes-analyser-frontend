@@ -4,7 +4,7 @@ import { fetchTopArtists } from "@/app/api/data";
 import TopTitle from "../components/TopTitle";
 
 const TopArtistsPage = async () => {
-	const topArtists: Artist[] = await fetchTopArtists();
+	const topArtists: Artist[] = await fetchTopArtists("short_term");
 
 	return (
 		<>

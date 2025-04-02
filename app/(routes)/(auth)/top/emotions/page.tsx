@@ -4,7 +4,7 @@ import TopEmotionCard from "./components/TopEmotionCard";
 import TopTitle from "../components/TopTitle";
 
 const TopEmotionsPage = async () => {
-	const topEmotions: Emotion[] = await fetchTopEmotions();
+	const topEmotions: Emotion[] = await fetchTopEmotions("short_term");
 
 	return (
 		<>

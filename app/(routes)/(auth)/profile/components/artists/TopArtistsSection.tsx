@@ -1,13 +1,14 @@
 import { fetchTopArtists } from "@/app/api/data";
 import { Artist } from "@/app/api/dataTypes";
 import TopArtistCard from "@/app/(routes)/(auth)/components/common/TopArtistCard";
+import TitleAndShowAllLink from "../TitleAndShowAllLink";
 
 const TopArtistsSection = async () => {
-	const topArtists: Artist[] = await fetchTopArtists(10);
+	const topArtists: Artist[] = await fetchTopArtists("short_term", 10);
 
 	return (
 		<div className="p-6">
-			<h3 className="mb-4 text-white font-bold">Your top artists</h3>
+			<TitleAndShowAllLink name="artists" />
 
 			<div className="flex overflow-x-auto no-scrollbar">
 				{topArtists.map(({ id, name, images }) => (

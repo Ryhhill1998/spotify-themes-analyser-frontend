@@ -1,13 +1,14 @@
 import TopTrackCard from "@/app/(routes)/(auth)/components/common/TopTrackCard";
 import { fetchTopTracks } from "@/app/api/data";
 import { Track } from "@/app/api/dataTypes";
+import TitleAndShowAllLink from "../TitleAndShowAllLink";
 
 const TopTracksSection = async () => {
-	const topTracks: Track[] = await fetchTopTracks(10);
+	const topTracks: Track[] = await fetchTopTracks("short_term", 10);
 
 	return (
 		<div className="p-6 pt-2">
-			<h3 className="mb-4 text-white font-bold">Your top tracks</h3>
+			<TitleAndShowAllLink name="tracks" />
 
 			<div className="h-[330px] overflow-y-scroll no-scrollbar">
 				{topTracks.map(
