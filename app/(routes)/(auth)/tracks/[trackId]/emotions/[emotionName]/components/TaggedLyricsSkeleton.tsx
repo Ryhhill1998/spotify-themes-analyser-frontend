@@ -11,22 +11,21 @@ const TaggedLyricsSkeleton = () => {
 	];
 
 	return (
-		<div className="w-full bg-stone-800 flex justify-center p-6">
-			<div className="w-full max-w-[350px] flex flex-col gap-10">
-				{lines.map((verse, verseIndex) => (
-					<div
-						key={`verse-${verseIndex}`}
-						className="w-full flex flex-col items-center gap-2"
-					>
-						{verse.map((width, lineIndex) => (
-							<Skeleton
-								key={`lyric-${verseIndex}-${lineIndex}`}
-								className={`h-4 w-full max-w-[${width}]`}
-							/>
-						))}
-					</div>
-				))}
-			</div>
+		<div className="w-full max-w-[500px] flex flex-col gap-10">
+			{lines.map((verse, verseIndex) => (
+				<div
+					key={`verse-${verseIndex}`}
+					className="w-full flex flex-col items-center gap-2"
+				>
+					{verse.map((width, lineIndex) => (
+						<Skeleton
+							key={`lyric-${verseIndex}-${lineIndex}`}
+							className="h-4 w-full"
+							style={{ maxWidth: width }}
+						/>
+					))}
+				</div>
+			))}
 		</div>
 	);
 };

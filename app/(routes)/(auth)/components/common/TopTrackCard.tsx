@@ -1,6 +1,8 @@
 import Image from "next/image";
+import Link from "next/link";
 
 type TopTrackCardProps = {
+	trackId: string;
 	albumImageUrl: string;
 	albumName: string;
 	trackName: string;
@@ -10,6 +12,7 @@ type TopTrackCardProps = {
 };
 
 const TopTrackCard = ({
+	trackId,
 	albumImageUrl,
 	albumName,
 	trackName,
@@ -18,7 +21,10 @@ const TopTrackCard = ({
 	position,
 }: TopTrackCardProps) => {
 	return (
-		<div className="grid grid-cols-[6fr_4fr_1fr] items-center px-3 py-2 hover:bg-stone-800 rounded-sm gap-x-2 cursor-pointer">
+		<Link
+			href={`/tracks/${trackId}`}
+			className="grid grid-cols-[6fr_4fr_1fr] items-center px-3 py-2 hover:bg-stone-800 rounded-sm gap-x-2 cursor-pointer"
+		>
 			<div className="flex gap-3 items-center min-w-0 overflow-hidden">
 				<p className="text-stone-300 text-sm text-right">{position}</p>
 
@@ -46,7 +52,7 @@ const TopTrackCard = ({
 			</div>
 
 			<p className="text-stone-300 text-xs text-right">{duration}</p>
-		</div>
+		</Link>
 	);
 };
 

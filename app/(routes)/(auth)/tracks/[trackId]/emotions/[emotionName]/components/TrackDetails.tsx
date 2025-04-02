@@ -11,7 +11,7 @@ const TrackDetails = async ({ trackId }: TrackDetailsProps) => {
 	const track: Track = await fetchTrack(trackId);
 
 	return (
-		<div className="flex gap-2 items-center p-6">
+		<div className="flex gap-2 items-center">
 			<Image
 				src={track.images[0].url}
 				alt="Album image for track"

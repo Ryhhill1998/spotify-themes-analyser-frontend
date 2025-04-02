@@ -24,6 +24,7 @@ const TopTracksSection = async () => {
 					) => (
 						<TopTrackCard
 							key={id}
+							trackId={id}
 							albumImageUrl={images[0].url}
 							albumName={albumName}
 							trackName={name}

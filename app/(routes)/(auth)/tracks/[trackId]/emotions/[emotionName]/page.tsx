@@ -18,27 +18,47 @@ const EmotionPage = async ({
 
 	return (
 		<div className="container mx-auto bg-stone-900 rounded-md">
-			<Link
-				href="/top-emotions"
-				className="text-white font-bold text-2xl flex gap-2 items-center p-6"
-			>
-				<ChevronLeft />
+			<div className="flex p-6 justify-between">
+				<Link
+					href="/top/emotions"
+					className="text-white font-bold text-lg flex gap-2 items-center"
+				>
+					<ChevronLeft />
 
-				<h1>
+					<p>Back</p>
+				</Link>
+
+				<h1 className="text-white font-bold text-2xl self-center">
 					Your Top{" "}
 					{emotionName.charAt(0).toUpperCase() + emotionName.slice(1)}{" "}
 					Track
 				</h1>
-			</Link>
 
-			<div className="flex flex-col gap-8 justify-center items-center">
-				<Suspense fallback={<TrackDetailsSkeleton />}>
-					<TrackDetails trackId={trackId} />
-				</Suspense>
+				<Link
+					href="/top-emotions"
+					className="invisible text-white font-bold text-lg flex gap-2 items-center"
+				>
+					<ChevronLeft />
 
-				<Suspense fallback={<TaggedLyricsSkeleton />}>
-					<TaggedLyrics trackId={trackId} emotionName={emotionName} />
-				</Suspense>
+					<p>Back</p>
+				</Link>
+			</div>
+
+			<div className="flex flex-col items-center">
+				<div className="w-full p-6 flex justify-center">
+					<Suspense fallback={<TrackDetailsSkeleton />}>
+						<TrackDetails trackId={trackId} />
+					</Suspense>
+				</div>
+
+				<div className="w-full bg-stone-800 flex justify-center p-6">
+					<Suspense fallback={<TaggedLyricsSkeleton />}>
+						<TaggedLyrics
+							trackId={trackId}
+							emotionName={emotionName}
+						/>
+					</Suspense>
+				</div>
 			</div>
 		</div>
 	);
