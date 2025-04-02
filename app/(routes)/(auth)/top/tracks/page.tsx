@@ -1,14 +1,31 @@
 import { fetchTopTracks } from "@/app/api/data";
 import { Track } from "@/app/api/dataTypes";
 import TopTrackCard from "@/app/(routes)/(auth)/components/common/TopTrackCard";
-import TopTitle from "../components/TopTitle";
+import TopTitleAndTimeRanges from "../components/TopTitleAndTimeRanges";
 
-const TopTracksPage = async () => {
-	const topTracks: Track[] = await fetchTopTracks("short_term");
+const TopTracksPage = async ({
+	searchParams,
+}: {
+	searchParams?: Promise<{ "time-range": string }>;
+}) => {
+	const search = await searchParams;
+	let timeRange = "short_term";
+
+	if (search) {
+		timeRange = search["time-range"];
+
+		if (timeRange) {
+			timeRange = timeRange.replace("-", "_");
+		} else {
+			timeRange = "short_term";
+		}
+	}
+
+	const topTracks: Track[] = await fetchTopTracks(timeRange);
 
 	return (
 		<>
-			<TopTitle name="tracks" />
+			<TopTitleAndTimeRanges name="tracks" />
 
 			<div>
 				{topTracks.map(

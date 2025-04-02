@@ -1,5 +1,5 @@
 import TopArtistCardSkeleton from "../../components/common/TopArtistCardSkeleton";
-import TopTitle from "../components/TopTitle";
+import TopTitle from "../components/TopTitleAndTimeRanges";
 
 const Loading = () => {
 	return (

@@ -1,5 +1,5 @@
 import TopTrackCardSkeleton from "@/app/(routes)/(auth)/components/common/TopTrackCardSkeleton";
-import TopTitle from "../components/TopTitle";
+import TopTitle from "../components/TopTitleAndTimeRanges";
 
 const Loading = () => {
 	return (

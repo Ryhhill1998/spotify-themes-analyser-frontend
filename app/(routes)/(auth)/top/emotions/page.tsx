@@ -1,14 +1,31 @@
 import { fetchTopEmotions } from "@/app/api/data";
 import { Emotion } from "@/app/api/dataTypes";
 import TopEmotionCard from "./components/TopEmotionCard";
-import TopTitle from "../components/TopTitle";
+import TopTitleAndTimeRanges from "../components/TopTitleAndTimeRanges";
 
-const TopEmotionsPage = async () => {
-	const topEmotions: Emotion[] = await fetchTopEmotions("short_term");
+const TopEmotionsPage = async ({
+	searchParams,
+}: {
+	searchParams?: Promise<{ "time-range": string }>;
+}) => {
+	const search = await searchParams;
+	let timeRange = "short_term";
+
+	if (search) {
+		timeRange = search["time-range"];
+
+		if (timeRange) {
+			timeRange = timeRange.replace("-", "_");
+		} else {
+			timeRange = "short_term";
+		}
+	}
+
+	const topEmotions: Emotion[] = await fetchTopEmotions(timeRange);
 
 	return (
 		<>
-			<TopTitle name="emotions" />
+			<TopTitleAndTimeRanges name="emotions" />
 
 			<div className="container mx-auto flex flex-col gap-2">
 				{topEmotions.map(({ name, percentage, trackId }, index) => (

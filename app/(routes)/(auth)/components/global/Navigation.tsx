@@ -4,9 +4,17 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 
 const routeDetails = [
-	{ id: 2, route: "/top/artists", name: "Top Artists" },
+	{
+		id: 2,
+		route: "/top/artists",
+		name: "Top Artists",
+	},
 	{ id: 3, route: "/top/tracks", name: "Top Tracks" },
-	{ id: 4, route: "/top/emotions", name: "Top Emotions" },
+	{
+		id: 4,
+		route: "/top/emotions",
+		name: "Top Emotions",
+	},
 ];
 
 const Navigation = () => {
@@ -20,7 +28,7 @@ const Navigation = () => {
 						<Link
 							href={route}
 							className={`px-4 py-2 hover:bg-white hover:text-black text-sm rounded-sm ${
-								pathname === route
+								pathname.startsWith(route)
 									? "bg-white text-black"
 									: "bg-nonoe text-white"
 							}`}

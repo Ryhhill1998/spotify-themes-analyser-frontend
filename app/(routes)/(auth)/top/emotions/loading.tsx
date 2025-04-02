@@ -1,4 +1,4 @@
-import TopTitle from "../components/TopTitle";
+import TopTitle from "../components/TopTitleAndTimeRanges";
 import TopEmotionCardSkeleton from "./components/TopEmotionCardSkeleton";
 
 const Loading = () => {
