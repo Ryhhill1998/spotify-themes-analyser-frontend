@@ -16,7 +16,7 @@ const TaggedLyrics = async ({ trackId, emotionName }: TaggedLyricsProps) => {
 			dangerouslySetInnerHTML={{
 				__html: taggedLyrics,
 			}}
-			className="text-stone-300 text-center"
+			className="text-stone-300 text-xl"
 		></div>
 	);
 };
