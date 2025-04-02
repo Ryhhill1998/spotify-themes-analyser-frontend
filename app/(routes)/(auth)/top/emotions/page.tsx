@@ -1,15 +1,14 @@
 import { fetchTopEmotions } from "@/app/api/data";
 import { Emotion } from "@/app/api/dataTypes";
 import TopEmotionCard from "./components/TopEmotionCard";
+import TopTitle from "../components/TopTitle";
 
 const TopEmotionsPage = async () => {
 	const topEmotions: Emotion[] = await fetchTopEmotions();
 
 	return (
-		<div className="container bg-stone-900 mx-auto p-6 rounded-md">
-			<h3 className="mb-6 text-white font-bold text-2xl">
-				Your top emotions
-			</h3>
+		<>
+			<TopTitle name="emotions" />
 
 			<div className="container mx-auto flex flex-col gap-2">
 				{topEmotions.map(({ name, percentage, trackId }, index) => (
@@ -22,7 +21,7 @@ const TopEmotionsPage = async () => {
 					/>
 				))}
 			</div>
-		</div>
+		</>
 	);
 };
 
