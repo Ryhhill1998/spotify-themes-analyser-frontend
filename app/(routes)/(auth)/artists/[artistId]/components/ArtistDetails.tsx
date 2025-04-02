@@ -27,13 +27,29 @@ const ArtistDetails = async ({ artistId }: ArtistDetailsProps) => {
 						{artist.name}
 					</p>
 
-					<p className=" text-stone-400 text-md font-semibold">
-						{artist.followers}
-					</p>
+					<div className="font-semibold flex gap-2 items-center">
+						<p className="text-md text-stone-400">Followers</p>
 
-					<p className=" text-stone-400 text-sm">
-						{artist.popularity}
-					</p>
+						<p className="text-md text-white">
+							{artist.followers.toLocaleString()}
+						</p>
+					</div>
+
+					<div className="font-semibold flex gap-2 items-center">
+						<p className="text-md text-stone-400">Popularity</p>
+
+						<p className="text-md text-white">
+							{artist.popularity}%
+						</p>
+					</div>
+
+					<div className="font-semibold flex gap-2 items-center">
+						<p className="text-md text-stone-400">Genres</p>
+
+						<p className="text-md text-white">
+							{artist.genres.join(", ")}
+						</p>
+					</div>
 				</div>
 
 				<ListenOnSpotifyButton spotifyUrl={artist.spotifyUrl} />
