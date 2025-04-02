@@ -2,7 +2,7 @@ import { Skeleton } from "@/components/ui/skeleton";
 
 const ArtistDetailsSkeleton = () => {
 	return (
-		<div className="flex gap-2 items-center justify-center p-6 w-full mx-auto">
+		<div className="flex gap-2 p-6 w-full mx-auto">
 			<Skeleton className="w-[250px] h-[250px] aspect-square object-cover rounded-sm" />
 
 			<div className="flex w-full max-w-[25%] flex-col gap-8 p-4">

@@ -11,8 +11,6 @@ type ArtistDetailsProps = {
 const ArtistDetails = async ({ artistId }: ArtistDetailsProps) => {
 	const artist: Artist = await fetchArtist(artistId);
 
-	console.log({ genres: artist.genres.length > 1 });
-
 	return (
 		<div className="flex gap-2 items-center">
 			<Image
