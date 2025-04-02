@@ -25,7 +25,7 @@ const ProfileBanner = async () => {
 
 				<p className="text-stone-300 text-sm">{profile.email}</p>
 				<p className="text-stone-300 text-sm">
-					{profile.followers.total} Followers
+					{profile.followers} Followers
 				</p>
 			</div>
 		</div>

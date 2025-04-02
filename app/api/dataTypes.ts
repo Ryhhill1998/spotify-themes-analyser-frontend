@@ -7,7 +7,7 @@ interface ProfileBase {
 	email: string;
 	href: string;
 	images: Image[];
-	followers: { total: number };
+	followers: number;
 }
 
 interface ProfileAPI extends ProfileBase {
