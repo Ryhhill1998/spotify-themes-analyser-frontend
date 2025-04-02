@@ -1,13 +1,12 @@
 import TopArtistCard from "@/app/(routes)/(auth)/components/common/TopArtistCard";
 import { Artist } from "@/app/api/dataTypes";
 import { fetchTopArtists } from "@/app/api/data";
-import TopArtistCardSkeleton from "../components/common/TopArtistCardSkeleton";
 
 const TopArtistsPage = async () => {
 	const topArtists: Artist[] = await fetchTopArtists();
 
 	return (
-		<div className="container bg-stone-900 mx-auto p-6 rounded-md">
+		<>
 			<h3 className="mb-6 text-white font-bold text-2xl">
 				Your top artists
 			</h3>
@@ -21,7 +20,7 @@ const TopArtistsPage = async () => {
 					/>
 				))}
 			</div>
-		</div>
+		</>
 	);
 };
 

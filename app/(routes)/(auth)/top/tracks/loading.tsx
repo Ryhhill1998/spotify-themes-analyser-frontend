@@ -1,15 +1,15 @@
-import TopArtistCardSkeleton from "../components/common/TopArtistCardSkeleton";
+import TopTrackCardSkeleton from "@/app/(routes)/(auth)/components/common/TopTrackCardSkeleton";
 
 const Loading = () => {
 	return (
 		<div className="container bg-stone-900 mx-auto p-6 rounded-md">
 			<h3 className="mb-6 text-white font-bold text-2xl">
-				Your top artists
+				Your top tracks
 			</h3>
 
-			<div className="grid grid-cols-[repeat(auto-fill,_minmax(150px,_1fr))] gap-y-4">
+			<div>
 				{[...Array(50).keys()].map((_, index) => (
-					<TopArtistCardSkeleton key={index} />
+					<TopTrackCardSkeleton key={index} position={index + 1} />
 				))}
 			</div>
 		</div>
