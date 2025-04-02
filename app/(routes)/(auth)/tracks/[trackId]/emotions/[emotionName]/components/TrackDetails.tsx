@@ -1,7 +1,7 @@
+import PlayOnSpotifyButton from "@/app/(routes)/(auth)/components/common/PlayOnSpotifyButton";
 import { fetchTrack } from "@/app/api/data";
 import { Track } from "@/app/api/dataTypes";
 import Image from "next/image";
-import Link from "next/link";
 
 type TrackDetailsProps = {
 	trackId: string;
@@ -14,7 +14,7 @@ const TrackDetails = async ({ trackId }: TrackDetailsProps) => {
 		<div className="flex gap-2 items-center p-6">
 			<Image
 				src={track.images[0].url}
-				alt={"Album image for track"}
+				alt="Album image for track"
 				width={250}
 				height={250}
 				className="rounded-md"
@@ -39,18 +39,7 @@ const TrackDetails = async ({ trackId }: TrackDetailsProps) => {
 					</p>
 				</div>
 
-				<Link
-					href={track.spotifyUrl}
-					className="bg-stone-700 hover:bg-stone-600 text-stone-100 text-sm w-fit px-4 py-3 rounded-4xl font-semibold flex gap-2 items-center"
-				>
-					<Image
-						src="/spotify-icon-dark-mode.svg"
-						alt="Spotify"
-						width={22}
-						height={22}
-					/>
-					Play on Spotify
-				</Link>
+				<PlayOnSpotifyButton spotifyUrl={track.spotifyUrl} />
 			</div>
 		</div>
 	);
