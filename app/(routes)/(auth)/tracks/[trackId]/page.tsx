@@ -13,7 +13,7 @@ const TrackPage = async ({
 
 	return (
 		<div className="container mx-auto bg-stone-900 rounded-md">
-			<div className="p-4">
+			<div className="p-6">
 				<Link
 					href="/top/tracks"
 					className="text-white font-bold text-lg flex gap-2 items-center"
@@ -24,7 +24,7 @@ const TrackPage = async ({
 				</Link>
 			</div>
 
-			<div className="flex justify-center p-4">
+			<div className="flex justify-center p-6">
 				<Suspense fallback={<TrackDetailsSkeleton />}>
 					<TrackDetails trackId={trackId} />
 				</Suspense>

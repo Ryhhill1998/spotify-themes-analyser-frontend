@@ -7,22 +7,24 @@ const ProfileBanner = async () => {
 	const profile: Profile = await fetchProfile();
 
 	return (
-		<div className="flex items-center gap-4 p-6 bg-stone-700 rounded-t-md">
+		<div className="flex items-end gap-4 p-6 bg-stone-800 rounded-t-md">
 			<Image
 				src={profile.images[0].url}
 				alt="Spotify profile picture"
-				width={200}
-				height={200}
+				width={225}
+				height={225}
 				className="rounded-full"
 			/>
 
-			<div className="flex flex-col gap-2">
-				<p className="text-white font-extrabold text-6xl">
+			<div className="flex flex-col gap-2 p-4">
+				<p className="text-stone-300 text-sm">Profile</p>
+
+				<p className="text-white font-extrabold text-7xl mb-2">
 					{profile.displayName}
 				</p>
 
-				<p className="text-stone-300 text-xs">{profile.email}</p>
-				<p className="text-stone-300 text-xs">
+				<p className="text-stone-300 text-sm">{profile.email}</p>
+				<p className="text-stone-300 text-sm">
 					{profile.followers.total} Followers
 				</p>
 			</div>
