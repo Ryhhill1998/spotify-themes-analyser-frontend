@@ -11,6 +11,8 @@ type ArtistDetailsProps = {
 const ArtistDetails = async ({ artistId }: ArtistDetailsProps) => {
 	const artist: Artist = await fetchArtist(artistId);
 
+	console.log({ genres: artist.genres.length > 1 });
+
 	return (
 		<div className="flex gap-2 items-center">
 			<Image
@@ -43,13 +45,15 @@ const ArtistDetails = async ({ artistId }: ArtistDetailsProps) => {
 						</p>
 					</div>
 
-					<div className="font-semibold flex gap-2 items-center">
-						<p className="text-md text-stone-400">Genres</p>
+					{artist.genres.length > 0 && (
+						<div className="font-semibold flex gap-2 items-center">
+							<p className="text-md text-stone-400">Genres</p>
 
-						<p className="text-md text-white">
-							{artist.genres.join(", ")}
-						</p>
-					</div>
+							<p className="text-md text-white">
+								{artist.genres.join(", ")}
+							</p>
+						</div>
+					)}
 				</div>
 
 				<ListenOnSpotifyButton spotifyUrl={artist.spotifyUrl} />

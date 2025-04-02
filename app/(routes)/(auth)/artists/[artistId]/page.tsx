@@ -24,7 +24,7 @@ const ArtistPage = async ({
 				</Link>
 			</div>
 
-			<div className="flex justify-center p-6">
+			<div className="flex p-6">
 				<Suspense fallback={<ArtistDetailsSkeleton />}>
 					<ArtistDetails artistId={artistId} />
 				</Suspense>
