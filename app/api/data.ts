@@ -122,6 +122,8 @@ const fetchTrackLyricsWithEmotionalTags = async (
 const handleCookieSet = async () => {
 	const res = await fetch(`${API_BASE_URL}/auth/spotify/cookies`);
 	console.log({ res });
+	console.log({ headers: res.headers });
+
 	const data = await res.json();
 	console.log({ data });
 
