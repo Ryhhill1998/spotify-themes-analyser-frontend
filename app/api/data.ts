@@ -119,6 +119,22 @@ const fetchTrackLyricsWithEmotionalTags = async (
 	return taggedLyrics;
 };
 
+const handleCookieSet = async () => {
+	const res = await fetch(`${API_BASE_URL}/auth/spotify/cookies`);
+	console.log({ res });
+	const data = await res.json();
+	console.log({ data });
+
+	const cookieStore = await cookies();
+
+	cookieStore.set({
+		name: data["name"],
+		value: data["value"],
+		httpOnly: true,
+		path: "/",
+	});
+};
+
 export {
 	fetchProfile,
 	fetchTrack,
@@ -127,4 +143,5 @@ export {
 	fetchTopArtists,
 	fetchTopEmotions,
 	fetchTrackLyricsWithEmotionalTags,
+	handleCookieSet,
 };
