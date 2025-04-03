@@ -3,10 +3,10 @@ import { cookies } from "next/headers";
 
 const protectedRoutes = [
 	/^\/profile$/,
-	/^\/top-tracks$/,
-	/^\/top-artists$/,
-	/^\/top-emotions$/,
-	/^\/tracks\/.+$/,
+	/^\/top\/tracks(?:\?.*)?$/,
+	/^\/top\/artists(?:\?.*)?$/,
+	/^\/top\/emotions(?:\?.*)?$/,
+	/^\/tracks\/[^/]+(?:\?.*)?$/,
 ];
 const publicRoutes = ["/", "/login"];
 
@@ -19,20 +19,19 @@ const middleware = async (req: NextRequest) => {
 
 	const cookieStore = await cookies();
 
+	const isAuthenticated =
+		cookieStore.has("access_token") && cookieStore.has("refresh_token");
+
 	// Redirect to /login if the user is not authenticated
 	if (
 		(isProtectedRoute || req.nextUrl.pathname === "/") &&
-		!(cookieStore.has("access_token") && cookieStore.has("refresh_token"))
+		!isAuthenticated
 	) {
 		return NextResponse.redirect(new URL("/login", req.nextUrl));
 	}
 
 	// Redirect to /profile if the user is authenticated
-	if (
-		isPublicRoute &&
-		cookieStore.has("access_token") &&
-		cookieStore.has("refresh_token")
-	) {
+	if (isPublicRoute && isAuthenticated) {
 		return NextResponse.redirect(new URL("/profile", req.nextUrl));
 	}
 
