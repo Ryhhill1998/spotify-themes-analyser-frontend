@@ -31,7 +31,7 @@ const middleware = async (req: NextRequest) => {
 	const accessToken = req.cookies.get("access_token")?.value ?? "";
 	const refreshToken = req.cookies.get("refresh_token")?.value ?? "";
 
-	if (path === "/login/?success=true") {
+	if (path === "/login?success=true") {
 		response.cookies.set({
 			name: "access_token",
 			value: accessToken,
