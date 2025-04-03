@@ -1,5 +1,5 @@
-import { fetchTopEmotions } from "@/app/data/data";
-import { Emotion } from "@/app/data/dataTypes";
+import { fetchTopEmotions } from "@/app/api/data";
+import { Emotion } from "@/app/api/dataTypes";
 import TopEmotionCard from "./components/TopEmotionCard";
 import TopTitleAndTimeRanges from "../components/TopTitleAndTimeRanges";
 

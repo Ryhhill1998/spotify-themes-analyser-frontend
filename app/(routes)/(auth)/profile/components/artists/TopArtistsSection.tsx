@@ -1,5 +1,5 @@
-import { fetchTopArtists } from "@/app/data/data";
-import { Artist } from "@/app/data/dataTypes";
+import { fetchTopArtists } from "@/app/api/data";
+import { Artist } from "@/app/api/dataTypes";
 import TopArtistCard from "@/app/(routes)/(auth)/components/common/TopArtistCard";
 import TitleAndShowAllLink from "../TitleAndShowAllLink";
 

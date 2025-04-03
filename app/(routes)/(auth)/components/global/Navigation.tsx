@@ -1,9 +1,7 @@
 "use client";
 
-import { handleCookieSet } from "@/app/data/data";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useEffect } from "react";
 
 const routeDetails = [
 	{
@@ -21,10 +19,6 @@ const routeDetails = [
 
 const Navigation = () => {
 	const pathname = usePathname();
-
-	// useEffect(() => {
-	// 	handleCookieSet();
-	// }, []);
 
 	return (
 		<nav>

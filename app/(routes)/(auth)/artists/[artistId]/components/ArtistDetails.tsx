@@ -1,7 +1,7 @@
 import Image from "next/image";
 
-import { fetchArtist } from "@/app/data/data";
-import { Artist } from "@/app/data/dataTypes";
+import { fetchArtist } from "@/app/api/data";
+import { Artist } from "@/app/api/dataTypes";
 import ListenOnSpotifyButton from "../../../components/common/ListenOnSpotifyButton";
 
 type ArtistDetailsProps = {
