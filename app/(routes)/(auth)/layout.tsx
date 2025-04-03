@@ -2,8 +2,8 @@ import "@/app/globals.css";
 import Navigation from "@/app/(routes)/(auth)/components/global/Navigation";
 import Image from "next/image";
 import Link from "next/link";
-import { Profile } from "@/app/api/dataTypes";
-import { fetchProfile } from "@/app/api/data";
+import { Profile } from "@/app/data/dataTypes";
+import { fetchProfile } from "@/app/data/data";
 
 const Header = async () => {
 	const profile: Profile = await fetchProfile();

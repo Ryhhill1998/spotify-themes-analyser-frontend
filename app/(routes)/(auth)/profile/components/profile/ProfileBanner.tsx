@@ -1,7 +1,7 @@
 import Image from "next/image";
 
-import { fetchProfile } from "@/app/api/data";
-import { Profile } from "@/app/api/dataTypes";
+import { fetchProfile } from "@/app/data/data";
+import { Profile } from "@/app/data/dataTypes";
 
 const ProfileBanner = async () => {
 	const profile: Profile = await fetchProfile();

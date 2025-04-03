@@ -1,6 +1,6 @@
 import TopTrackCard from "@/app/(routes)/(auth)/components/common/TopTrackCard";
-import { fetchTopTracks } from "@/app/api/data";
-import { Track } from "@/app/api/dataTypes";
+import { fetchTopTracks } from "@/app/data/data";
+import { Track } from "@/app/data/dataTypes";
 import TitleAndShowAllLink from "../TitleAndShowAllLink";
 
 const TopTracksSection = async () => {

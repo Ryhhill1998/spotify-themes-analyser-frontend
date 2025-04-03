@@ -25,8 +25,11 @@ const makeAPIRequest = async (route: string) => {
 
 const fetchProfile = async () => {
 	const res = await makeAPIRequest("/data/me/profile");
-	const data: ProfileAPI = await res.json();
-	const profile: Profile = { ...data, displayName: data.display_name };
+	const profileData: ProfileAPI = await res.json();
+	const profile: Profile = {
+		...profileData,
+		displayName: profileData.display_name,
+	};
 	return profile;
 };
 
@@ -120,21 +123,10 @@ const fetchTrackLyricsWithEmotionalTags = async (
 };
 
 const handleCookieSet = async () => {
-	const res = await fetch(`${API_BASE_URL}/auth/spotify/cookies`);
-	console.log({ res });
-	console.log({ headers: res.headers });
-
-	const data = await res.json();
-	console.log({ data });
-
-	const cookieStore = await cookies();
-
-	cookieStore.set({
-		name: data["name"],
-		value: data["value"],
-		httpOnly: true,
-		path: "/",
+	const res = await fetch(`${API_BASE_URL}/auth/spotify/cookies`, {
+		credentials: "include", // Ensure cookies are included in the request
 	});
+	return res;
 };
 
 export {

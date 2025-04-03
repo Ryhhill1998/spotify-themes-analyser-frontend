@@ -1,4 +1,4 @@
-import { fetchTrackLyricsWithEmotionalTags } from "@/app/api/data";
+import { fetchTrackLyricsWithEmotionalTags } from "@/app/data/data";
 
 type TaggedLyricsProps = {
 	trackId: string;
