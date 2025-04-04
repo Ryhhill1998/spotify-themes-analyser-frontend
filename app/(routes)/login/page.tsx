@@ -1,5 +1,5 @@
 "use client";
-import { useSearchParams, useRouter } from "next/navigation";
+import { useSearchParams } from "next/navigation";
 import { Suspense, useEffect } from "react";
 
 import SpotifySignInButton from "@/app/(routes)/login/components/SpotifySignInButton";

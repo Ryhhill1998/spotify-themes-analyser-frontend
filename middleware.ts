@@ -8,10 +8,7 @@ const protectedRoutes = [
 	/^\/top\/emotions(?:\?.*)?$/,
 	/^\/tracks\/[^/]+(?:\?.*)?$/,
 ];
-const publicRoutes = [
-	/^\/$/, // Matches exactly "/"
-	/^\/login(?:\?.*)?$/, // Matches "/login" and "/login?q=..."
-];
+const publicRoutes = [/^\/$/, /^\/login(?:\?.*)?$/];
 
 const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL;
 

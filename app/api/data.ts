@@ -12,6 +12,7 @@ import {
 	Emotion,
 	TaggedLyricsAPI,
 } from "./dataTypes";
+import { redirect } from "next/navigation";
 
 const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL;
 
@@ -39,6 +40,7 @@ const getTokens = async (code: string) => {
 		name: "refresh_token",
 		value: data.refresh_token,
 	});
+	redirect("/");
 };
 
 const makeAPIRequest = async (route: string) => {
