@@ -29,19 +29,6 @@ const middleware = async (req: NextRequest) => {
 	const accessToken = cookieStore.get("access_token");
 	const refreshToken = cookieStore.get("refresh_token");
 
-	// Redirect to /login if the user is not authenticated
-	if ((isProtectedRoute || path === "/") && !(accessToken && refreshToken)) {
-		return NextResponse.redirect(new URL("/login", req.nextUrl));
-	}
-
-	// Redirect to /profile if the user is authenticated
-	if (isPublicRoute && accessToken && refreshToken) {
-		return NextResponse.redirect(new URL("/profile", req.nextUrl));
-	}
-
-	// create response object
-	const response = NextResponse.next();
-
 	// Refresh tokens if accessToken has expired but refreshToken exists
 	if (!accessToken && refreshToken) {
 		try {
@@ -49,9 +36,15 @@ const middleware = async (req: NextRequest) => {
 				`${API_BASE_URL}/auth/spotify/refresh-tokens`,
 				{
 					method: "POST",
+					headers: {
+						Accept: "application/json",
+						"Content-Type": "application/json",
+					},
+					body: JSON.stringify({ refresh_token: refreshToken.value }),
 				}
 			);
 			const refreshData: Tokens = await res.json();
+			const response = NextResponse.next();
 			response.cookies.set({
 				name: "access_token",
 				value: refreshData.access_token,
@@ -64,13 +57,25 @@ const middleware = async (req: NextRequest) => {
 				secure: true,
 				sameSite: "none",
 			});
+			return response;
 		} catch (error) {
 			cookieStore.delete("access_token");
+			cookieStore.delete("refresh_token");
 			return NextResponse.redirect(new URL("/login", req.nextUrl));
 		}
 	}
 
-	return response;
+	// Redirect to /login if the user is not authenticated
+	if ((isProtectedRoute || path === "/") && !(accessToken && refreshToken)) {
+		return NextResponse.redirect(new URL("/login", req.nextUrl));
+	}
+
+	// Redirect to /profile if the user is authenticated
+	if (isPublicRoute && accessToken && refreshToken) {
+		return NextResponse.redirect(new URL("/profile", req.nextUrl));
+	}
+
+	return NextResponse.next();
 };
 
 // Routes Middleware should not run on
