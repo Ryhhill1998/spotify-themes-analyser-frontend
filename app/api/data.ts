@@ -103,7 +103,7 @@ const fetchArtist = async (artistId: string) => {
 // TODO - get top tracks
 const fetchTopTracks = async (timeRange: string, limit: number = 50) => {
 	const res = await makeAPIRequest(
-		`/data/me/top/tracks/?time_range=${timeRange}&limit=${limit}`
+		`/data/me/top/tracks?time_range=${timeRange}&limit=${limit}`
 	);
 	const data: TrackAPI[] = await res.json();
 	const tracks: Track[] = data.map((data) => {
@@ -126,7 +126,7 @@ const fetchTopTracks = async (timeRange: string, limit: number = 50) => {
 // TODO - get top artists
 const fetchTopArtists = async (timeRange: string, limit: number = 50) => {
 	const res = await makeAPIRequest(
-		`/data/me/top/artists/?time_range=${timeRange}&limit=${limit}`
+		`/data/me/top/artists?time_range=${timeRange}&limit=${limit}`
 	);
 	const data: ArtistAPI[] = await res.json();
 	const artists: Artist[] = data.map((data) => ({
@@ -139,7 +139,7 @@ const fetchTopArtists = async (timeRange: string, limit: number = 50) => {
 // TODO - get top emotions
 const fetchTopEmotions = async (timeRange: string) => {
 	const res = await makeAPIRequest(
-		`/data/me/top/emotions/?time_range=${timeRange}`
+		`/data/me/top/emotions?time_range=${timeRange}`
 	);
 	const data: EmotionAPI[] = await res.json();
 	const emotions: Emotion[] = data.map((data) => ({
