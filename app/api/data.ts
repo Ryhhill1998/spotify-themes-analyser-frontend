@@ -48,9 +48,9 @@ const getTokens = async (code: string) => {
 };
 
 const makeAPIRequest = async (route: string) => {
-	const cookiesToSend = await cookies();
 	const res = await fetch(`${API_BASE_URL}${route}`, {
-		headers: { Cookie: cookiesToSend.toString() },
+		credentials: "include",
+		redirect: "follow",
 	});
 
 	return res;
