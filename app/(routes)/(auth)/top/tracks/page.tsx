@@ -21,7 +21,11 @@ const TopTracksPage = async ({
 		}
 	}
 
-	const topTracks: Track[] = await fetchTopTracks(timeRange);
+	const topTracks: Track[] | null = await fetchTopTracks(timeRange);
+
+	if (!topTracks) {
+		return <></>;
+	}
 
 	return (
 		<>

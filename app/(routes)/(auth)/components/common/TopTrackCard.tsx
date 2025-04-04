@@ -23,7 +23,7 @@ const TopTrackCard = ({
 	return (
 		<Link
 			href={`/tracks/${trackId}`}
-			className="grid grid-cols-[6fr_4fr_1fr] items-center px-3 py-2 hover:bg-stone-800 rounded-sm gap-x-2 cursor-pointer"
+			className="grid grid-cols-[6fr_1fr] sm:grid-cols-[6fr_4fr_1fr] items-center px-3 py-2 hover:bg-stone-800 rounded-sm gap-x-2 cursor-pointer"
 		>
 			<div className="flex gap-3 items-center min-w-0 overflow-hidden">
 				<p className="text-stone-300 text-sm text-right">{position}</p>
@@ -47,7 +47,7 @@ const TopTrackCard = ({
 				</div>
 			</div>
 
-			<div className="min-w-0 overflow-hidden">
+			<div className="min-w-0 overflow-hidden hidden sm:block">
 				<p className="text-stone-300 text-sm truncate">{albumName}</p>
 			</div>
 
