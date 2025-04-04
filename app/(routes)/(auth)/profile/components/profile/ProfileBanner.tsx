@@ -10,10 +10,13 @@ const ProfileBanner = async () => {
 		return <></>;
 	}
 
+	const images = profile.images;
+	const imageUrl = images.length ? images[0]?.url : "";
+
 	return (
 		<div className="flex items-end gap-4 p-6 bg-stone-800 rounded-t-md">
 			<Image
-				src={profile.images[0].url}
+				src={imageUrl}
 				alt="Spotify profile picture"
 				width={225}
 				height={225}
