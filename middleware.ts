@@ -8,7 +8,10 @@ const protectedRoutes = [
 	/^\/top\/emotions(?:\?.*)?$/,
 	/^\/tracks\/[^/]+(?:\?.*)?$/,
 ];
-const publicRoutes = ["/", "/login"];
+const publicRoutes = [
+	/^\/$/, // Matches exactly "/"
+	/^\/login(?:\?.*)?$/, // Matches "/login" and "/login?q=..."
+];
 
 const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL;
 
@@ -23,7 +26,7 @@ const middleware = async (req: NextRequest) => {
 	const isProtectedRoute = protectedRoutes.some((pattern) =>
 		pattern.test(path)
 	);
-	const isPublicRoute = publicRoutes.includes(path);
+	const isPublicRoute = publicRoutes.some((pattern) => pattern.test(path));
 
 	const cookieStore = await cookies();
 	const accessToken = cookieStore.get("access_token");

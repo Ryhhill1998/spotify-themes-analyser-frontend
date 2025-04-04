@@ -15,11 +15,38 @@ import {
 
 const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL;
 
+type Tokens = {
+	access_token: string;
+	refresh_token: string;
+};
+
+const getCookies = async (code: string) => {
+	const cookieStore = await cookies();
+	const res = await fetch(`${API_BASE_URL}/auth/spotify/tokens`, {
+		method: "POST",
+		headers: {
+			Accept: "application/json",
+			"Content-Type": "application/json",
+		},
+		body: JSON.stringify({ code }),
+	});
+	const data: Tokens = await res.json();
+	cookieStore.set({
+		name: "access_token",
+		value: data.access_token,
+	});
+	cookieStore.set({
+		name: "refresh_token",
+		value: data.refresh_token,
+	});
+};
+
 const makeAPIRequest = async (route: string) => {
 	const cookiesToSend = await cookies();
 	const res = await fetch(`${API_BASE_URL}${route}`, {
 		headers: { Cookie: cookiesToSend.toString() },
 	});
+
 	return res;
 };
 
@@ -138,4 +165,5 @@ export {
 	fetchTopEmotions,
 	fetchTrackLyricsWithEmotionalTags,
 	handleCookieSet,
+	getCookies,
 };
