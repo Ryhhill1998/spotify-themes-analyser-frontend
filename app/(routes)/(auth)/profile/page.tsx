@@ -14,13 +14,13 @@ const ProfilePage = () => {
 				<ProfileBanner />
 			</Suspense>
 
-			<Suspense fallback={<TopArtistsSectionSkeleton />}>
+			{/* <Suspense fallback={<TopArtistsSectionSkeleton />}>
 				<TopArtistsSection />
 			</Suspense>
 
 			<Suspense fallback={<TopTracksSectionSkeleton />}>
 				<TopTracksSection />
-			</Suspense>
+			</Suspense> */}
 		</div>
 	);
 };
