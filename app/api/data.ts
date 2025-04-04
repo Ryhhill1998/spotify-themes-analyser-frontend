@@ -35,10 +35,14 @@ const getTokens = async (code: string) => {
 	cookieStore.set({
 		name: "access_token",
 		value: data.access_token,
+		secure: true,
+		sameSite: "none",
 	});
 	cookieStore.set({
 		name: "refresh_token",
 		value: data.refresh_token,
+		secure: true,
+		sameSite: "none",
 	});
 	redirect("/");
 };

@@ -55,10 +55,14 @@ const middleware = async (req: NextRequest) => {
 			response.cookies.set({
 				name: "access_token",
 				value: refreshData.access_token,
+				secure: true,
+				sameSite: "none",
 			});
 			response.cookies.set({
 				name: "refresh_token",
 				value: refreshData.refresh_token,
+				secure: true,
+				sameSite: "none",
 			});
 		} catch (error) {
 			cookieStore.delete("access_token");
