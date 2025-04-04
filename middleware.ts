@@ -10,6 +10,8 @@ const protectedRoutes = [
 ];
 const publicRoutes = ["/", "/login"];
 
+const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL;
+
 const middleware = async (req: NextRequest) => {
 	const path = req.nextUrl.pathname;
 
@@ -34,6 +36,13 @@ const middleware = async (req: NextRequest) => {
 	if (isPublicRoute && isAuthenticated) {
 		return NextResponse.redirect(new URL("/profile", req.nextUrl));
 	}
+
+	const res = await fetch(`${API_BASE_URL}/auth/spotify/test-refresh`, {
+		method: "POST",
+	});
+	const refreshData = await res.json();
+	cookieStore.set({ name: "access_", value: refreshData["access_"] });
+	cookieStore.set({ name: "refresh_", value: refreshData["refresh_"] });
 
 	const response = NextResponse.next();
 
