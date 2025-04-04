@@ -12,10 +12,8 @@ const timeRanges = [
 
 const TopTitleAndTimeRanges = ({ name }: TopTitleProps) => {
 	return (
-		<div className="flex justify-between items-center">
-			<h3 className="mb-6 text-white font-bold text-2xl">
-				Your top {name}
-			</h3>
+		<div className="flex items-center flex-col gap-4 sm:flex-row sm:justify-between mb-6">
+			<h3 className="text-white font-bold text-2xl">Your top {name}</h3>
 
 			<div className="flex gap-2">
 				{timeRanges.map(({ label, value }, index) => (
