@@ -6,6 +6,10 @@ import TitleAndShowAllLink from "../TitleAndShowAllLink";
 const TopTracksSection = async () => {
 	const topTracks: Track[] = await fetchTopTracks("short_term", 10);
 
+	if (!topTracks) {
+		return <></>;
+	}
+
 	return (
 		<div className="p-6 pt-2">
 			<TitleAndShowAllLink name="tracks" />

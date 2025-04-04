@@ -6,6 +6,10 @@ import { Profile } from "@/app/api/dataTypes";
 const ProfileBanner = async () => {
 	const profile: Profile = await fetchProfile();
 
+	if (!profile) {
+		return <></>;
+	}
+
 	return (
 		<div className="flex items-end gap-4 p-6 bg-stone-800 rounded-t-md">
 			<Image
