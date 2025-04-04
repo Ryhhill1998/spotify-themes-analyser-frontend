@@ -14,19 +14,21 @@ const ProfileBanner = async () => {
 	const imageUrl = images.length ? images[0]?.url : "";
 
 	return (
-		<div className="flex items-end gap-4 p-6 bg-stone-800 rounded-t-md">
+		<div className="flex flex-col sm:flex-row items-center sm:items-end gap-4 sm:gap-6 p-2 py-6 sm:px-6 bg-stone-800 rounded-t-md">
 			<Image
 				src={imageUrl}
 				alt="Spotify profile picture"
-				width={225}
-				height={225}
-				className="rounded-full"
+				width={200}
+				height={200}
+				className="aspect-square object-cover rounded-full"
 			/>
 
-			<div className="flex flex-col gap-2 p-4">
-				<p className="text-stone-300 text-sm">Profile</p>
+			<div className="flex flex-col gap-2 text-center sm:text-left">
+				<p className="text-stone-300 hidden sm:block text-sm">
+					Profile
+				</p>
 
-				<p className="text-white font-extrabold text-7xl mb-2">
+				<p className="text-white font-extrabold text-4xl sm:text-6xl mb-2">
 					{profile.displayName}
 				</p>
 

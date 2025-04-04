@@ -59,7 +59,7 @@ const Navigation = () => {
 					</div>
 
 					<DrawerFooter>
-						<DrawerClose>
+						<DrawerClose asChild>
 							<Button className="w-full bg-black">Cancel</Button>
 						</DrawerClose>
 					</DrawerFooter>
