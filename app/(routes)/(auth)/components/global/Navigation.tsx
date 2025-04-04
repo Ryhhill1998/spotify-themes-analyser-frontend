@@ -1,6 +1,15 @@
 "use client";
 
 import { Button } from "@/components/ui/button";
+import {
+	Drawer,
+	DrawerClose,
+	DrawerContent,
+	DrawerFooter,
+	DrawerHeader,
+	DrawerTitle,
+	DrawerTrigger,
+} from "@/components/ui/drawer";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 
@@ -23,7 +32,39 @@ const Navigation = () => {
 
 	return (
 		<nav>
-			<Button className="block sm:hidden">Menu</Button>
+			<Drawer>
+				<DrawerTrigger asChild className="block sm:hidden">
+					<Button className="bg-stone-900 text-white">Menu</Button>
+				</DrawerTrigger>
+
+				<DrawerContent className="bg-stone-900 block sm:hidden">
+					<DrawerHeader className="hidden">
+						<DrawerTitle className="">Menu</DrawerTitle>
+					</DrawerHeader>
+
+					<div className="p-4 pb-0 flex flex-col gap-4">
+						{routeDetails.map(({ id, route, name }) => (
+							<Link
+								key={id}
+								href={route}
+								className={`px-4 py-2 hover:bg-white hover:text-black text-sm rounded-sm ${
+									pathname.startsWith(route)
+										? "bg-white text-black"
+										: "bg-nonoe text-white"
+								}`}
+							>
+								{name}
+							</Link>
+						))}
+					</div>
+
+					<DrawerFooter>
+						<DrawerClose>
+							<Button className="w-full bg-black">Cancel</Button>
+						</DrawerClose>
+					</DrawerFooter>
+				</DrawerContent>
+			</Drawer>
 
 			<ul className="gap-2 hidden sm:flex">
 				{routeDetails.map(({ id, route, name }) => (
