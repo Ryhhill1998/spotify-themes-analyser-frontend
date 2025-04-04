@@ -53,7 +53,7 @@ const makeAPIRequest = async (route: string) => {
 
 	const res = await fetch(`${API_BASE_URL}${route}`, {
 		headers: { Cookie: cookieStore.toString() },
-		redirect: "follow",
+		redirect: "manual",
 	});
 
 	if (res.status === 401) {
