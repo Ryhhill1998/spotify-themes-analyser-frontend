@@ -20,7 +20,7 @@ type Tokens = {
 	refresh_token: string;
 };
 
-const getCookies = async (code: string) => {
+const getTokens = async (code: string) => {
 	const cookieStore = await cookies();
 	const res = await fetch(`${API_BASE_URL}/auth/spotify/tokens`, {
 		method: "POST",
@@ -165,5 +165,5 @@ export {
 	fetchTopEmotions,
 	fetchTrackLyricsWithEmotionalTags,
 	handleCookieSet,
-	getCookies,
+	getTokens,
 };

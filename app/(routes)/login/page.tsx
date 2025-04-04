@@ -1,25 +1,32 @@
 "use client";
 import { useSearchParams, useRouter } from "next/navigation";
-import { useEffect } from "react";
+import { Suspense, useEffect } from "react";
 
 import SpotifySignInButton from "@/app/(routes)/login/components/SpotifySignInButton";
-import { getCookies } from "@/app/api/data";
+import { getTokens } from "@/app/api/data";
 
-const LoginPage = () => {
+const TokensSetter = () => {
 	const searchParams = useSearchParams();
-	const router = useRouter();
 
 	const code = searchParams.get("code");
 
 	useEffect(() => {
 		if (code) {
-			getCookies(code);
+			getTokens(code);
 		}
-	}, [code, router]);
+	}, [code]);
 
+	return <></>;
+};
+
+const LoginPage = () => {
 	return (
 		<div>
 			<h1>Login page</h1>
+
+			<Suspense>
+				<TokensSetter />
+			</Suspense>
 
 			<SpotifySignInButton />
 		</div>
