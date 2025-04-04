@@ -4,7 +4,7 @@ import { Track } from "@/app/api/dataTypes";
 import TitleAndShowAllLink from "../TitleAndShowAllLink";
 
 const TopTracksSection = async () => {
-	const topTracks: Track[] = await fetchTopTracks("short_term", 10);
+	const topTracks: Track[] | null = await fetchTopTracks("short_term", 10);
 
 	if (!topTracks) {
 		return <></>;

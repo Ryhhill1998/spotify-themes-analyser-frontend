@@ -21,7 +21,11 @@ const TopEmotionsPage = async ({
 		}
 	}
 
-	const topEmotions: Emotion[] = await fetchTopEmotions(timeRange);
+	const topEmotions: Emotion[] | null = await fetchTopEmotions(timeRange);
+
+	if (!topEmotions) {
+		return <></>;
+	}
 
 	return (
 		<>

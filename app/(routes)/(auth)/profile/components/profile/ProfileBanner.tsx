@@ -4,7 +4,7 @@ import { fetchProfile } from "@/app/api/data";
 import { Profile } from "@/app/api/dataTypes";
 
 const ProfileBanner = async () => {
-	const profile: Profile = await fetchProfile();
+	const profile: Profile | null = await fetchProfile();
 
 	if (!profile) {
 		return <></>;
