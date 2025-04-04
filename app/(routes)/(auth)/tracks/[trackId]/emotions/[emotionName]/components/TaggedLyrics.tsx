@@ -6,10 +6,14 @@ type TaggedLyricsProps = {
 };
 
 const TaggedLyrics = async ({ trackId, emotionName }: TaggedLyricsProps) => {
-	const taggedLyrics: string = await fetchTrackLyricsWithEmotionalTags(
+	const taggedLyrics: string | null = await fetchTrackLyricsWithEmotionalTags(
 		trackId,
 		emotionName
 	);
+
+	if (!taggedLyrics) {
+		return <></>;
+	}
 
 	return (
 		<div

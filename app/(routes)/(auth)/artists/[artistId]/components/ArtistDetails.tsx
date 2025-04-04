@@ -9,7 +9,11 @@ type ArtistDetailsProps = {
 };
 
 const ArtistDetails = async ({ artistId }: ArtistDetailsProps) => {
-	const artist: Artist = await fetchArtist(artistId);
+	const artist: Artist | null = await fetchArtist(artistId);
+
+	if (!artist) {
+		return <></>;
+	}
 
 	return (
 		<div className="flex gap-2 items-center">
