@@ -48,8 +48,11 @@ const getTokens = async (code: string) => {
 };
 
 const makeAPIRequest = async (route: string) => {
+	const cookiesToSend = await cookies();
+	console.log(`COOKIES BEING SENT: ${cookiesToSend.getAll()}`);
+
 	const res = await fetch(`${API_BASE_URL}${route}`, {
-		credentials: "include",
+		headers: { Cookie: cookiesToSend.toString() },
 		redirect: "follow",
 	});
 
