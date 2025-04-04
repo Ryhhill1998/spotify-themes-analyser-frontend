@@ -6,7 +6,11 @@ import { Profile } from "@/app/api/dataTypes";
 import { fetchProfile } from "@/app/api/data";
 
 const Header = async () => {
-	const profile: Profile = await fetchProfile();
+	const profile: Profile | null = await fetchProfile();
+
+	if (!profile) {
+		return <></>;
+	}
 
 	return (
 		<header className="w-full flex justify-between items-center px-4 py-3 sticky top-0 bg-black/75">

@@ -1,5 +1,6 @@
 "use client";
 
+import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 
@@ -22,7 +23,9 @@ const Navigation = () => {
 
 	return (
 		<nav>
-			<ul className="flex gap-2">
+			<Button className="block sm:hidden">Menu</Button>
+
+			<ul className="gap-2 hidden sm:flex">
 				{routeDetails.map(({ id, route, name }) => (
 					<li key={id}>
 						<Link
