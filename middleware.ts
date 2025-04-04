@@ -3,10 +3,11 @@ import { cookies } from "next/headers";
 
 const protectedRoutes = [
 	/^\/profile$/,
-	/^\/top\/tracks(?:\?.*)?$/,
-	/^\/top\/artists(?:\?.*)?$/,
-	/^\/top\/emotions(?:\?.*)?$/,
-	/^\/tracks\/[^/]+(?:\?.*)?$/,
+	/^\/top\/tracks$/,
+	/^\/top\/artists$/,
+	/^\/top\/emotions$/,
+	/^\/tracks\/[^/]+$/,
+	/^\/tracks\/[^/]+\/emotions\/[^/]+$/,
 ];
 const publicRoutes = [/^\/$/, /^\/login(?:\?.*)?$/];
 
@@ -50,6 +51,7 @@ const middleware = async (req: NextRequest) => {
 				value: refreshData.access_token,
 				secure: true,
 				sameSite: "none",
+				maxAge: 3300,
 			});
 			response.cookies.set({
 				name: "refresh_token",

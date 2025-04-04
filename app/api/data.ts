@@ -36,6 +36,7 @@ const getTokens = async (code: string) => {
 		value: data.access_token,
 		secure: true,
 		sameSite: "none",
+		maxAge: 3300,
 	});
 	cookieStore.set({
 		name: "refresh_token",
