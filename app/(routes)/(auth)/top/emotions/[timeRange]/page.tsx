@@ -1,7 +1,4 @@
 import TopTitleAndTimeRanges from "../../components/TopTitleAndTimeRanges";
-import { Emotion } from "@/app/api/dataTypes";
-import { fetchTopEmotions } from "@/app/api/data";
-import TopEmotionCard from "./components/TopEmotionCard";
 import { Suspense } from "react";
 import TopEmotionsGridSkeleton from "./components/TopEmotionsGridSkeleton";
 import TopEmotionsGrid from "./components/TopEmotionsGrid";
