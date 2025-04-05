@@ -4,7 +4,7 @@ import TopArtistCard from "@/app/(routes)/(auth)/components/common/TopArtistCard
 import TitleAndShowAllLink from "../TitleAndShowAllLink";
 
 const TopArtistsSection = async () => {
-	const topArtists: Artist[] = await fetchTopArtists("short", 10);
+	const topArtists: Artist[] = await fetchTopArtists("short_term", 10);
 
 	return (
 		<div className="p-6">

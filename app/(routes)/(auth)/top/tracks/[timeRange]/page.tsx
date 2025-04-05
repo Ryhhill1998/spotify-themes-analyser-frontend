@@ -1,47 +1,23 @@
-import { fetchTopTracks } from "@/app/api/data";
-import { Track } from "@/app/api/dataTypes";
-import TopTrackCard from "@/app/(routes)/(auth)/components/common/TopTrackCard";
+import { Suspense } from "react";
 import TopTitleAndTimeRanges from "../../components/TopTitleAndTimeRanges";
+import TopTracksGrid from "./components/TopTracksGrid";
+import TopTracksGridSkeleton from "./components/TopTracksGridSkeleton";
 
 const TopTracksPage = async ({
 	params,
 }: {
-	params: Promise<{ history: string }>;
+	params: Promise<{ timeRange: string }>;
 }) => {
-	const { history } = await params;
-
-	const topTracks: Track[] = await fetchTopTracks(history);
+	const { timeRange } = await params;
+	const formattedTimeRange = timeRange.replace("-", "_");
 
 	return (
 		<>
 			<TopTitleAndTimeRanges name="tracks" />
 
-			<div>
-				{topTracks.map(
-					(
-						{
-							id,
-							name,
-							images,
-							artist,
-							durationFormatted,
-							albumName,
-						},
-						index
-					) => (
-						<TopTrackCard
-							key={id}
-							trackId={id}
-							albumImageUrl={images[0].url}
-							albumName={albumName}
-							trackName={name}
-							artistName={artist.name}
-							duration={durationFormatted}
-							position={index + 1}
-						/>
-					)
-				)}
-			</div>
+			<Suspense fallback={<TopTracksGridSkeleton />}>
+				<TopTracksGrid timeRange={formattedTimeRange} />
+			</Suspense>
 		</>
 	);
 };

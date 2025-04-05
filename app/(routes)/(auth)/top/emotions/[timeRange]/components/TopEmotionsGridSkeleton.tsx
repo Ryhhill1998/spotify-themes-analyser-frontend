@@ -1,6 +1,6 @@
-import TopEmotionCardSkeleton from "./components/TopEmotionCardSkeleton";
+import TopEmotionCardSkeleton from "./TopEmotionCardSkeleton";
 
-const TopEmotionsLoader = () => {
+const TopEmotionsGridSkeleton = () => {
 	return (
 		<div className="container mx-auto flex flex-col gap-2">
 			{[...Array(5).keys()].map((_, index) => (
@@ -10,4 +10,4 @@ const TopEmotionsLoader = () => {
 	);
 };
 
-export default TopEmotionsLoader;
+export default TopEmotionsGridSkeleton;

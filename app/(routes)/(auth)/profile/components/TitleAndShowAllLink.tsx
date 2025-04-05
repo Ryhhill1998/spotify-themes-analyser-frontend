@@ -10,7 +10,7 @@ const TitleAndShowAllLink = ({ name }: TitleAndShowAllLinkProps) => {
 			<h3 className="text-white font-bold">Your top {name} this month</h3>
 
 			<Link
-				href={`/top/${name}?history=short`}
+				href={`/top/${name}/short-term`}
 				className="text-stone-300 text-sm font-medium"
 			>
 				Show all
