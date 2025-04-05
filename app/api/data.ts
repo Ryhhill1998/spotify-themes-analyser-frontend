@@ -94,6 +94,8 @@ const getTokens = async (code: string) => {
 
 		setTokens(data, cookieStore);
 	} catch (error) {
+		console.error(error);
+
 		deleteTokens(cookieStore);
 	}
 };
@@ -119,6 +121,8 @@ const refreshTokens = async () => {
 
 		setTokens(data, cookieStore);
 	} catch (error) {
+		console.error(error);
+
 		deleteTokens(cookieStore);
 	}
 };

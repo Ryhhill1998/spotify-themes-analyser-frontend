@@ -21,11 +21,7 @@ const TopArtistsPage = async ({
 		}
 	}
 
-	const topArtists: Artist[] | null = await fetchTopArtists(timeRange);
-
-	if (!topArtists) {
-		return <></>;
-	}
+	const topArtists: Artist[] = await fetchTopArtists(timeRange);
 
 	return (
 		<>

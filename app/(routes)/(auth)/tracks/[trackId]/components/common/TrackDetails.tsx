@@ -8,11 +8,7 @@ type TrackDetailsProps = {
 };
 
 const TrackDetails = async ({ trackId }: TrackDetailsProps) => {
-	const track: Track | null = await fetchTrack(trackId);
-
-	if (!track) {
-		return <></>;
-	}
+	const track: Track = await fetchTrack(trackId);
 
 	return (
 		<div className="flex w-full gap-2 items-center">
