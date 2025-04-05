@@ -1,15 +1,14 @@
 import { fetchTopTracks } from "@/app/api/data";
 import { Track } from "@/app/api/dataTypes";
 import TopTrackCard from "@/app/(routes)/(auth)/components/common/TopTrackCard";
-import TopTitleAndTimeRanges from "../components/TopTitleAndTimeRanges";
+import TopTitleAndTimeRanges from "../../components/TopTitleAndTimeRanges";
 
 const TopTracksPage = async ({
-	searchParams,
+	params,
 }: {
-	searchParams?: Promise<{ history: string }>;
+	params: Promise<{ history: string }>;
 }) => {
-	const search = await searchParams;
-	const history = search?.history ?? "short";
+	const { history } = await params;
 
 	const topTracks: Track[] = await fetchTopTracks(history);
 

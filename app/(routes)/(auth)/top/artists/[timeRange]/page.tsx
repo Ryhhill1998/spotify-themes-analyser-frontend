@@ -6,11 +6,12 @@ import TopArtistCard from "../../../components/common/TopArtistCard";
 const TopArtistsPage = async ({
 	params,
 }: {
-	params: Promise<{ history: string }>;
+	params: Promise<{ timeRange: string }>;
 }) => {
-	const { history } = await params;
+	const { timeRange } = await params;
+	const formattedTimeRange = timeRange.replace("-", "_");
 
-	const topArtists: Artist[] = await fetchTopArtists(history);
+	const topArtists: Artist[] = await fetchTopArtists(timeRange);
 
 	return (
 		<>

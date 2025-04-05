@@ -156,11 +156,7 @@ const fetchTrack = async (trackId: string) => {
 	return track;
 };
 
-const fetchTopTracks = async (
-	history: string = "short",
-	limit: number = 50
-) => {
-	const timeRange = `${history}_term`;
+const fetchTopTracks = async (timeRange: string, limit: number = 50) => {
 	const res = await makeAPIRequest(
 		`/data/me/top/tracks?time_range=${timeRange}&limit=${limit}`
 	);
@@ -190,8 +186,7 @@ const fetchArtist = async (artistId: string) => {
 	return artist;
 };
 
-const fetchTopArtists = async (history: string, limit: number = 50) => {
-	const timeRange = `${history}_term`;
+const fetchTopArtists = async (timeRange: string, limit: number = 50) => {
 	const res = await makeAPIRequest(
 		`/data/me/top/artists?time_range=${timeRange}&limit=${limit}`
 	);
@@ -204,8 +199,7 @@ const fetchTopArtists = async (history: string, limit: number = 50) => {
 };
 
 // -------------------- EMOTIONS -------------------- //
-const fetchTopEmotions = async (history: string) => {
-	const timeRange = `${history}_term`;
+const fetchTopEmotions = async (timeRange: string) => {
 	const res = await makeAPIRequest(
 		`/data/me/top/emotions?time_range=${timeRange}`
 	);

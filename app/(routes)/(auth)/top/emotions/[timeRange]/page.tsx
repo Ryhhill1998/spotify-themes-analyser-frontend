@@ -6,11 +6,13 @@ import TopEmotionCard from "./components/TopEmotionCard";
 const TopEmotionsPage = async ({
 	params,
 }: {
-	params: Promise<{ history: string }>;
+	params: Promise<{ timeRange: string }>;
 }) => {
-	const { history } = await params;
+	const { timeRange } = await params;
 
-	const topEmotions: Emotion[] = await fetchTopEmotions(history);
+	const formattedTimeRange = timeRange.replace("-", "_");
+
+	const topEmotions: Emotion[] = await fetchTopEmotions(formattedTimeRange);
 
 	return (
 		<>
