@@ -18,9 +18,7 @@ import {
 	UnauthorisedAPIError,
 	UnexpectedAPIError,
 } from "./errors";
-import { redirect } from "next/navigation";
 import { ReadonlyRequestCookies } from "next/dist/server/web/spec-extension/adapters/request-cookies";
-import { revalidatePath } from "next/cache";
 
 const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL;
 
@@ -96,8 +94,6 @@ const getTokens = async (code: string) => {
 
 		setTokens(data, cookieStore);
 	} catch (error) {
-		console.error(error);
-
 		deleteTokens(cookieStore);
 	}
 };
@@ -123,8 +119,6 @@ const refreshTokens = async () => {
 
 		setTokens(data, cookieStore);
 	} catch (error) {
-		console.log("REFRESH ERROR", error);
-
 		deleteTokens(cookieStore);
 	}
 };

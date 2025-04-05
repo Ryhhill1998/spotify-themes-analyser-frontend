@@ -27,7 +27,7 @@ const middleware = async (req: NextRequest) => {
 	// Refresh tokens if accessToken has expired but refreshToken exists
 	if (!accessToken && refreshToken) {
 		await refreshTokens();
-		return NextResponse.redirect(new URL("/profile", req.nextUrl));
+		return NextResponse.redirect(new URL(path, req.nextUrl));
 	}
 
 	// Redirect to /login if the user is not authenticated
