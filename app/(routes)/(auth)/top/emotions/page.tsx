@@ -6,22 +6,12 @@ import TopTitleAndTimeRanges from "../components/TopTitleAndTimeRanges";
 const TopEmotionsPage = async ({
 	searchParams,
 }: {
-	searchParams?: Promise<{ "time-range": string }>;
+	searchParams?: Promise<{ history: string }>;
 }) => {
 	const search = await searchParams;
-	let timeRange = "short_term";
+	const history = search?.history ?? "short";
 
-	if (search) {
-		timeRange = search["time-range"];
-
-		if (timeRange) {
-			timeRange = timeRange.replace("-", "_");
-		} else {
-			timeRange = "short_term";
-		}
-	}
-
-	const topEmotions: Emotion[] = await fetchTopEmotions(timeRange);
+	const topEmotions: Emotion[] = await fetchTopEmotions(history);
 
 	return (
 		<>
