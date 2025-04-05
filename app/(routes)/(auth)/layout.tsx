@@ -6,7 +6,7 @@ import { Profile } from "@/app/api/dataTypes";
 import { fetchProfile } from "@/app/api/data";
 
 const Header = async () => {
-	const profile: Profile | null = await fetchProfile();
+	const profile: Profile = await fetchProfile();
 
 	return (
 		<header className="w-full flex justify-between items-center px-4 py-3 sticky top-0 bg-black/75">
@@ -21,19 +21,15 @@ const Header = async () => {
 
 			<Navigation />
 
-			{!profile ? (
-				<Link href="/profile">
-					<Image
-						src={profile.images[1].url}
-						alt="Spotify profile picture"
-						width={35}
-						height={35}
-						className="rounded-full"
-					/>
-				</Link>
-			) : (
-				<div className="h-[35px] w-[35px] rounded-full bg-stone-700"></div>
-			)}
+			<Link href="/profile">
+				<Image
+					src={profile.images[1].url}
+					alt="Spotify profile picture"
+					width={35}
+					height={35}
+					className="rounded-full"
+				/>
+			</Link>
 		</header>
 	);
 };
