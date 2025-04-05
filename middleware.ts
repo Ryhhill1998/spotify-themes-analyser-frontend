@@ -28,10 +28,12 @@ const middleware = async (req: NextRequest) => {
 
 	const cookieStore = await cookies();
 	const accessToken = cookieStore.get("access_token");
+	const accessTokenExists = accessToken?.value;
 	const refreshToken = cookieStore.get("refresh_token");
+	const refreshTokenExists = refreshToken?.value;
 
 	// Refresh tokens if accessToken has expired but refreshToken exists
-	if (!accessToken && refreshToken) {
+	if (!accessTokenExists && refreshTokenExists) {
 		try {
 			const res = await fetch(
 				`${API_BASE_URL}/auth/spotify/refresh-tokens`,
@@ -68,12 +70,15 @@ const middleware = async (req: NextRequest) => {
 	}
 
 	// Redirect to /login if the user is not authenticated
-	if ((isProtectedRoute || path === "/") && !(accessToken && refreshToken)) {
+	if (
+		(isProtectedRoute || path === "/") &&
+		!(accessTokenExists && refreshTokenExists)
+	) {
 		return NextResponse.redirect(new URL("/login", req.nextUrl));
 	}
 
 	// Redirect to /profile if the user is authenticated
-	if (isPublicRoute && accessToken && refreshToken) {
+	if (isPublicRoute && accessTokenExists && refreshTokenExists) {
 		return NextResponse.redirect(new URL("/profile", req.nextUrl));
 	}
 
