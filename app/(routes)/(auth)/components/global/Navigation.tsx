@@ -46,7 +46,7 @@ const Navigation = () => {
 						{routeDetails.map(({ id, route, name }) => (
 							<Link
 								key={id}
-								href={route}
+								href={`${route}?history=short`}
 								className={`px-4 py-2 hover:bg-white hover:text-black text-sm rounded-sm ${
 									pathname.startsWith(route)
 										? "bg-white text-black"
@@ -70,7 +70,7 @@ const Navigation = () => {
 				{routeDetails.map(({ id, route, name }) => (
 					<li key={id}>
 						<Link
-							href={route}
+							href={`${route}?history=short`}
 							className={`px-4 py-2 hover:bg-white hover:text-black text-sm rounded-sm ${
 								pathname.startsWith(route)
 									? "bg-white text-black"

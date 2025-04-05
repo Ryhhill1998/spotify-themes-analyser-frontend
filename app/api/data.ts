@@ -204,7 +204,8 @@ const fetchTopArtists = async (history: string, limit: number = 50) => {
 };
 
 // -------------------- EMOTIONS -------------------- //
-const fetchTopEmotions = async (timeRange: string) => {
+const fetchTopEmotions = async (history: string) => {
+	const timeRange = `${history}_term`;
 	const res = await makeAPIRequest(
 		`/data/me/top/emotions?time_range=${timeRange}`
 	);
