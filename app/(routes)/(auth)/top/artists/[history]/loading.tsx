@@ -1,6 +1,6 @@
 import TopArtistCardSkeleton from "../../../components/common/TopArtistCardSkeleton";
 
-const TopArtistsGridSkeleton = () => {
+const TopArtistsLoader = () => {
 	return (
 		<div className="grid grid-cols-[repeat(auto-fill,_minmax(150px,_1fr))] gap-y-4">
 			{[...Array(50).keys()].map((_, index) => (
@@ -10,4 +10,4 @@ const TopArtistsGridSkeleton = () => {
 	);
 };
 
-export default TopArtistsGridSkeleton;
+export default TopArtistsLoader;
