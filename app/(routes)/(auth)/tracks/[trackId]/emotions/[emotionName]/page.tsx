@@ -15,7 +15,7 @@ const EmotionPage = async ({
 
 	return (
 		<div className="container mx-auto bg-stone-900 rounded-md">
-			<div className="flex justify-between p-6 pb-0">
+			<div className="flex flex-col sm:flex-row gap-4 sm:justify-between p-6 pb-0">
 				<Link
 					href="/top/emotions"
 					className="text-white font-bold text-lg flex gap-2 items-center"
@@ -25,15 +25,15 @@ const EmotionPage = async ({
 					<p>Back</p>
 				</Link>
 
-				<h1 className="text-white font-bold text-2xl">
+				<h3 className="text-white font-bold text-2xl self-center">
 					Your Top{" "}
 					{emotionName.charAt(0).toUpperCase() + emotionName.slice(1)}{" "}
 					Track
-				</h1>
+				</h3>
 
 				<Link
 					href="/top-emotions"
-					className="invisible text-white font-bold text-lg flex gap-2 items-center"
+					className="invisible text-white font-bold text-lg gap-2 items-center hidden sm:flex"
 				>
 					<ChevronLeft />
 
@@ -48,7 +48,9 @@ const EmotionPage = async ({
 					</Suspense>
 				</div>
 
-				<div className="w-full bg-stone-800 flex p-6">
+				<div className="w-full bg-stone-800 flex p-6 gap-6 flex-col">
+					<h3 className="text-white font-bold text-2xl">Lyrics</h3>
+
 					<Suspense fallback={<TaggedLyricsSkeleton />}>
 						<TaggedLyrics
 							trackId={trackId}
