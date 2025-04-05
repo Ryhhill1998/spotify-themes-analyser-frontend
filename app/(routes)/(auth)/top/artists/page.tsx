@@ -1,7 +1,7 @@
-import TopArtistCard from "@/app/(routes)/(auth)/components/common/TopArtistCard";
-import { Artist } from "@/app/api/dataTypes";
-import { fetchTopArtists } from "@/app/api/data";
+import { Suspense } from "react";
 import TopTitleAndTimeRanges from "../components/TopTitleAndTimeRanges";
+import TopArtistsGrid from "./components/TopArtistsGrid";
+import TopArtistsGridSkeleton from "./components/TopArtistsGridSkeleton";
 
 const TopArtistsPage = async ({
 	searchParams,
@@ -11,22 +11,13 @@ const TopArtistsPage = async ({
 	const search = await searchParams;
 	const history = search?.history ?? "short";
 
-	const topArtists: Artist[] = await fetchTopArtists(history);
-
 	return (
 		<>
 			<TopTitleAndTimeRanges name="artists" />
 
-			<div className="grid grid-cols-[repeat(auto-fill,_minmax(150px,_1fr))] gap-y-4">
-				{topArtists.map(({ id, name, images }) => (
-					<TopArtistCard
-						key={id}
-						artistId={id}
-						imageUrl={images[0].url}
-						name={name}
-					/>
-				))}
-			</div>
+			<Suspense fallback={<TopArtistsGridSkeleton />}>
+				<TopArtistsGrid history={history} />
+			</Suspense>
 		</>
 	);
 };
