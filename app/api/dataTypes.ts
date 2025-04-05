@@ -1,3 +1,9 @@
+// -------------------- PROFILE -------------------- //
+type Tokens = {
+	access_token: string;
+	refresh_token: string;
+};
+
 // -------------------- COMMON -------------------- //
 type Image = { url: string; height: number; width: number };
 
@@ -89,6 +95,7 @@ type TaggedLyricsAPI = {
 
 // -------------------- EXPORTS -------------------- //
 export type {
+	Tokens,
 	ProfileAPI,
 	Profile,
 	TrackAPI,

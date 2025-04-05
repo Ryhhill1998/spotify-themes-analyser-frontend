@@ -2,6 +2,7 @@
 
 import { cookies } from "next/headers";
 import {
+	Tokens,
 	ProfileAPI,
 	Profile,
 	TrackAPI,
@@ -12,25 +13,47 @@ import {
 	Emotion,
 	TaggedLyricsAPI,
 } from "./dataTypes";
+import {
+	BadRequestAPIError,
+	UnauthorisedAPIError,
+	UnexpectedAPIError,
+} from "./errors";
 
 const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL;
 
-type Tokens = {
-	access_token: string;
-	refresh_token: string;
+// -------------------- HELPERS -------------------- //
+const makeAPIRequest = async (
+	route: string,
+	method?: string,
+	headers?: object,
+	body?: string
+) => {
+	const cookieStore = await cookies();
+
+	const res = await fetch(`${API_BASE_URL}${route}`, {
+		method: method ? method : "GET",
+		headers: { Cookie: cookieStore.toString(), ...headers },
+		redirect: "manual",
+		body: body ?? null,
+	});
+
+	if (res.status === 401) {
+		throw new BadRequestAPIError();
+	}
+
+	if (res.status === 401) {
+		throw new UnauthorisedAPIError();
+	}
+
+	if (!res.ok) {
+		throw new UnexpectedAPIError();
+	}
+
+	return res;
 };
 
-const getTokens = async (code: string) => {
+const setTokens = async (data: Tokens) => {
 	const cookieStore = await cookies();
-	const res = await fetch(`${API_BASE_URL}/auth/spotify/tokens`, {
-		method: "POST",
-		headers: {
-			Accept: "application/json",
-			"Content-Type": "application/json",
-		},
-		body: JSON.stringify({ code }),
-	});
-	const data: Tokens = await res.json();
 	cookieStore.set({
 		name: "access_token",
 		value: data.access_token,
@@ -46,23 +69,45 @@ const getTokens = async (code: string) => {
 	});
 };
 
-const makeAPIRequest = async (route: string) => {
-	const cookieStore = await cookies();
-	console.log(`COOKIES BEING SENT: ${cookieStore.getAll()}`);
+// -------------------- TOKENS -------------------- //
+const getTokens = async (code: string) => {
+	const res = await makeAPIRequest(
+		`${API_BASE_URL}/auth/spotify/tokens`,
+		"POST",
+		{
+			Accept: "application/json",
+			"Content-Type": "application/json",
+		},
+		JSON.stringify({ code })
+	);
 
-	const res = await fetch(`${API_BASE_URL}${route}`, {
-		headers: { Cookie: cookieStore.toString() },
-		redirect: "manual",
-	});
+	const data: Tokens = await res.json();
 
-	return res;
+	setTokens(data);
 };
 
+const refreshTokens = async () => {
+	const cookieStore = await cookies();
+	const refeshToken = cookieStore.get("refresh_token")?.value;
+
+	const res = await makeAPIRequest(
+		`${API_BASE_URL}/auth/spotify/refresh-tokens`,
+		"POST",
+		{
+			Accept: "application/json",
+			"Content-Type": "application/json",
+		},
+		JSON.stringify({ refresh_token: refeshToken })
+	);
+
+	const data: Tokens = await res.json();
+
+	setTokens(data);
+};
+
+// -------------------- PROFILE -------------------- //
 const fetchProfile = async () => {
 	const res = await makeAPIRequest("/data/me/profile");
-
-	if (!res.ok) return null;
-
 	const profileData: ProfileAPI = await res.json();
 	const profile: Profile = {
 		...profileData,
@@ -71,12 +116,9 @@ const fetchProfile = async () => {
 	return profile;
 };
 
-// TODO - get track by ID
+// -------------------- TRACKS -------------------- //
 const fetchTrack = async (trackId: string) => {
 	const res = await makeAPIRequest(`/data/tracks/${trackId}`);
-
-	if (!res.ok) return null;
-
 	const data: TrackAPI = await res.json();
 	const totalSeconds = data.duration_ms / 1000;
 	const seconds = totalSeconds % 60;
@@ -92,25 +134,10 @@ const fetchTrack = async (trackId: string) => {
 	return track;
 };
 
-// TODO - get track by ID
-const fetchArtist = async (artistId: string) => {
-	const res = await makeAPIRequest(`/data/artists/${artistId}`);
-
-	if (!res.ok) return null;
-
-	const data: ArtistAPI = await res.json();
-	const artist: Artist = { ...data, spotifyUrl: data.spotify_url };
-	return artist;
-};
-
-// TODO - get top tracks
 const fetchTopTracks = async (timeRange: string, limit: number = 50) => {
 	const res = await makeAPIRequest(
 		`/data/me/top/tracks?time_range=${timeRange}&limit=${limit}`
 	);
-
-	if (!res.ok) return null;
-
 	const data: TrackAPI[] = await res.json();
 	const tracks: Track[] = data.map((data) => {
 		const totalSeconds = Math.round(data.duration_ms / 1000);
@@ -129,14 +156,18 @@ const fetchTopTracks = async (timeRange: string, limit: number = 50) => {
 	return tracks;
 };
 
-// TODO - get top artists
+// -------------------- ARTISTS -------------------- //
+const fetchArtist = async (artistId: string) => {
+	const res = await makeAPIRequest(`/data/artists/${artistId}`);
+	const data: ArtistAPI = await res.json();
+	const artist: Artist = { ...data, spotifyUrl: data.spotify_url };
+	return artist;
+};
+
 const fetchTopArtists = async (timeRange: string, limit: number = 50) => {
 	const res = await makeAPIRequest(
 		`/data/me/top/artists?time_range=${timeRange}&limit=${limit}`
 	);
-
-	if (!res.ok) return null;
-
 	const data: ArtistAPI[] = await res.json();
 	const artists: Artist[] = data.map((data) => ({
 		...data,
@@ -145,14 +176,11 @@ const fetchTopArtists = async (timeRange: string, limit: number = 50) => {
 	return artists;
 };
 
-// TODO - get top emotions
+// -------------------- EMOTIONS -------------------- //
 const fetchTopEmotions = async (timeRange: string) => {
 	const res = await makeAPIRequest(
 		`/data/me/top/emotions?time_range=${timeRange}`
 	);
-
-	if (!res.ok) return null;
-
 	const data: EmotionAPI[] = await res.json();
 	const emotions: Emotion[] = data.map((data) => ({
 		...data,
@@ -162,7 +190,6 @@ const fetchTopEmotions = async (timeRange: string) => {
 	return emotions;
 };
 
-// TODO - get track's lyrics with emotion tags
 const fetchTrackLyricsWithEmotionalTags = async (
 	trackId: string,
 	emotionName: string
@@ -170,15 +197,15 @@ const fetchTrackLyricsWithEmotionalTags = async (
 	const res = await makeAPIRequest(
 		`/data/tracks/${trackId}/lyrics/emotional-tags/${emotionName}`
 	);
-
-	if (!res.ok) return null;
-
 	const data: TaggedLyricsAPI = await res.json();
 	const taggedLyrics = data.lyrics;
 	return taggedLyrics;
 };
 
+// -------------------- EXPORTS -------------------- //
 export {
+	getTokens,
+	refreshTokens,
 	fetchProfile,
 	fetchTrack,
 	fetchArtist,
@@ -186,5 +213,4 @@ export {
 	fetchTopArtists,
 	fetchTopEmotions,
 	fetchTrackLyricsWithEmotionalTags,
-	getTokens,
 };
