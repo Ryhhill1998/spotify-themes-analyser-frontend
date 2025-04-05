@@ -6,22 +6,12 @@ import TopTitleAndTimeRanges from "../components/TopTitleAndTimeRanges";
 const TopArtistsPage = async ({
 	searchParams,
 }: {
-	searchParams?: Promise<{ "time-range": string }>;
+	searchParams?: Promise<{ history: string }>;
 }) => {
 	const search = await searchParams;
-	let timeRange = "short_term";
+	const history = search?.history ?? "short";
 
-	if (search) {
-		timeRange = search["time-range"];
-
-		if (timeRange) {
-			timeRange = timeRange.replace("-", "_");
-		} else {
-			timeRange = "short_term";
-		}
-	}
-
-	const topArtists: Artist[] = await fetchTopArtists(timeRange);
+	const topArtists: Artist[] = await fetchTopArtists(history);
 
 	return (
 		<>
