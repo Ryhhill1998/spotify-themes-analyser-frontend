@@ -25,11 +25,11 @@ const LoginPage = () => {
 		<div>
 			<h1>Login page</h1>
 
+			<SpotifySignInButton />
+
 			<Suspense>
 				<TokensSetter />
 			</Suspense>
-
-			<SpotifySignInButton />
 		</div>
 	);
 };
