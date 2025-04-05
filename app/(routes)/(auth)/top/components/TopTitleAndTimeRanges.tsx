@@ -1,7 +1,7 @@
 "use client";
 
-import Link from "next/link";
-import { useSearchParams } from "next/navigation";
+import { Button } from "@/components/ui/button";
+import { useRouter, useSearchParams } from "next/navigation";
 
 type TopTitleProps = {
 	name: string;
@@ -14,6 +14,7 @@ const timeRanges = [
 ];
 
 const TopTitleAndTimeRanges = ({ name }: TopTitleProps) => {
+	const router = useRouter();
 	const searchParams = useSearchParams();
 
 	const isActive = (value: string) => searchParams.get("history") === value;
@@ -24,15 +25,17 @@ const TopTitleAndTimeRanges = ({ name }: TopTitleProps) => {
 
 			<div className="flex gap-2">
 				{timeRanges.map(({ label, value }, index) => (
-					<Link
+					<Button
 						key={`history=${index}`}
-						href={`/top/${name}/?history=${value}`}
 						className={`text-white text-sm font-medium px-4 py-2 hover:bg-stone-700 rounded-md ${
 							isActive(value) ? "bg-stone-700" : ""
 						}`}
+						onClick={() =>
+							router.replace(`/top/${name}/?history=${value}`)
+						}
 					>
 						{label}
-					</Link>
+					</Button>
 				))}
 			</div>
 		</div>

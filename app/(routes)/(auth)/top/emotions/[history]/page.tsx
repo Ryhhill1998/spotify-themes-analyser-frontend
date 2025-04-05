@@ -1,15 +1,14 @@
-import { fetchTopEmotions } from "@/app/api/data";
+import TopTitleAndTimeRanges from "../../components/TopTitleAndTimeRanges";
 import { Emotion } from "@/app/api/dataTypes";
+import { fetchTopEmotions } from "@/app/api/data";
 import TopEmotionCard from "./components/TopEmotionCard";
-import TopTitleAndTimeRanges from "../components/TopTitleAndTimeRanges";
 
 const TopEmotionsPage = async ({
-	searchParams,
+	params,
 }: {
-	searchParams?: Promise<{ history: string }>;
+	params: Promise<{ history: string }>;
 }) => {
-	const search = await searchParams;
-	const history = search?.history ?? "short";
+	const { history } = await params;
 
 	const topEmotions: Emotion[] = await fetchTopEmotions(history);
 
