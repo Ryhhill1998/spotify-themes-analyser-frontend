@@ -21,7 +21,7 @@ const Header = async () => {
 
 			<Navigation />
 
-			{profile ? (
+			{/* {profile ? (
 				<Link href="/profile">
 					<Image
 						src={profile.images[1].url}
@@ -33,7 +33,7 @@ const Header = async () => {
 				</Link>
 			) : (
 				<div className="h-35 w-35 rounded-full bg-stone-900"></div>
-			)}
+			)} */}
 		</header>
 	);
 };

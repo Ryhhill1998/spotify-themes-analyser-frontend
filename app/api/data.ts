@@ -18,6 +18,9 @@ import {
 	UnauthorisedAPIError,
 	UnexpectedAPIError,
 } from "./errors";
+import { redirect } from "next/navigation";
+import { ReadonlyRequestCookies } from "next/dist/server/web/spec-extension/adapters/request-cookies";
+import { revalidatePath } from "next/cache";
 
 const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL;
 
@@ -37,7 +40,7 @@ const makeAPIRequest = async (
 		body: body ?? null,
 	});
 
-	if (res.status === 401) {
+	if (res.status === 400) {
 		throw new BadRequestAPIError();
 	}
 
@@ -52,8 +55,7 @@ const makeAPIRequest = async (
 	return res;
 };
 
-const setTokens = async (data: Tokens) => {
-	const cookieStore = await cookies();
+const setTokens = (data: Tokens, cookieStore: ReadonlyRequestCookies) => {
 	cookieStore.set({
 		name: "access_token",
 		value: data.access_token,
@@ -69,40 +71,62 @@ const setTokens = async (data: Tokens) => {
 	});
 };
 
+const deleteTokens = (cookieStore: ReadonlyRequestCookies) => {
+	// delete access and refresh token cookies if present
+	cookieStore.delete("access_token");
+	cookieStore.delete("refresh_token");
+};
+
 // -------------------- TOKENS -------------------- //
 const getTokens = async (code: string) => {
-	const res = await makeAPIRequest(
-		`${API_BASE_URL}/auth/spotify/tokens`,
-		"POST",
-		{
-			Accept: "application/json",
-			"Content-Type": "application/json",
-		},
-		JSON.stringify({ code })
-	);
+	const cookieStore = await cookies();
 
-	const data: Tokens = await res.json();
+	try {
+		const res = await makeAPIRequest(
+			"/auth/spotify/tokens",
+			"POST",
+			{
+				Accept: "application/json",
+				"Content-Type": "application/json",
+			},
+			JSON.stringify({ code })
+		);
 
-	setTokens(data);
+		const data: Tokens = await res.json();
+
+		setTokens(data, cookieStore);
+	} catch (error) {
+		console.error(error);
+
+		deleteTokens(cookieStore);
+	}
 };
 
 const refreshTokens = async () => {
 	const cookieStore = await cookies();
-	const refeshToken = cookieStore.get("refresh_token")?.value;
+	const refreshToken = cookieStore.get("refresh_token")?.value;
 
-	const res = await makeAPIRequest(
-		`${API_BASE_URL}/auth/spotify/refresh-tokens`,
-		"POST",
-		{
-			Accept: "application/json",
-			"Content-Type": "application/json",
-		},
-		JSON.stringify({ refresh_token: refeshToken })
-	);
+	if (!refreshToken) return;
 
-	const data: Tokens = await res.json();
+	try {
+		const res = await makeAPIRequest(
+			"/auth/spotify/refresh-tokens",
+			"POST",
+			{
+				Accept: "application/json",
+				"Content-Type": "application/json",
+			},
+			JSON.stringify({ refresh_token: refreshToken })
+		);
 
-	setTokens(data);
+		const data: Tokens = await res.json();
+
+		setTokens(data, cookieStore);
+	} catch (error) {
+		console.log("REFRESH ERROR", error);
+
+		deleteTokens(cookieStore);
+	}
 };
 
 // -------------------- PROFILE -------------------- //
