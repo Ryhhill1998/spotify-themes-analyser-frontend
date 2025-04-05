@@ -1,8 +1,7 @@
 import { Suspense } from "react";
 import TrackDetails from "./components/common/TrackDetails";
 import TrackDetailsSkeleton from "./components/common/TrackDetailsSkeleton";
-import Link from "next/link";
-import { ChevronLeft } from "lucide-react";
+import BackButton from "../../components/common/BackButton";
 
 const TrackPage = async ({
 	params,
@@ -14,14 +13,7 @@ const TrackPage = async ({
 	return (
 		<div className="container mx-auto bg-stone-900 rounded-md">
 			<div className="p-6 pb-0">
-				<Link
-					href="/top/tracks"
-					className="text-white font-bold text-lg flex gap-2 items-center"
-				>
-					<ChevronLeft />
-
-					<p>Back</p>
-				</Link>
+				<BackButton />
 			</div>
 
 			<div className="flex justify-center p-6">
