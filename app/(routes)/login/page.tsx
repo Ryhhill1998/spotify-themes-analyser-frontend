@@ -3,34 +3,36 @@
 import { redirect, useRouter, useSearchParams } from "next/navigation";
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
-import { useEffect, useState } from "react";
+import { Suspense, useEffect, useState } from "react";
 
 import { getSpotifyAuthUrl, getTokens } from "@/app/api/data";
 import LoadingSpinner from "./components/LoadingSpinner";
 
-const LoginPage = () => {
+const TokensLoader = () => {
 	const router = useRouter();
 	const searchParams = useSearchParams();
 
 	const code = searchParams.get("code");
 
-	const [feedbackText, setFeedbackText] = useState<string>("");
+	useEffect(() => {
+		if (code) {
+			getTokens(code).then(() => router.push("/"));
+		}
+	}, [code, router]);
+
+	if (!code) return <></>;
+
+	return <LoadingSpinner text="Signing you in" />;
+};
+
+const LoginPage = () => {
 	const [isLoading, setIsLoading] = useState(false);
 
 	const handleLoginClick = async () => {
-		setFeedbackText("Redirecting to Spotify");
 		setIsLoading(true);
 		const loginUrl = await getSpotifyAuthUrl();
 		redirect(loginUrl);
 	};
-
-	useEffect(() => {
-		if (code) {
-			setFeedbackText("Signing you in");
-			setIsLoading(true);
-			getTokens(code).then(() => router.push("/"));
-		}
-	}, [code, router]);
 
 	return (
 		<div className="container mx-auto mt-10 p-6 flex flex-col gap-4 items-center justify-center">
@@ -62,7 +64,11 @@ const LoginPage = () => {
 				Sign in with Spotify
 			</Button>
 
-			{isLoading && <LoadingSpinner text={feedbackText} />}
+			<Suspense>
+				<TokensLoader />
+			</Suspense>
+
+			{isLoading && <LoadingSpinner text="Redirecting to Spotify" />}
 		</div>
 	);
 };
