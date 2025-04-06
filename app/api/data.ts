@@ -12,7 +12,6 @@ import {
 	EmotionAPI,
 	Emotion,
 	TaggedLyricsAPI,
-	loginUrlData,
 } from "./dataTypes";
 import {
 	BadRequestAPIError,
@@ -34,7 +33,10 @@ const makeAPIRequest = async (
 
 	const res = await fetch(`${API_BASE_URL}${route}`, {
 		method: method ? method : "GET",
-		headers: { Cookie: cookieStore.toString(), ...headers },
+		headers: {
+			Cookie: cookieStore.toString(),
+			...headers,
+		},
 		redirect: "manual",
 		body: body ?? null,
 	});
@@ -47,9 +49,7 @@ const makeAPIRequest = async (
 		throw new UnauthorisedAPIError();
 	}
 
-	console.log({ res });
-
-	if (!res.ok && res.status !== 307) {
+	if (!res.ok) {
 		throw new UnexpectedAPIError();
 	}
 
@@ -63,12 +63,14 @@ const setTokens = (data: Tokens, cookieStore: ReadonlyRequestCookies) => {
 		secure: true,
 		sameSite: "none",
 		maxAge: 3300,
+		httpOnly: true,
 	});
 	cookieStore.set({
 		name: "refresh_token",
 		value: data.refresh_token,
 		secure: true,
 		sameSite: "none",
+		httpOnly: true,
 	});
 };
 
@@ -79,22 +81,6 @@ const deleteTokens = (cookieStore: ReadonlyRequestCookies) => {
 };
 
 // -------------------- AUTH -------------------- //
-const getSpotifyLoginUrl = async () => {
-	const res = await makeAPIRequest("/auth/spotify/login");
-	const data: loginUrlData = await res.json();
-
-	const cookieStore = await cookies();
-
-	cookieStore.set({
-		name: "oauth_state",
-		value: data.oauth_state,
-		secure: true,
-		sameSite: "none",
-	});
-
-	return data.login_url;
-};
-
 const getTokens = async (code: string) => {
 	const cookieStore = await cookies();
 
@@ -245,7 +231,6 @@ const fetchTrackLyricsWithEmotionalTags = async (
 
 // -------------------- EXPORTS -------------------- //
 export {
-	getSpotifyLoginUrl,
 	getTokens,
 	refreshTokens,
 	fetchProfile,
