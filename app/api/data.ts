@@ -81,6 +81,8 @@ const deleteTokens = (cookieStore: ReadonlyRequestCookies) => {
 };
 
 // -------------------- AUTH -------------------- //
+const authUrl = `${API_BASE_URL}/auth/spotify/login`;
+
 const getTokens = async (code: string) => {
 	const cookieStore = await cookies();
 
@@ -231,6 +233,7 @@ const fetchTrackLyricsWithEmotionalTags = async (
 
 // -------------------- EXPORTS -------------------- //
 export {
+	authUrl,
 	getTokens,
 	refreshTokens,
 	fetchProfile,
