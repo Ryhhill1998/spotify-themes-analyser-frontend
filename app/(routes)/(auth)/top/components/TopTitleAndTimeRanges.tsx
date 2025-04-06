@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { useSearchParams } from "next/navigation";
+import { usePathname } from "next/navigation";
 
 type TopTitleProps = {
 	name: string;
@@ -14,9 +14,9 @@ const timeRanges = [
 ];
 
 const TopTitleAndTimeRanges = ({ name }: TopTitleProps) => {
-	const searchParams = useSearchParams();
+	const pathname = usePathname();
 
-	const isActive = (value: string) => searchParams.get("history") === value;
+	const isActive = (value: string) => pathname.endsWith(value);
 
 	return (
 		<div className="flex items-center flex-col gap-4 sm:flex-row sm:justify-between mb-6">
