@@ -13,7 +13,7 @@ const BackButtonAndImage = ({ imageUrl, alt }: BackButtonProps) => {
 	const router = useRouter();
 
 	return (
-		<div className="flex justify-between gap-4 w-full sm:w-fit">
+		<div className="flex justify-between gap-4 w-full sm:w-fit sm:flex-col">
 			<ChevronLeft
 				size={30}
 				className="text-white cursor-pointer hover:text-stone-400"
