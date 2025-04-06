@@ -12,6 +12,7 @@ import {
 	EmotionAPI,
 	Emotion,
 	TaggedLyricsAPI,
+	loginUrlData,
 } from "./dataTypes";
 import {
 	BadRequestAPIError,
@@ -46,7 +47,9 @@ const makeAPIRequest = async (
 		throw new UnauthorisedAPIError();
 	}
 
-	if (!res.ok) {
+	console.log({ res });
+
+	if (!res.ok && res.status !== 307) {
 		throw new UnexpectedAPIError();
 	}
 
@@ -75,7 +78,23 @@ const deleteTokens = (cookieStore: ReadonlyRequestCookies) => {
 	cookieStore.delete("refresh_token");
 };
 
-// -------------------- TOKENS -------------------- //
+// -------------------- AUTH -------------------- //
+const getSpotifyLoginUrl = async () => {
+	const res = await makeAPIRequest("/auth/spotify/login");
+	const data: loginUrlData = await res.json();
+
+	const cookieStore = await cookies();
+
+	cookieStore.set({
+		name: "oauth_state",
+		value: data.oauth_state,
+		secure: true,
+		sameSite: "none",
+	});
+
+	return data.login_url;
+};
+
 const getTokens = async (code: string) => {
 	const cookieStore = await cookies();
 
@@ -226,6 +245,7 @@ const fetchTrackLyricsWithEmotionalTags = async (
 
 // -------------------- EXPORTS -------------------- //
 export {
+	getSpotifyLoginUrl,
 	getTokens,
 	refreshTokens,
 	fetchProfile,

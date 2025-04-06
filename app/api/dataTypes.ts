@@ -1,4 +1,9 @@
-// -------------------- PROFILE -------------------- //
+// -------------------- AUTH -------------------- //
+type loginUrlData = {
+	login_url: string;
+	oauth_state: string;
+};
+
 type Tokens = {
 	access_token: string;
 	refresh_token: string;
@@ -95,6 +100,7 @@ type TaggedLyricsAPI = {
 
 // -------------------- EXPORTS -------------------- //
 export type {
+	loginUrlData,
 	Tokens,
 	ProfileAPI,
 	Profile,

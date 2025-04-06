@@ -4,11 +4,10 @@ import { refreshTokens } from "./app/api/data";
 
 const protectedRoutes = [
 	/^\/profile$/,
-	/^\/top\/tracks$/,
-	/^\/top\/artists$/,
-	/^\/top\/emotions$/,
+	/^\/top\/(artists|tracks|emotions)\/(short|medium|long)-term$/,
 	/^\/tracks\/[^/]+$/,
-	/^\/tracks\/[^/]+\/emotions\/[^/]+$/,
+	/^\/artists\/[^/]+$/,
+	/^\/track\/[^/]+\/emotions\/[^/]+$/,
 ];
 const publicRoutes = [/^\/$/, /^\/login(?:\?.*)?$/];
 
