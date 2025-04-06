@@ -27,13 +27,13 @@ const LoginPage = () => {
 				Welcome to Spotify Insights!
 			</h1>
 
-			<p className="text-center text-stone-200 font-medium mt-4">
+			<p className="text-center text-stone-200 font-medium">
 				Discover what music truly resonates with you. See your top
 				artists, tracks and even the dominant emotions in your listening
 				history.
 			</p>
 
-			<p className="text-center text-stone-200 font-medium mb-4">
+			<p className="text-center text-stone-200 font-medium">
 				Sign in to explore your unique musical fingerprint.
 			</p>
 

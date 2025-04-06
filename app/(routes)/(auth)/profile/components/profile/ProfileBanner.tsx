@@ -25,7 +25,10 @@ const ProfileBanner = async () => {
 					{profile.displayName}
 				</p>
 
-				<p className="text-stone-300 text-sm">{profile.email}</p>
+				{profile.email && (
+					<p className="text-stone-300 text-sm">{profile.email}</p>
+				)}
+
 				<p className="text-stone-300 text-sm">
 					{profile.followers} Followers
 				</p>

@@ -44,17 +44,18 @@ const Navigation = () => {
 
 					<div className="p-4 pb-0 flex flex-col gap-4">
 						{routeDetails.map(({ id, route, name }) => (
-							<Link
-								key={id}
-								href={`${route}/short-term`}
-								className={`px-4 py-2 hover:bg-white hover:text-black text-sm rounded-sm ${
-									pathname.startsWith(route)
-										? "bg-white text-black"
-										: "bg-nonoe text-white"
-								}`}
-							>
-								{name}
-							</Link>
+							<DrawerClose key={id} asChild>
+								<Link
+									href={`${route}/short-term`}
+									className={`px-4 py-2 hover:bg-white hover:text-black text-sm rounded-sm ${
+										pathname.startsWith(route)
+											? "bg-white text-black"
+											: "bg-nonoe text-white"
+									}`}
+								>
+									{name}
+								</Link>
+							</DrawerClose>
 						))}
 					</div>
 
