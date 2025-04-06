@@ -1,8 +1,7 @@
-import Image from "next/image";
-
 import { fetchArtist } from "@/app/api/data";
 import { Artist } from "@/app/api/dataTypes";
 import ListenOnSpotifyButton from "../../../components/common/ListenOnSpotifyButton";
+import BackButtonAndImage from "../../../components/common/BackButtonAndImage";
 
 type ArtistDetailsProps = {
 	artistId: string;
@@ -12,22 +11,19 @@ const ArtistDetails = async ({ artistId }: ArtistDetailsProps) => {
 	const artist: Artist = await fetchArtist(artistId);
 
 	return (
-		<div className="flex flex-col sm:flex-row w-full gap-4 sm:gap-8 items-center">
-			<Image
-				src={artist.images[0].url}
-				alt="Artist image"
-				width={250}
-				height={250}
-				className="aspect-square object-cover rounded-md"
+		<div className="flex flex-col sm:flex-row w-full gap-6 sm:items-end">
+			<BackButtonAndImage
+				imageUrl={artist.images[0].url}
+				alt={artist.name}
 			/>
 
-			<div className="flex flex-col gap-4 items-center sm:items-start text-center sm:text-left">
+			<div className="flex flex-col gap-4">
 				<div className="flex flex-col gap-2">
-					<p className="text-white text-4xl font-bold">
+					<p className="text-white text-2xl sm:text-4xl font-bold">
 						{artist.name}
 					</p>
 
-					<div className="font-semibold flex flex-col sm:flex-row gap-2 items-center justify-center sm:justify-start">
+					<div className="font-semibold flex flex-col sm:flex-row gap-2">
 						<p className="text-md text-stone-400">Followers</p>
 
 						<p className="text-md text-white">
@@ -35,7 +31,7 @@ const ArtistDetails = async ({ artistId }: ArtistDetailsProps) => {
 						</p>
 					</div>
 
-					<div className="font-semibold flex flex-col sm:flex-row gap-2 items-center justify-center sm:justify-start">
+					<div className="font-semibold flex flex-col sm:flex-row gap-2">
 						<p className="text-md text-stone-400">Popularity</p>
 
 						<p className="text-md text-white">
@@ -44,7 +40,7 @@ const ArtistDetails = async ({ artistId }: ArtistDetailsProps) => {
 					</div>
 
 					{artist.genres.length > 0 && (
-						<div className="font-semibold flex gap-2 flex-col sm:flex-row items-center justify-center sm:justify-start">
+						<div className="font-semibold flex gap-2 flex-col sm:flex-row">
 							<p className="text-md text-stone-400">Genres</p>
 
 							{artist.genres.map((genre, index) => (

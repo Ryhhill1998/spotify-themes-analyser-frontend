@@ -1,7 +1,6 @@
 import { Suspense } from "react";
 import ArtistDetails from "./components/ArtistDetails";
 import ArtistDetailsSkeleton from "./components/ArtistDetailsSkeleton";
-import BackButton from "../../components/common/BackButton";
 
 const ArtistPage = async ({
 	params,
@@ -12,11 +11,7 @@ const ArtistPage = async ({
 
 	return (
 		<div className="container mx-auto bg-stone-900 rounded-md">
-			<div className="p-6 pb-0">
-				<BackButton />
-			</div>
-
-			<div className="flex p-6">
+			<div className="p-6">
 				<Suspense fallback={<ArtistDetailsSkeleton />}>
 					<ArtistDetails artistId={artistId} />
 				</Suspense>

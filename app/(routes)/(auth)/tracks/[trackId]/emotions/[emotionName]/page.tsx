@@ -5,7 +5,7 @@ import TrackDetails from "../../components/common/TrackDetails";
 import { Suspense } from "react";
 import TrackDetailsSkeleton from "../../components/common/TrackDetailsSkeleton";
 import TaggedLyricsSkeleton from "./components/TaggedLyricsSkeleton";
-import BackButton from "@/app/(routes)/(auth)/components/common/BackButton";
+import BackButton from "@/app/(routes)/(auth)/components/common/BackButtonAndImage";
 
 const EmotionPage = async ({
 	params,
@@ -16,7 +16,7 @@ const EmotionPage = async ({
 
 	return (
 		<div className="container mx-auto bg-stone-900 rounded-md">
-			<div className="flex flex-col sm:flex-row gap-4 sm:justify-between p-6 pb-0">
+			{/* <div className="flex flex-col sm:flex-row gap-4 sm:justify-between p-6 pb-0">
 				<BackButton />
 
 				<h3 className="text-white font-bold text-2xl self-center">
@@ -33,7 +33,7 @@ const EmotionPage = async ({
 
 					<p>Back</p>
 				</Link>
-			</div>
+			</div> */}
 
 			<div>
 				<div className="w-full p-6 flex">
@@ -42,8 +42,13 @@ const EmotionPage = async ({
 					</Suspense>
 				</div>
 
-				<div className="w-full bg-stone-800 flex p-6 gap-6 flex-col">
-					<h3 className="text-white font-bold text-2xl">Lyrics</h3>
+				<div className="w-full bg-stone-800 flex p-6 gap-4 flex-col">
+					<h3 className="text-white font-bold text-2xl">
+						Lyrics (
+						{emotionName.charAt(0).toUpperCase() +
+							emotionName.slice(1)}
+						)
+					</h3>
 
 					<Suspense fallback={<TaggedLyricsSkeleton />}>
 						<TaggedLyrics
