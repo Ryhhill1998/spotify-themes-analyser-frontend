@@ -1,9 +1,10 @@
 "use client";
-import { useRouter, useSearchParams } from "next/navigation";
+import { redirect, useRouter, useSearchParams } from "next/navigation";
+import Image from "next/image";
+import { Button } from "@/components/ui/button";
 import { Suspense, useEffect } from "react";
 
-import SpotifySignInButton from "@/app/(routes)/login/components/SpotifySignInButton";
-import { getTokens } from "@/app/api/data";
+import { getSpotifyAuthUrl, getTokens } from "@/app/api/data";
 
 const TokensSetter = () => {
 	const router = useRouter();
@@ -21,6 +22,11 @@ const TokensSetter = () => {
 };
 
 const LoginPage = () => {
+	const handleLoginClick = async () => {
+		const loginUrl = await getSpotifyAuthUrl();
+		redirect(loginUrl);
+	};
+
 	return (
 		<div className="container mx-auto mt-10 p-6 flex flex-col gap-4 items-center justify-center">
 			<h1 className="text-white font-bold text-2xl">
@@ -37,7 +43,18 @@ const LoginPage = () => {
 				Sign in to explore your unique musical fingerprint.
 			</p>
 
-			<SpotifySignInButton />
+			<Button
+				className="bg-stone-700 hover:bg-stone-600 text-stone-100 text-sm w-fit px-4 py-5 rounded-4xl font-semibold flex gap-2 items-center cursor-pointer"
+				onClick={handleLoginClick}
+			>
+				<Image
+					src="/spotify-icon-dark-mode.svg"
+					alt="Spotify"
+					width={22}
+					height={22}
+				/>
+				Sign in with Spotify
+			</Button>
 
 			<Suspense>
 				<TokensSetter />

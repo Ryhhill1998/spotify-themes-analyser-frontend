@@ -12,6 +12,7 @@ import {
 	EmotionAPI,
 	Emotion,
 	TaggedLyricsAPI,
+	SpotifyAuth,
 } from "./dataTypes";
 import {
 	BadRequestAPIError,
@@ -81,6 +82,20 @@ const deleteTokens = (cookieStore: ReadonlyRequestCookies) => {
 };
 
 // -------------------- AUTH -------------------- //
+const getSpotifyAuthUrl = async () => {
+	const res = await makeAPIRequest("/auth/spotify/login");
+	const data: SpotifyAuth = await res.json();
+	const cookieStore = await cookies();
+	cookieStore.set({
+		name: "oauth_state",
+		value: data.oauth_state,
+		secure: true,
+		sameSite: "none",
+		httpOnly: true,
+	});
+	return data.login_url;
+};
+
 const getTokens = async (code: string) => {
 	const cookieStore = await cookies();
 
@@ -231,6 +246,7 @@ const fetchTrackLyricsWithEmotionalTags = async (
 
 // -------------------- EXPORTS -------------------- //
 export {
+	getSpotifyAuthUrl,
 	getTokens,
 	refreshTokens,
 	fetchProfile,
