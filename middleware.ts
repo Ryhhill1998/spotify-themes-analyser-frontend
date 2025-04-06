@@ -7,7 +7,7 @@ const protectedRoutes = [
 	/^\/top\/(artists|tracks|emotions)\/(short|medium|long)-term$/,
 	/^\/tracks\/[^/]+$/,
 	/^\/artists\/[^/]+$/,
-	/^\/track\/[^/]+\/emotions\/[^/]+$/,
+	/^\/tracks\/[^/]+\/emotions\/[^/]+$/,
 ];
 const publicRoutes = [/^\/$/, /^\/login(?:\?.*)?$/];
 
