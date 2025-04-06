@@ -1,31 +1,36 @@
 "use client";
+
 import { redirect, useRouter, useSearchParams } from "next/navigation";
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
-import { Suspense, useEffect } from "react";
+import { useEffect, useState } from "react";
 
 import { getSpotifyAuthUrl, getTokens } from "@/app/api/data";
+import LoadingSpinner from "./components/LoadingSpinner";
 
-const TokensSetter = () => {
+const LoginPage = () => {
 	const router = useRouter();
 	const searchParams = useSearchParams();
 
 	const code = searchParams.get("code");
 
-	useEffect(() => {
-		if (code) {
-			getTokens(code).then(() => router.push("/"));
-		}
-	}, [code, router]);
+	const [feedbackText, setFeedbackText] = useState<string>("");
+	const [isLoading, setIsLoading] = useState(false);
 
-	return <></>;
-};
-
-const LoginPage = () => {
 	const handleLoginClick = async () => {
+		setFeedbackText("Redirecting to Spotify");
+		setIsLoading(true);
 		const loginUrl = await getSpotifyAuthUrl();
 		redirect(loginUrl);
 	};
+
+	useEffect(() => {
+		if (code) {
+			setFeedbackText("Signing you in");
+			setIsLoading(true);
+			getTokens(code).then(() => router.push("/"));
+		}
+	}, [code, router]);
 
 	return (
 		<div className="container mx-auto mt-10 p-6 flex flex-col gap-4 items-center justify-center">
@@ -46,6 +51,7 @@ const LoginPage = () => {
 			<Button
 				className="bg-stone-700 hover:bg-stone-600 text-stone-100 text-sm w-fit px-4 py-5 rounded-4xl font-semibold flex gap-2 items-center cursor-pointer"
 				onClick={handleLoginClick}
+				disabled={isLoading}
 			>
 				<Image
 					src="/spotify-icon-dark-mode.svg"
@@ -56,9 +62,7 @@ const LoginPage = () => {
 				Sign in with Spotify
 			</Button>
 
-			<Suspense>
-				<TokensSetter />
-			</Suspense>
+			{isLoading && <LoadingSpinner text={feedbackText} />}
 		</div>
 	);
 };
