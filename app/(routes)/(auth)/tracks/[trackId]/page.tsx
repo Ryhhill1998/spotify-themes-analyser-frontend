@@ -12,8 +12,6 @@ const TrackPage = async ({
 	return (
 		<div className="container mx-auto bg-stone-900 rounded-md">
 			<div className="p-6">
-				<TrackDetailsSkeleton />
-
 				<Suspense fallback={<TrackDetailsSkeleton />}>
 					<TrackDetails trackId={trackId} />
 				</Suspense>
