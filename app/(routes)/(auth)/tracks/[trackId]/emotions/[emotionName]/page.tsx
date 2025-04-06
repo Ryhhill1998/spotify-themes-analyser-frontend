@@ -1,11 +1,8 @@
-import { ChevronLeft } from "lucide-react";
-import Link from "next/link";
 import TaggedLyrics from "@/app/(routes)/(auth)/tracks/[trackId]/emotions/[emotionName]/components/TaggedLyrics";
 import TrackDetails from "../../components/common/TrackDetails";
 import { Suspense } from "react";
 import TrackDetailsSkeleton from "../../components/common/TrackDetailsSkeleton";
 import TaggedLyricsSkeleton from "./components/TaggedLyricsSkeleton";
-import BackButton from "@/app/(routes)/(auth)/components/common/BackButtonAndImage";
 
 const EmotionPage = async ({
 	params,
@@ -16,25 +13,6 @@ const EmotionPage = async ({
 
 	return (
 		<div className="container mx-auto bg-stone-900 rounded-md">
-			{/* <div className="flex flex-col sm:flex-row gap-4 sm:justify-between p-6 pb-0">
-				<BackButton />
-
-				<h3 className="text-white font-bold text-2xl self-center">
-					Your Top{" "}
-					{emotionName.charAt(0).toUpperCase() + emotionName.slice(1)}{" "}
-					Track
-				</h3>
-
-				<Link
-					href="/top-emotions"
-					className="invisible text-white font-bold text-lg gap-2 items-center hidden sm:flex"
-				>
-					<ChevronLeft />
-
-					<p>Back</p>
-				</Link>
-			</div> */}
-
 			<div>
 				<div className="w-full p-6 flex">
 					<Suspense fallback={<TrackDetailsSkeleton />}>

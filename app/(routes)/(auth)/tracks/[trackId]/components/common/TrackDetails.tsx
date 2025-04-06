@@ -2,7 +2,6 @@ import BackButtonAndImage from "@/app/(routes)/(auth)/components/common/BackButt
 import ListenOnSpotifyButton from "@/app/(routes)/(auth)/components/common/ListenOnSpotifyButton";
 import { fetchTrack } from "@/app/api/data";
 import { Track } from "@/app/api/dataTypes";
-import Image from "next/image";
 
 type TrackDetailsProps = {
 	trackId: string;
