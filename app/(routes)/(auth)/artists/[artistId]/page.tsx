@@ -12,6 +12,8 @@ const ArtistPage = async ({
 	return (
 		<div className="container mx-auto bg-stone-900 rounded-md">
 			<div className="p-6">
+				<ArtistDetailsSkeleton />
+
 				<Suspense fallback={<ArtistDetailsSkeleton />}>
 					<ArtistDetails artistId={artistId} />
 				</Suspense>

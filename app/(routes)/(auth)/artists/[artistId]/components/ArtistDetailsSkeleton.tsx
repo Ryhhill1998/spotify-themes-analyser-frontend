@@ -18,15 +18,15 @@ const ArtistDetailsSkeleton = () => {
 				/>
 			</div>
 
-			<div className="flex w-full max-w-[25%] flex-col gap-8 p-4">
+			<div className="flex w-full max-w-[75%] sm:max-w-[50%] flex-col gap-6">
 				<div className="flex w-full flex-col gap-4">
 					<Skeleton className="h-6 w-full" />
-					<Skeleton className="h-4 w-full max-w-[60%]" />
 					<Skeleton className="h-4 w-full max-w-[40%]" />
-					<Skeleton className="h-4 w-full max-w-[75%]" />
+					<Skeleton className="h-4 w-full max-w-[30%]" />
+					<Skeleton className="h-4 w-full max-w-[50%]" />
 				</div>
 
-				<Skeleton className="h-10 w-full max-w-[60%] rounded-4xl" />
+				<Skeleton className="h-10 w-[175px] rounded-4xl" />
 			</div>
 		</div>
 	);
