@@ -1,5 +1,5 @@
 import BackButtonAndImage from "@/app/(routes)/(auth)/components/common/BackButtonAndImage";
-import ListenOnSpotifyButton from "@/app/(routes)/(auth)/components/common/ListenOnSpotifyButton";
+import SpotifyButton from "@/app/(routes)/(auth)/components/common/SpotifyButton";
 import { fetchTrack } from "@/app/api/data";
 import { Track } from "@/app/api/dataTypes";
 
@@ -36,7 +36,10 @@ const TrackDetails = async ({ trackId }: TrackDetailsProps) => {
 					</p>
 				</div>
 
-				<ListenOnSpotifyButton spotifyUrl={track.spotifyUrl} />
+				<SpotifyButton
+					text="Listen on Spotify"
+					spotifyUrl={track.spotifyUrl}
+				/>
 			</div>
 		</div>
 	);

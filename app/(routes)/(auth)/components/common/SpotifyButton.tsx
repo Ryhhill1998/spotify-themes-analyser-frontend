@@ -2,10 +2,11 @@ import Image from "next/image";
 import Link from "next/link";
 
 type PlayOnSpotifyButtonProps = {
+	text: string;
 	spotifyUrl: string;
 };
 
-const ListenOnSpotifyButton = ({ spotifyUrl }: PlayOnSpotifyButtonProps) => {
+const SpotifyButton = ({ text, spotifyUrl }: PlayOnSpotifyButtonProps) => {
 	return (
 		<Link
 			href={spotifyUrl}
@@ -17,9 +18,9 @@ const ListenOnSpotifyButton = ({ spotifyUrl }: PlayOnSpotifyButtonProps) => {
 				width={22}
 				height={22}
 			/>
-			Listen on Spotify
+			{text}
 		</Link>
 	);
 };
 
-export default ListenOnSpotifyButton;
+export default SpotifyButton;

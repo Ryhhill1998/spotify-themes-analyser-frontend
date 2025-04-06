@@ -1,6 +1,6 @@
 import { fetchArtist } from "@/app/api/data";
 import { Artist } from "@/app/api/dataTypes";
-import ListenOnSpotifyButton from "../../../components/common/ListenOnSpotifyButton";
+import SpotifyButton from "../../../components/common/SpotifyButton";
 import BackButtonAndImage from "../../../components/common/BackButtonAndImage";
 
 type ArtistDetailsProps = {
@@ -60,7 +60,10 @@ const ArtistDetails = async ({ artistId }: ArtistDetailsProps) => {
 					)}
 				</div>
 
-				<ListenOnSpotifyButton spotifyUrl={artist.spotifyUrl} />
+				<SpotifyButton
+					text="Listen on Spotify"
+					spotifyUrl={artist.spotifyUrl}
+				/>
 			</div>
 		</div>
 	);
