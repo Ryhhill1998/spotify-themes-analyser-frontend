@@ -6,6 +6,7 @@ import { Profile } from "@/app/api/dataTypes";
 import { fetchProfile } from "@/app/api/data";
 import { Suspense } from "react";
 import { Skeleton } from "@/components/ui/skeleton";
+import { User } from "lucide-react";
 
 const HeaderSkeleton = async () => {
 	return (
@@ -43,13 +44,17 @@ const Header = async () => {
 			<Navigation />
 
 			<Link href="/profile">
-				<Image
-					src={profile.images[1].url}
-					alt="Spotify profile picture"
-					width={35}
-					height={35}
-					className="rounded-full"
-				/>
+				{profile.images?.length > 0 ? (
+					<Image
+						src={profile.images[1].url}
+						alt="Spotify profile picture"
+						width={35}
+						height={35}
+						className="rounded-full"
+					/>
+				) : (
+					<User className="text-white" />
+				)}
 			</Link>
 		</header>
 	);

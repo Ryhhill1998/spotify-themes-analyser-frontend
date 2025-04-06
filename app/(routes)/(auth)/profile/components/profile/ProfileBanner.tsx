@@ -8,13 +8,15 @@ const ProfileBanner = async () => {
 
 	return (
 		<div className="flex flex-col sm:flex-row items-center sm:items-end gap-4 sm:gap-6 p-2 py-6 sm:px-6 bg-stone-800 rounded-t-md">
-			<Image
-				src={profile.images[0].url}
-				alt="Spotify profile picture"
-				width={200}
-				height={200}
-				className="aspect-square object-cover rounded-full"
-			/>
+			{profile.images?.length > 0 && (
+				<Image
+					src={profile.images[0].url}
+					alt="Spotify profile picture"
+					width={200}
+					height={200}
+					className="aspect-square object-cover rounded-full"
+				/>
+			)}
 
 			<div className="flex flex-col gap-2 text-center sm:text-left">
 				<p className="text-stone-300 hidden sm:block text-sm">
