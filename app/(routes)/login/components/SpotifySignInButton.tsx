@@ -1,14 +1,14 @@
 "use client";
 
-import Link from "next/link";
+import ListenOnSpotifyButton from "../../(auth)/components/common/ListenOnSpotifyButton";
 
 const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL;
 
 const SpotifySignInButton = () => {
 	return (
-		<Link href={`${API_BASE_URL}/auth/spotify/login`} className="bg-white">
-			Sign in with Spotify
-		</Link>
+		<ListenOnSpotifyButton
+			spotifyUrl={`${API_BASE_URL}/auth/spotify/login`}
+		/>
 	);
 };
 

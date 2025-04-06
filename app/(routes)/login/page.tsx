@@ -22,8 +22,20 @@ const TokensSetter = () => {
 
 const LoginPage = () => {
 	return (
-		<div>
-			<h1>Login page</h1>
+		<div className="container mx-auto mt-10 p-6 flex flex-col gap-4 items-center justify-center">
+			<h1 className="text-white font-bold text-2xl">
+				Welcome to Spotify Insights!
+			</h1>
+
+			<p className="text-center text-stone-200 font-medium mt-4">
+				Discover what music truly resonates with you. See your top
+				artists, tracks and even the dominant emotions in your listening
+				history.
+			</p>
+
+			<p className="text-center text-stone-200 font-medium mb-4">
+				Sign in to explore your unique musical fingerprint.
+			</p>
 
 			<SpotifySignInButton />
 
