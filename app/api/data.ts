@@ -57,28 +57,46 @@ const makeAPIRequest = async (
 	return res;
 };
 
-const setTokens = (data: Tokens, cookieStore: ReadonlyRequestCookies) => {
+const setCookie = (
+	cookieStore: ReadonlyRequestCookies,
+	name: string,
+	value: string,
+	maxAge?: number
+) => {
 	cookieStore.set({
-		name: "access_token",
-		value: data.access_token,
+		name: name,
+		value: value,
 		secure: true,
 		sameSite: "none",
-		maxAge: 3300,
-		httpOnly: true,
-	});
-	cookieStore.set({
-		name: "refresh_token",
-		value: data.refresh_token,
-		secure: true,
-		sameSite: "none",
+		maxAge: maxAge,
 		httpOnly: true,
 	});
 };
 
-const deleteTokens = (cookieStore: ReadonlyRequestCookies) => {
-	// delete access and refresh token cookies if present
-	cookieStore.delete("access_token");
-	cookieStore.delete("refresh_token");
+const handleTokensRequest = async (route: string, body: string) => {
+	const cookieStore = await cookies();
+
+	try {
+		const res = await makeAPIRequest(
+			`/auth/spotify/${route}`,
+			"POST",
+			{
+				Accept: "application/json",
+				"Content-Type": "application/json",
+			},
+			body
+		);
+
+		const data: Tokens = await res.json();
+
+		setCookie(cookieStore, "access_token", data.access_token, 3300);
+		setCookie(cookieStore, "refresh_token", data.refresh_token);
+	} catch (error) {
+		console.error(error);
+
+		cookieStore.delete("access_token");
+		cookieStore.delete("refresh_token");
+	}
 };
 
 // -------------------- AUTH -------------------- //
@@ -86,38 +104,12 @@ const getSpotifyAuthUrl = async () => {
 	const res = await makeAPIRequest("/auth/spotify/login");
 	const data: SpotifyAuth = await res.json();
 	const cookieStore = await cookies();
-	cookieStore.set({
-		name: "oauth_state",
-		value: data.oauth_state,
-		secure: true,
-		sameSite: "none",
-		httpOnly: true,
-	});
+	setCookie(cookieStore, "refreshoauth_state_token", data.oauth_state);
 	return data.login_url;
 };
 
 const getTokens = async (code: string) => {
-	const cookieStore = await cookies();
-
-	try {
-		const res = await makeAPIRequest(
-			"/auth/spotify/tokens",
-			"POST",
-			{
-				Accept: "application/json",
-				"Content-Type": "application/json",
-			},
-			JSON.stringify({ code })
-		);
-
-		const data: Tokens = await res.json();
-
-		setTokens(data, cookieStore);
-	} catch (error) {
-		console.error(error);
-
-		deleteTokens(cookieStore);
-	}
+	handleTokensRequest("tokens", JSON.stringify({ code }));
 };
 
 const refreshTokens = async () => {
@@ -126,25 +118,10 @@ const refreshTokens = async () => {
 
 	if (!refreshToken) return;
 
-	try {
-		const res = await makeAPIRequest(
-			"/auth/spotify/refresh-tokens",
-			"POST",
-			{
-				Accept: "application/json",
-				"Content-Type": "application/json",
-			},
-			JSON.stringify({ refresh_token: refreshToken })
-		);
-
-		const data: Tokens = await res.json();
-
-		setTokens(data, cookieStore);
-	} catch (error) {
-		console.error(error);
-
-		deleteTokens(cookieStore);
-	}
+	handleTokensRequest(
+		"refresh-tokens",
+		JSON.stringify({ refresh_token: refreshToken })
+	);
 };
 
 // -------------------- PROFILE -------------------- //
