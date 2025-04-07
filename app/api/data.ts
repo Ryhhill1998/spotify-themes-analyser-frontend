@@ -73,8 +73,12 @@ const setCookie = (
 	});
 };
 
-const handleTokensRequest = async (route: string, body: string) => {
-	const cookieStore = await cookies();
+const handleTokensRequest = async (
+	route: string,
+	body: string,
+	cookieStore?: ReadonlyRequestCookies
+) => {
+	if (!cookieStore) cookieStore = await cookies();
 
 	try {
 		const res = await makeAPIRequest(
@@ -120,7 +124,8 @@ const refreshTokens = async () => {
 
 	handleTokensRequest(
 		"refresh-tokens",
-		JSON.stringify({ refresh_token: refreshToken })
+		JSON.stringify({ refresh_token: refreshToken }),
+		cookieStore
 	);
 };
 
