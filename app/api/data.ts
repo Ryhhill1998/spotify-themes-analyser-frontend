@@ -108,12 +108,12 @@ const getSpotifyAuthUrl = async () => {
 	const res = await makeAPIRequest("/auth/spotify/login");
 	const data: SpotifyAuth = await res.json();
 	const cookieStore = await cookies();
-	setCookie(cookieStore, "refreshoauth_state_token", data.oauth_state);
+	setCookie(cookieStore, "oauth_state", data.oauth_state);
 	return data.login_url;
 };
 
 const getTokens = async (code: string) => {
-	handleTokensRequest("tokens", JSON.stringify({ code }));
+	await handleTokensRequest("tokens", JSON.stringify({ code }));
 };
 
 const refreshTokens = async () => {
@@ -122,7 +122,7 @@ const refreshTokens = async () => {
 
 	if (!refreshToken) return;
 
-	handleTokensRequest(
+	await handleTokensRequest(
 		"refresh-tokens",
 		JSON.stringify({ refresh_token: refreshToken }),
 		cookieStore
