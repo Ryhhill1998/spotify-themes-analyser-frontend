@@ -47,7 +47,7 @@ const LoginPage = () => {
 				Sign in with Spotify
 			</Button>
 
-			{isLoading && <LoadingSpinner text="Redirecting to Spotify" />}
+			{isLoading && <LoadingSpinner text="Connecting to Spotify" />}
 		</div>
 	);
 };
