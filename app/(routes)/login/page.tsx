@@ -3,7 +3,7 @@
 import { redirect } from "next/navigation";
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
-import { Suspense, useState } from "react";
+import { useState } from "react";
 
 import { getSpotifyAuthUrl } from "@/app/api/data";
 import LoadingSpinner from "./components/LoadingSpinner";
