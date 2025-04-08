@@ -1,29 +1,12 @@
 "use client";
 
-import { redirect, useRouter, useSearchParams } from "next/navigation";
+import { redirect } from "next/navigation";
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
-import { Suspense, useEffect, useState } from "react";
+import { Suspense, useState } from "react";
 
-import { getSpotifyAuthUrl, getTokens } from "@/app/api/data";
+import { getSpotifyAuthUrl } from "@/app/api/data";
 import LoadingSpinner from "./components/LoadingSpinner";
-
-const TokensLoader = () => {
-	const router = useRouter();
-	const searchParams = useSearchParams();
-
-	const code = searchParams.get("code");
-
-	useEffect(() => {
-		if (code) {
-			getTokens(code).then(() => router.push("/"));
-		}
-	}, [code, router]);
-
-	if (!code) return <></>;
-
-	return <LoadingSpinner text="Signing you in" />;
-};
 
 const LoginPage = () => {
 	const [isLoading, setIsLoading] = useState(false);
@@ -63,10 +46,6 @@ const LoginPage = () => {
 				/>
 				Sign in with Spotify
 			</Button>
-
-			<Suspense>
-				<TokensLoader />
-			</Suspense>
 
 			{isLoading && <LoadingSpinner text="Redirecting to Spotify" />}
 		</div>
