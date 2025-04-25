@@ -154,6 +154,7 @@ const fetchTrack = async (trackId: string) => {
 		releaseDate: data.release_date,
 		durationMs: data.duration_ms,
 		durationFormatted: `${minutes}:${seconds}`,
+		positionChange: data.position_change,
 	};
 	return track;
 };
@@ -175,6 +176,7 @@ const fetchTopTracks = async (timeRange: string, limit: number = 50) => {
 			releaseDate: data.release_date,
 			durationMs: data.duration_ms,
 			durationFormatted: `${minutes}:${seconds}`,
+			positionChange: data.position_change,
 		};
 	});
 	return tracks;
@@ -184,7 +186,11 @@ const fetchTopTracks = async (timeRange: string, limit: number = 50) => {
 const fetchArtist = async (artistId: string) => {
 	const res = await makeAPIRequest(`/data/artists/${artistId}`);
 	const data: ArtistAPI = await res.json();
-	const artist: Artist = { ...data, spotifyUrl: data.spotify_url };
+	const artist: Artist = {
+		...data,
+		spotifyUrl: data.spotify_url,
+		positionChange: data.position_change,
+	};
 	return artist;
 };
 
@@ -196,6 +202,7 @@ const fetchTopArtists = async (timeRange: string, limit: number = 50) => {
 	const artists: Artist[] = data.map((data) => ({
 		...data,
 		spotifyUrl: data.spotify_url,
+		positionChange: data.position_change,
 	}));
 	return artists;
 };
@@ -228,6 +235,7 @@ const fetchTrackLyricsWithEmotionalTags = async (
 
 // -------------------- EXPORTS -------------------- //
 export {
+	setCookie,
 	getSpotifyAuthUrl,
 	getTokens,
 	refreshTokens,

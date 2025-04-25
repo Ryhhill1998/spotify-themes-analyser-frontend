@@ -29,6 +29,13 @@ interface Profile extends ProfileBase {
 	displayName: string;
 }
 
+// -------------------- ITEM -------------------- //
+// type Item = {
+// 	id: string;
+// 	name: string;
+
+// }
+
 // -------------------- TRACK -------------------- //
 type TrackArtist = {
 	id: string;
@@ -49,6 +56,7 @@ interface TrackAPI extends TrackBase {
 	spotify_url: string;
 	release_date: string;
 	duration_ms: number;
+	position_change: string | number | null;
 }
 
 interface Track extends TrackBase {
@@ -57,6 +65,7 @@ interface Track extends TrackBase {
 	releaseDate: string;
 	durationMs: number;
 	durationFormatted: string;
+	positionChange: string | number | null;
 }
 
 // -------------------- ARTIST -------------------- //
@@ -71,10 +80,12 @@ interface ArtistBase {
 
 interface ArtistAPI extends ArtistBase {
 	spotify_url: string;
+	position_change: string | number | null;
 }
 
 interface Artist extends ArtistBase {
 	spotifyUrl: string;
+	positionChange: string | number | null;
 }
 
 // -------------------- EMOTION -------------------- //

@@ -1,6 +1,6 @@
 import { redirect } from "next/navigation";
 import { NextRequest } from "next/server";
-import { getTokens } from "../../data";
+import { fetchProfile, getTokens, setCookie } from "../../data";
 import { cookies } from "next/headers";
 
 const GET = async (request: NextRequest) => {
@@ -17,6 +17,8 @@ const GET = async (request: NextRequest) => {
 	cookieStore.delete("oauth_state");
 
 	await getTokens(code);
+	const profile = await fetchProfile();
+	setCookie(cookieStore, "user_id", profile.id);
 
 	redirect("/profile");
 };

@@ -13,7 +13,15 @@ const TopTracksGrid = async ({ timeRange }: TopTracksGridProps) => {
 		<div>
 			{topTracks.map(
 				(
-					{ id, name, images, artist, durationFormatted, albumName },
+					{
+						id,
+						name,
+						images,
+						artist,
+						durationFormatted,
+						albumName,
+						positionChange,
+					},
 					index
 				) => (
 					<TopTrackCard
@@ -25,6 +33,7 @@ const TopTracksGrid = async ({ timeRange }: TopTracksGridProps) => {
 						artistName={artist.name}
 						duration={durationFormatted}
 						position={index + 1}
+						positionChange={positionChange}
 					/>
 				)
 			)}
