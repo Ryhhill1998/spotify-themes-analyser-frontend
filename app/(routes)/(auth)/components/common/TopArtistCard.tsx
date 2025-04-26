@@ -20,7 +20,7 @@ const TopArtistCard = ({
 	return (
 		<Link
 			href={`/artists/${artistId}`}
-			className="flex flex-col items-center p-3 hover:bg-stone-800 rounded-sm cursor-pointer"
+			className="flex flex-col items-center p-3 hover:bg-stone-800 rounded-sm cursor-pointer h-full"
 		>
 			<Image
 				src={imageUrl}
