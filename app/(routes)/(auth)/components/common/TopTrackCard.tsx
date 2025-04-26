@@ -1,5 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
+import PositionIndicator from "./PositionIndicator";
 
 type TopTrackCardProps = {
 	trackId: string;
@@ -28,31 +29,10 @@ const TopTrackCard = ({
 			className="grid grid-cols-[auto_1fr_auto] sm:grid-cols-[auto_1fr_1fr_auto] items-center px-3 py-2 hover:bg-stone-800 rounded-sm gap-x-3 cursor-pointer"
 		>
 			{/* Position + Arrows */}
-			<div className="grid place-items-center gap-1 w-[24px]">
-				{typeof positionChange === "number" && positionChange > 0 && (
-					<div className="w-0 h-0 border-l-[6px] border-r-[6px] border-b-[6px] border-l-transparent border-r-transparent border-b-green-500" />
-				)}
-				{typeof positionChange === "number" && positionChange < 0 && (
-					<div className="invisible w-0 h-0 border-l-[6px] border-r-[6px] border-t-[6px] border-l-transparent border-r-transparent border-t-red-500" />
-				)}
-				{positionChange === "new" && (
-					<div className="invisible h-[7px] w-[7px] rounded-full bg-blue-300" />
-				)}
-
-				<p className="text-stone-200 text-xs font-bold text-center">
-					{position}
-				</p>
-
-				{typeof positionChange === "number" && positionChange > 0 && (
-					<div className="invisible w-0 h-0 border-l-[6px] border-r-[6px] border-b-[6px] border-l-transparent border-r-transparent border-b-green-500" />
-				)}
-				{typeof positionChange === "number" && positionChange < 0 && (
-					<div className="w-0 h-0 border-l-[6px] border-r-[6px] border-t-[6px] border-l-transparent border-r-transparent border-t-red-500" />
-				)}
-				{positionChange === "new" && (
-					<div className="h-[7px] w-[7px] rounded-full bg-blue-300" />
-				)}
-			</div>
+			<PositionIndicator
+				position={position}
+				positionChange={positionChange}
+			/>
 
 			{/* Image + Track Info */}
 			<div className="grid grid-cols-[50px_1fr] items-center gap-3 min-w-0 overflow-hidden">
