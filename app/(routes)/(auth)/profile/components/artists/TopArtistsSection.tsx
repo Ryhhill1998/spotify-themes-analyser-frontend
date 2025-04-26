@@ -11,15 +11,19 @@ const TopArtistsSection = async () => {
 			<TitleAndShowAllLink name="artists" />
 
 			<div className="flex overflow-x-auto no-scrollbar">
-				{topArtists.map(({ id, name, images }) => (
-					<div key={id} className="flex-shrink-0 w-[160px]">
-						<TopArtistCard
-							artistId={id}
-							imageUrl={images[0].url}
-							name={name}
-						/>
-					</div>
-				))}
+				{topArtists.map(
+					({ id, name, images, positionChange }, index) => (
+						<div key={id} className="flex-shrink-0 w-[160px]">
+							<TopArtistCard
+								artistId={id}
+								imageUrl={images[0].url}
+								name={name}
+								position={index + 1}
+								positionChange={positionChange}
+							/>
+						</div>
+					)
+				)}
 			</div>
 		</div>
 	);

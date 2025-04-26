@@ -20,6 +20,7 @@ const TopTracksSection = async () => {
 							artist,
 							durationFormatted,
 							albumName,
+							positionChange,
 						},
 						index
 					) => (
@@ -32,6 +33,7 @@ const TopTracksSection = async () => {
 							artistName={artist.name}
 							duration={durationFormatted}
 							position={index + 1}
+							positionChange={positionChange}
 						/>
 					)
 				)}

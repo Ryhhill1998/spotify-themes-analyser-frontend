@@ -1,13 +1,22 @@
 import Image from "next/image";
 import Link from "next/link";
+import PositionIndicator from "./PositionIndicator";
 
 type TopArtistCardProps = {
 	artistId: string;
 	imageUrl: string;
 	name: string;
+	position: number;
+	positionChange: string | number | null;
 };
 
-const TopArtistCard = ({ artistId, imageUrl, name }: TopArtistCardProps) => {
+const TopArtistCard = ({
+	artistId,
+	imageUrl,
+	name,
+	position,
+	positionChange,
+}: TopArtistCardProps) => {
 	return (
 		<Link
 			href={`/artists/${artistId}`}
@@ -21,8 +30,13 @@ const TopArtistCard = ({ artistId, imageUrl, name }: TopArtistCardProps) => {
 				className="aspect-square object-cover rounded-full mb-3"
 			/>
 
-			<div className="w-full overflow-hidden">
-				<p className="text-center truncate text-white text-sm font-medium">
+			<div className="h-full w-full overflow-hidden flex items-center">
+				<PositionIndicator
+					position={position}
+					positionChange={positionChange}
+				/>
+
+				<p className="text-center truncate text-white text-xs font-medium h-full flex items-center">
 					{name}
 				</p>
 			</div>

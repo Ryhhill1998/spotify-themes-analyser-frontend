@@ -11,12 +11,14 @@ const TopArtistsGrid = async ({ timeRange }: TopArtistsGridProps) => {
 
 	return (
 		<div className="grid grid-cols-[repeat(auto-fill,_minmax(150px,_1fr))] gap-y-4">
-			{topArtists.map(({ id, name, images }) => (
+			{topArtists.map(({ id, name, images, positionChange }, index) => (
 				<TopArtistCard
 					key={id}
 					artistId={id}
 					imageUrl={images[0].url}
 					name={name}
+					position={index + 1}
+					positionChange={positionChange}
 				/>
 			))}
 		</div>
