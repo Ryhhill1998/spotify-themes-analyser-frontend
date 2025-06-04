@@ -55,7 +55,7 @@ interface TrackAPI extends TrackBase {
 	spotify_url: string;
 	release_date: string;
 	duration_ms: number;
-	position_change: string | number | null;
+	position_change: string | null;
 }
 
 interface Track extends TrackBase {
@@ -64,7 +64,7 @@ interface Track extends TrackBase {
 	releaseDate: string;
 	durationMs: number;
 	durationFormatted: string;
-	positionChange: string | number | null;
+	positionChange: string | null;
 }
 
 // -------------------- ARTIST -------------------- //
@@ -79,12 +79,12 @@ interface ArtistBase {
 
 interface ArtistAPI extends ArtistBase {
 	spotify_url: string;
-	position_change: string | number | null;
+	position_change: string | null;
 }
 
 interface Artist extends ArtistBase {
 	spotifyUrl: string;
-	positionChange: string | number | null;
+	positionChange: string | null;
 }
 
 // -------------------- EMOTION -------------------- //
@@ -95,10 +95,12 @@ interface EmotionBase {
 
 interface EmotionAPI extends EmotionBase {
 	track_id: string;
+	position_change: string | null;
 }
 
 interface Emotion extends EmotionBase {
 	trackId: string;
+	positionChange: string | null;
 }
 
 // -------------------- EMOTION TAGGED LYRICS -------------------- //

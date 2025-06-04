@@ -202,6 +202,7 @@ const fetchTopEmotions = async (timeRange: string) => {
 		...data,
 		percentage: Math.round(data.percentage * 100),
 		trackId: data.track_id,
+		positionChange: data.position_change,
 	}));
 	return emotions;
 };
