@@ -10,7 +10,7 @@ type TopTrackCardProps = {
 	artistName: string;
 	duration: string;
 	position: number;
-	positionChange: string | number | null;
+	positionChange: string | null;
 };
 
 const TopTrackCard = ({

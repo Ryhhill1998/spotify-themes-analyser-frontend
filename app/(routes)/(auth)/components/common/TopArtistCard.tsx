@@ -7,7 +7,7 @@ type TopArtistCardProps = {
 	imageUrl: string;
 	name: string;
 	position: number;
-	positionChange: string | number | null;
+	positionChange: string | null;
 };
 
 const TopArtistCard = ({
