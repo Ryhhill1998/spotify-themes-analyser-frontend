@@ -2,7 +2,6 @@
 
 import { cookies } from "next/headers";
 import {
-	Tokens,
 	ProfileAPI,
 	Profile,
 	TrackAPI,
@@ -13,6 +12,7 @@ import {
 	Emotion,
 	TaggedLyricsAPI,
 	SpotifyAuth,
+	TokenResponse,
 } from "./dataTypes";
 import {
 	BadRequestAPIError,
@@ -31,26 +31,35 @@ const makeAPIRequest = async (
 	body?: string
 ) => {
 	const cookieStore = await cookies();
+	const accessToken = cookieStore.get("access_token");
+	if (accessToken) {
+		const authorisationHeader = {
+			Authorization: `Bearer ${accessToken.value}`,
+		};
+		headers = { ...headers, ...authorisationHeader };
+	}
 
 	const res = await fetch(`${API_BASE_URL}${route}`, {
 		method: method ? method : "GET",
-		headers: {
-			Cookie: cookieStore.toString(),
-			...headers,
-		},
-		redirect: "manual",
+		headers: { ...headers },
 		body: body ?? null,
 	});
 
 	if (res.status === 400) {
+		console.log(res);
+
 		throw new BadRequestAPIError();
 	}
 
 	if (res.status === 401) {
+		console.log(res);
+
 		throw new UnauthorisedAPIError();
 	}
 
 	if (!res.ok) {
+		console.log(res);
+
 		throw new UnexpectedAPIError();
 	}
 
@@ -73,36 +82,6 @@ const setCookie = (
 	});
 };
 
-const handleTokensRequest = async (
-	route: string,
-	body: string,
-	cookieStore?: ReadonlyRequestCookies
-) => {
-	if (!cookieStore) cookieStore = await cookies();
-
-	try {
-		const res = await makeAPIRequest(
-			`/auth/spotify/${route}`,
-			"POST",
-			{
-				Accept: "application/json",
-				"Content-Type": "application/json",
-			},
-			body
-		);
-
-		const data: Tokens = await res.json();
-
-		setCookie(cookieStore, "access_token", data.access_token, 3300);
-		setCookie(cookieStore, "refresh_token", data.refresh_token);
-	} catch (error) {
-		console.error(error);
-
-		cookieStore.delete("access_token");
-		cookieStore.delete("refresh_token");
-	}
-};
-
 // -------------------- AUTH -------------------- //
 const getSpotifyAuthUrl = async () => {
 	const res = await makeAPIRequest("/auth/spotify/login");
@@ -112,21 +91,27 @@ const getSpotifyAuthUrl = async () => {
 	return data.login_url;
 };
 
-const getTokens = async (code: string) => {
-	await handleTokensRequest("tokens", JSON.stringify({ code }));
-};
-
-const refreshTokens = async () => {
+const getToken = async (code: string) => {
 	const cookieStore = await cookies();
-	const refreshToken = cookieStore.get("refresh_token")?.value;
 
-	if (!refreshToken) return;
+	try {
+		const res = await makeAPIRequest(
+			"/auth/spotify/token",
+			"POST",
+			{
+				Accept: "application/json",
+				"Content-Type": "application/json",
+			},
+			JSON.stringify({ code })
+		);
 
-	await handleTokensRequest(
-		"refresh-tokens",
-		JSON.stringify({ refresh_token: refreshToken }),
-		cookieStore
-	);
+		const data: TokenResponse = await res.json();
+
+		setCookie(cookieStore, "access_token", data.access_token);
+	} catch (error) {
+		console.error(error);
+		cookieStore.delete("access_token");
+	}
 };
 
 // -------------------- PROFILE -------------------- //
@@ -237,8 +222,7 @@ const fetchTrackLyricsWithEmotionalTags = async (
 export {
 	setCookie,
 	getSpotifyAuthUrl,
-	getTokens,
-	refreshTokens,
+	getToken,
 	fetchProfile,
 	fetchTrack,
 	fetchArtist,

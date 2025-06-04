@@ -4,9 +4,8 @@ type SpotifyAuth = {
 	oauth_state: string;
 };
 
-type Tokens = {
+type TokenResponse = {
 	access_token: string;
-	refresh_token: string;
 };
 
 // -------------------- COMMON -------------------- //
@@ -112,7 +111,7 @@ type TaggedLyricsAPI = {
 // -------------------- EXPORTS -------------------- //
 export type {
 	SpotifyAuth,
-	Tokens,
+	TokenResponse,
 	ProfileAPI,
 	Profile,
 	TrackAPI,
