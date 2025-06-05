@@ -88,6 +88,21 @@ interface Artist extends ArtistBase {
 }
 
 // -------------------- EMOTION -------------------- //
+interface GenreBase {
+	percentage: number;
+}
+
+interface GenreAPI extends GenreBase {
+	genre_name: string;
+	position_change: string | null;
+}
+
+interface Genre extends GenreBase {
+	name: string;
+	positionChange: string | null;
+}
+
+// -------------------- EMOTION -------------------- //
 interface EmotionBase {
 	percentage: number;
 }
@@ -121,6 +136,8 @@ export type {
 	Track,
 	ArtistAPI,
 	Artist,
+	GenreAPI,
+	Genre,
 	EmotionAPI,
 	Emotion,
 	TaggedLyricsAPI,

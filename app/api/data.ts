@@ -13,6 +13,8 @@ import {
 	TaggedLyricsAPI,
 	SpotifyAuth,
 	TokenResponse,
+	Genre,
+	GenreAPI,
 } from "./dataTypes";
 import {
 	BadRequestAPIError,
@@ -192,6 +194,22 @@ const fetchTopArtists = async (timeRange: string, limit: number = 50) => {
 	return artists;
 };
 
+// -------------------- GENRES -------------------- //
+const fetchTopGenres = async (timeRange: string, limit: number = 5) => {
+	const res = await makeAPIRequest(
+		`/data/me/top/genres?time_range=${timeRange}&limit=${limit}`
+	);
+	const data: GenreAPI[] = await res.json();
+	const genres: Genre[] = data.map((data) => ({
+		...data,
+		name: data.genre_name,
+		percentage: Math.round(data.percentage * 100),
+		positionChange: data.position_change,
+	}));
+
+	return genres;
+};
+
 // -------------------- EMOTIONS -------------------- //
 const fetchTopEmotions = async (timeRange: string, limit: number = 5) => {
 	const res = await makeAPIRequest(
@@ -205,7 +223,6 @@ const fetchTopEmotions = async (timeRange: string, limit: number = 5) => {
 		trackId: data.track_id,
 		positionChange: data.position_change,
 	}));
-	console.log({ emotions });
 
 	return emotions;
 };
@@ -232,6 +249,7 @@ export {
 	fetchArtist,
 	fetchTopTracks,
 	fetchTopArtists,
+	fetchTopGenres,
 	fetchTopEmotions,
 	fetchTrackLyricsWithEmotionalTags,
 };

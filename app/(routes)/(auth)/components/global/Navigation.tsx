@@ -15,11 +15,12 @@ import { usePathname } from "next/navigation";
 
 const routeDetails = [
 	{
-		id: 2,
+		id: 1,
 		route: "/top/artists",
 		name: "Top Artists",
 	},
-	{ id: 3, route: "/top/tracks", name: "Top Tracks" },
+	{ id: 2, route: "/top/tracks", name: "Top Tracks" },
+	{ id: 3, route: "/top/genres", name: "Top Genres" },
 	{
 		id: 4,
 		route: "/top/emotions",
