@@ -1,5 +1,3 @@
-import { ChevronRight } from "lucide-react";
-
 type TopGenreCardProps = {
 	name: string;
 	percentage: number;
