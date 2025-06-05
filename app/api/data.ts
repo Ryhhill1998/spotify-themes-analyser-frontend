@@ -193,17 +193,20 @@ const fetchTopArtists = async (timeRange: string, limit: number = 50) => {
 };
 
 // -------------------- EMOTIONS -------------------- //
-const fetchTopEmotions = async (timeRange: string) => {
+const fetchTopEmotions = async (timeRange: string, limit: number = 5) => {
 	const res = await makeAPIRequest(
-		`/data/me/top/emotions?time_range=${timeRange}`
+		`/data/me/top/emotions?time_range=${timeRange}&limit=${limit}`
 	);
 	const data: EmotionAPI[] = await res.json();
 	const emotions: Emotion[] = data.map((data) => ({
 		...data,
+		name: data.emotion_name,
 		percentage: Math.round(data.percentage * 100),
 		trackId: data.track_id,
 		positionChange: data.position_change,
 	}));
+	console.log({ emotions });
+
 	return emotions;
 };
 

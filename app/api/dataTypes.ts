@@ -89,16 +89,17 @@ interface Artist extends ArtistBase {
 
 // -------------------- EMOTION -------------------- //
 interface EmotionBase {
-	name: string;
 	percentage: number;
 }
 
 interface EmotionAPI extends EmotionBase {
+	emotion_name: string;
 	track_id: string;
 	position_change: string | null;
 }
 
 interface Emotion extends EmotionBase {
+	name: string;
 	trackId: string;
 	positionChange: string | null;
 }
