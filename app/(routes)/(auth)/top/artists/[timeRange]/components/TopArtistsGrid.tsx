@@ -15,7 +15,7 @@ const TopArtistsGrid = async ({ timeRange }: TopArtistsGridProps) => {
 				<TopArtistCard
 					key={id}
 					artistId={id}
-					imageUrl={images[0].url}
+					imageUrl={images[0]?.url}
 					name={name}
 					position={index + 1}
 					positionChange={positionChange}

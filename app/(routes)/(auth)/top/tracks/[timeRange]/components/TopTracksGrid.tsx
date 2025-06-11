@@ -27,7 +27,7 @@ const TopTracksGrid = async ({ timeRange }: TopTracksGridProps) => {
 					<TopTrackCard
 						key={id}
 						trackId={id}
-						albumImageUrl={images[0].url}
+						albumImageUrl={images[0]?.url}
 						albumName={albumName}
 						trackName={name}
 						artistName={artist.name}

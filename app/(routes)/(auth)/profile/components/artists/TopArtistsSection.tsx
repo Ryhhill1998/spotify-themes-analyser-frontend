@@ -16,7 +16,7 @@ const TopArtistsSection = async () => {
 						<div key={id} className="flex-shrink-0 w-[160px]">
 							<TopArtistCard
 								artistId={id}
-								imageUrl={images[0].url}
+								imageUrl={images[0]?.url}
 								name={name}
 								position={index + 1}
 								positionChange={positionChange}

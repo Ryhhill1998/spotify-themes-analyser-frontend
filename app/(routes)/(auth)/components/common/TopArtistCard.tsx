@@ -17,6 +17,11 @@ const TopArtistCard = ({
 	position,
 	positionChange,
 }: TopArtistCardProps) => {
+	if (!imageUrl) {
+		imageUrl =
+			"https://i.scdn.co/image/ab6761610000e5ebee7ca7e553f57af526bedb5e";
+	}
+
 	return (
 		<Link
 			href={`/artists/${artistId}`}
@@ -36,7 +41,7 @@ const TopArtistCard = ({
 					positionChange={positionChange}
 				/>
 
-				<p className="text-center truncate text-white text-xs font-medium h-full flex items-center">
+				<p className="text-white text-xs font-medium truncate w-full">
 					{name}
 				</p>
 			</div>

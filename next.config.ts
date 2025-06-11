@@ -5,10 +5,7 @@ const nextConfig: NextConfig = {
 		remotePatterns: [
 			{
 				protocol: "https",
-				hostname: "i.scdn.co",
-				port: "",
-				pathname: "/image/**",
-				search: "",
+				hostname: "*", // Allow images from all domains
 			},
 		],
 	},
