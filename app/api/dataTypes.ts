@@ -6,6 +6,7 @@ type SpotifyAuth = {
 
 type TokenResponse = {
 	access_token: string;
+	max_age: number;
 };
 
 // -------------------- COMMON -------------------- //

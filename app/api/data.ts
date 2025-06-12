@@ -74,6 +74,15 @@ const setCookie = (
 	value: string,
 	maxAge?: number
 ) => {
+	console.log("set cookie:", {
+		name: name,
+		value: value,
+		secure: true,
+		sameSite: "none",
+		maxAge: maxAge,
+		httpOnly: true,
+	});
+
 	cookieStore.set({
 		name: name,
 		value: value,
@@ -109,7 +118,7 @@ const getToken = async (code: string) => {
 
 		const data: TokenResponse = await res.json();
 
-		setCookie(cookieStore, "access_token", data.access_token);
+		setCookie(cookieStore, "access_token", data.access_token, data.max_age);
 	} catch (error) {
 		console.error(error);
 		cookieStore.delete("access_token");
