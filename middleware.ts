@@ -3,7 +3,7 @@ import { cookies } from "next/headers";
 
 const protectedRoutes = [
 	/^\/profile$/,
-	/^\/top\/(artists|tracks|emotions)\/(short|medium|long)-term$/,
+	/^\/top\/(artists|tracks|genres|emotions)\/(short|medium|long)-term$/,
 	/^\/tracks\/[^/]+$/,
 	/^\/artists\/[^/]+$/,
 	/^\/tracks\/[^/]+\/emotions\/[^/]+$/,
