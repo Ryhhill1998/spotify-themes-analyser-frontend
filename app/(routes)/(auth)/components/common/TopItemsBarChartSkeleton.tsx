@@ -13,9 +13,9 @@ const TopItemsBarChartSkeleton = () => {
 						{/* PositionIndicator placeholder */}
 						<Skeleton className="h-4 w-24" /> {/* Genre name */}
 					</div>
-					<div className="bg-white/10 rounded h-8 w-full">
+					<div className="bg-white/10 rounded sm:h-8 h-5 w-full">
 						<Skeleton
-							className="h-8 rounded"
+							className="sm:h-8 h-5 rounded"
 							style={{
 								width: `${100 - index * 10}%`, // fake bar width gradient
 							}}
