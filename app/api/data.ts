@@ -248,6 +248,27 @@ const fetchTrackLyricsWithEmotionalTags = async (
 	return taggedLyrics;
 };
 
+// -------------------- PERCENTAGE TOP ITEMS -------------------- //
+const fetchPercentageTopItems = async (
+	topItemType: string,
+	timeRange: string,
+	limit: number = 5
+) => {
+	const res = await makeAPIRequest(
+		`/data/me/top/${topItemType}?time_range=${timeRange}&limit=${limit}`
+	);
+	const data: EmotionAPI[] = await res.json();
+	const emotions: Emotion[] = data.map((data) => ({
+		...data,
+		name: data.emotion_name,
+		percentage: Math.round(data.percentage * 100),
+		trackId: data.track_id,
+		positionChange: data.position_change,
+	}));
+
+	return emotions;
+};
+
 // -------------------- EXPORTS -------------------- //
 export {
 	setCookie,

@@ -1,6 +1,6 @@
 import { Skeleton } from "@/components/ui/skeleton";
 
-const TopGenresChartSkeleton = () => {
+const TopItemsBarChartSkeleton = () => {
 	return (
 		<div className="bg-black text-white text-sm p-6 rounded-xl space-y-8 w-full">
 			{[...Array(5)].map((_, index) => (
@@ -17,7 +17,7 @@ const TopGenresChartSkeleton = () => {
 						<Skeleton
 							className="h-8 rounded"
 							style={{
-								width: `${60 - index * 8}%`, // fake bar width gradient
+								width: `${100 - index * 10}%`, // fake bar width gradient
 							}}
 						/>
 					</div>
@@ -27,4 +27,4 @@ const TopGenresChartSkeleton = () => {
 	);
 };
 
-export default TopGenresChartSkeleton;
+export default TopItemsBarChartSkeleton;
