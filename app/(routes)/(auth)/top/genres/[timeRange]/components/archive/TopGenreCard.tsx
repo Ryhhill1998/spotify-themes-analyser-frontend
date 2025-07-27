@@ -24,7 +24,7 @@ const TopGenreCard = ({
 				<p>{name.charAt(0).toUpperCase() + name.slice(1)}</p>
 			</div>
 
-			<div className="w-[85%] bg-white h-8 rounded-xs"></div>
+			<div className="w-[85%] bg-white h-8 rounded-xs">{percentage}</div>
 		</div>
 	);
 };
