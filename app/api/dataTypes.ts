@@ -88,7 +88,7 @@ interface Artist extends ArtistBase {
 	positionChange: string | null;
 }
 
-// -------------------- EMOTION -------------------- //
+// -------------------- GENRE -------------------- //
 interface GenreBase {
 	percentage: number;
 }
@@ -120,6 +120,13 @@ interface Emotion extends EmotionBase {
 	positionChange: string | null;
 }
 
+// -------------------- GENERIC PERCENTAGE TOP ITEM -------------------- //
+type PercentageTopItem = {
+	name: string;
+	percentage: number;
+	positionChange: string | null;
+};
+
 // -------------------- EMOTION TAGGED LYRICS -------------------- //
 type TaggedLyricsAPI = {
 	track_id: string;
@@ -141,5 +148,6 @@ export type {
 	Genre,
 	EmotionAPI,
 	Emotion,
+	PercentageTopItem,
 	TaggedLyricsAPI,
 };

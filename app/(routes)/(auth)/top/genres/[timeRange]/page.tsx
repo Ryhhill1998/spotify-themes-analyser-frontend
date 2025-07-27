@@ -1,7 +1,7 @@
 import TopTitleAndTimeRanges from "../../components/TopTitleAndTimeRanges";
 import { Suspense } from "react";
-import TopEmotionsGridSkeleton from "./components/TopGenresGridSkeleton";
-import TopEmotionsGrid from "./components/TopGenresGrid";
+import TopGenresChart from "./components/TopGenresChart";
+import TopItemsBarChartSkeleton from "../../../components/common/TopItemsBarChartSkeleton";
 
 const TopEmotionsPage = async ({
 	params,
@@ -15,8 +15,8 @@ const TopEmotionsPage = async ({
 		<>
 			<TopTitleAndTimeRanges name="genres" />
 
-			<Suspense fallback={<TopEmotionsGridSkeleton />}>
-				<TopEmotionsGrid timeRange={formattedTimeRange} />
+			<Suspense fallback={<TopItemsBarChartSkeleton />}>
+				<TopGenresChart timeRange={formattedTimeRange} />
 			</Suspense>
 		</>
 	);
