@@ -11,12 +11,13 @@ const TopGenresGrid = async ({ timeRange }: TopGenresGridProps) => {
 
 	return (
 		<div className="container mx-auto flex flex-col gap-2">
-			{topGenres.map(({ name, percentage }, index) => (
+			{topGenres.map(({ name, percentage, positionChange }, index) => (
 				<TopGenreCard
 					key={name}
 					name={name}
 					percentage={percentage}
 					position={index + 1}
+					positionChange={positionChange}
 				/>
 			))}
 		</div>
