@@ -10,7 +10,7 @@ const TopGenresGrid = async ({ timeRange }: TopGenresGridProps) => {
 	const topGenres: Genre[] = await fetchTopGenres(timeRange);
 
 	return (
-		<div className="container mx-auto flex flex-col gap-2">
+		<div className="container mx-auto flex flex-col gap-5">
 			{topGenres.map(({ name, percentage, positionChange }, index) => (
 				<TopGenreCard
 					key={name}

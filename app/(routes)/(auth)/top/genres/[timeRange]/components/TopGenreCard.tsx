@@ -14,8 +14,8 @@ const TopGenreCard = ({
 	positionChange,
 }: TopGenreCardProps) => {
 	return (
-		<div className="flex justify-between items-center p-4 rounded-md text-white text-sm">
-			<div className="flex gap-2 items-center">
+		<div className="flex gap-5 items-center rounded-md text-white text-sm">
+			<div className="flex gap-2 items-center min-w-[5%] max-w-[10%] justify-start">
 				<PositionIndicator
 					position={position}
 					positionChange={positionChange}
@@ -24,7 +24,7 @@ const TopGenreCard = ({
 				<p>{name.charAt(0).toUpperCase() + name.slice(1)}</p>
 			</div>
 
-			<p>{percentage} %</p>
+			<div className="w-[85%] bg-white h-8 rounded-xs"></div>
 		</div>
 	);
 };
