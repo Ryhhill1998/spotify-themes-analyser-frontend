@@ -2,22 +2,20 @@ import { Skeleton } from "@/components/ui/skeleton";
 
 const TopItemsBarChartSkeleton = () => {
 	return (
-		<div className="bg-black text-white text-sm p-6 rounded-xl space-y-8 w-full">
+		<div className="p-4 py-6 bg-black text-white text-xs sm:text-sm rounded-xl space-y-6 w-full">
 			{[...Array(5)].map((_, index) => (
-				<div
-					key={index}
-					className="grid grid-cols-[150px_1fr] items-center gap-4"
-				>
-					<div className="flex items-center gap-3">
-						<p className="text-white text-sm">{index + 1}</p>
-						{/* PositionIndicator placeholder */}
-						<Skeleton className="h-4 w-24" /> {/* Genre name */}
-					</div>
-					<div className="bg-white/10 rounded sm:h-8 h-5 w-full">
+				<div key={index} className="flex items-center">
+					<p className="text-stone-200 text-xs font-bold text-center p-2">
+						{index + 1}
+					</p>
+
+					<Skeleton className="h-4 w-24 mr-2" />
+
+					<div className="bg-white/10 rounded sm:h-8 h-6 w-full">
 						<Skeleton
-							className="sm:h-8 h-5 rounded"
+							className="bg-white sm:h-8 h-6 rounded"
 							style={{
-								width: `${100 - index * 10}%`, // fake bar width gradient
+								width: `${100 - index * 15}%`,
 							}}
 						/>
 					</div>

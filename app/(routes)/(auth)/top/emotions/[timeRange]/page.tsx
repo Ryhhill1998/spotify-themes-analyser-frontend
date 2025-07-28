@@ -15,9 +15,11 @@ const TopEmotionsPage = async ({
 		<>
 			<TopTitleAndTimeRanges name="emotions" />
 
-			<Suspense fallback={<TopItemsBarChartSkeleton />}>
+			{/* <Suspense fallback={<TopItemsBarChartSkeleton />}>
 				<TopEmotionsChart timeRange={formattedTimeRange} />
-			</Suspense>
+			</Suspense> */}
+
+			<TopItemsBarChartSkeleton />
 		</>
 	);
 };
